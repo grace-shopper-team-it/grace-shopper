@@ -1,1 +1,1 @@
-const newChange = 'Look ma, I made an obvious change!! '
+const newChange = 'look ma, I made an obvious change!'
