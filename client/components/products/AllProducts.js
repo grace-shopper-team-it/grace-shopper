@@ -25,7 +25,7 @@ const products = [
   },
   {
     id: 3,
-    name: 'nice clown1',
+    name: 'another nice clown',
     rating: 2.0,
     description: 'eiugrh fIOWAHGUIRW',
     imageUrl:
@@ -63,7 +63,7 @@ export default class AllProducts extends Component {
                   <form
                     className="navbar-form navbar-right"
                     role="search"
-                    onSubmit={e => e.preventDefault()}
+                    // onSubmit={e => e.preventDefault()}
                   >
                     <div className="form-group form-white">
                       <input
@@ -71,7 +71,7 @@ export default class AllProducts extends Component {
                         type="text"
                         className="form-control"
                         placeholder="Find your favorite product"
-                        onChange={this.handleSearch.bind(this)}
+                        // onChange={this.handleSearch.bind(this)}
                       />
                     </div>
                     <button type="submit" className="btn btn-white">
