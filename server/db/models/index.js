@@ -22,3 +22,6 @@ module.exports = {
 
 //Order.belongsTo(User)
 //Category.belongsTo(Product)
+
+//also need methods that decrement the products when they are ordered....
+//also need a method that will push the review on the the reviews array in the products for user after someone creates it
