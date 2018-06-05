@@ -4,6 +4,7 @@
 
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const CHANGE_INPUT = 'CHANGE_INPUT'
 
 /*
   action creators
@@ -20,6 +21,14 @@ const deleteAction = id => {
   return {
     type: DELETE_PRODUCT,
     id,
+  }
+}
+
+export const changeInputAction = (inputName, inputValue) => {
+  return {
+    type: CHANGE_INPUT,
+    inputValue,
+    inputName,
   }
 }
 
@@ -51,6 +60,7 @@ const initialState = {
     imageUrl:
       'https://i5.walmartimages.com/asr/62f061c8-9eae-460b-8964-84877f89dfc6_1.63cb4384ad2e3927105b7cfe8aa71fcc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF',
   },
+  formInput: {},
 }
 
 export default function(state = initialState, action) {
@@ -61,6 +71,14 @@ export default function(state = initialState, action) {
     case DELETE_PRODUCT:
       return { ...state, currentProduct: null }
     // will also need to delete product from products array in state
+    case CHANGE_INPUT:
+      return {
+        ...state,
+        currentProduct: {
+          ...state.currentProduct,
+          [action.inputName]: action.inputValue,
+        },
+      }
     default:
       return state
   }
