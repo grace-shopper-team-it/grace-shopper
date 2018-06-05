@@ -5,10 +5,6 @@ const db = require('../index')
 const User = db.model('user')
 
 describe('User model', () => {
-  beforeEach(() => {
-    return db.sync({force: true})
-  })
-
   describe('instanceMethods', () => {
     describe('correctPassword', () => {
       let cody
@@ -16,7 +12,9 @@ describe('User model', () => {
       beforeEach(() => {
         return User.create({
           email: 'cody@puppybook.com',
-          password: 'bones'
+          password: 'bones',
+          firstName: 'Cody',
+          lastName: 'Bones'
         })
           .then(user => {
             cody = user
@@ -32,4 +30,29 @@ describe('User model', () => {
       })
     }) // end describe('correctPassword')
   }) // end describe('instanceMethods')
+  describe('name fields', () => {
+    let cody
+
+    beforeEach(() => {
+      return User.create({
+        email: 'cody@puppybook.com',
+        password: 'bones',
+        firstName: 'Cody',
+        lastName: 'Bones'
+      })
+        .then(user => {
+          cody = user
+        })
+    })
+    it('has a first and last name', () => {
+      const codyFirst = cody.firstName
+      const codyLast = cody.lastName
+      expect(codyFirst).to.equal('Cody')
+      expect(codyLast).to.equal('Bones')
+    })
+    it('does not allow empty or null first or last names', async () => {
+      await expect(User.create({email: 'cody@puppybook.com',
+      password: 'bones'})).to.be.rejected;
+    })
+  })
 }) // end describe('User model')
