@@ -5,6 +5,7 @@
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const CHANGE_INPUT = 'CHANGE_INPUT'
+const GET_PRODUCT = 'GET_PRODUCT'
 
 /*
   action creators
@@ -21,6 +22,13 @@ const deleteAction = id => {
   return {
     type: DELETE_PRODUCT,
     id,
+  }
+}
+
+const getProductAction = product => {
+  return {
+    type: GET_PRODUCT,
+    product,
   }
 }
 
@@ -50,6 +58,20 @@ export const deleteProductThunk = productId => {
   }
 }
 
+export const getProductThunk = productId => {
+  return dispatch => {
+    const dummyProduct = {
+      name: 'Flamethrower',
+      price: 1000,
+      description: 'It throws flames!',
+      stock: 5,
+      imageUrl:
+        'https://bloximages.chicago2.vip.townnews.com/umudynamo.com/content/tncms/assets/v3/editorial/8/7a/87af1dfe-9de1-11e5-a860-f3a3a84a7c7b/56672efd1aa54.image.png?resize=300%2C169',
+    }
+    dispatch(getProductAction(dummyProduct))
+  }
+}
+
 const initialState = {
   currentProduct: {
     name: 'Basketball',
@@ -60,11 +82,12 @@ const initialState = {
     imageUrl:
       'https://i5.walmartimages.com/asr/62f061c8-9eae-460b-8964-84877f89dfc6_1.63cb4384ad2e3927105b7cfe8aa71fcc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF',
   },
-  formInput: {},
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case GET_PRODUCT:
+      return { ...state, currentProduct: action.product }
     case UPDATE_PRODUCT:
       return { ...state, currentProduct: action.updatedProduct }
     // will also need to update products array when that is created

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changeInputAction } from '../store/product'
+import { changeInputAction } from '../../store/product'
 
 export const ProductForm = props => {
   const { existingCategories, currentProduct, handleChange } = props
@@ -57,7 +57,7 @@ export const ProductForm = props => {
 
 const mapState = state => {
   return {
-    currentProduct: state.products.currentProduct,
+    currentProduct: state.product.currentProduct,
   }
 }
 const mapDispatch = dispatch => {
