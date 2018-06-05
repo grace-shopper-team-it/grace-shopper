@@ -9,8 +9,27 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
-  ratings: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER)
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  price: {
+    type: Sequelize.DECIMAL(13, 2),
+    allowNull: false
+  },
+  inventory: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  imageUrl: {
+    type: Sequelize.STRING,
+    defaultValue: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ9Mk3VEey9qFFa0Oul4kPVnA51QBAHa4whl4NfsOdwerioFYr',
+    validate: {
+      isUrl: true
+    }
   }
 })
 

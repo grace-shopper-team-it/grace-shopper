@@ -6,6 +6,7 @@ const User = db.model('user')
 const chaiAsPromised = require('chai-as-promised')
 const chai = require('chai')
 
+chai.use(chaiAsPromised)
 
 describe('User model', () => {
   describe('instanceMethods', () => {
@@ -61,7 +62,6 @@ describe('User model', () => {
           password: 'bones'
         });
     } catch (error) {
-      console.log(error)
       expect(error.message).to.include('notNull Violation: user.firstName cannot be null');
     }
 
