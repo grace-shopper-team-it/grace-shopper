@@ -2,6 +2,7 @@
   action types
 */
 
+const ADD_PRODUCT = 'ADD_PRODUCT'
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const CHANGE_INPUT = 'CHANGE_INPUT'
@@ -10,6 +11,12 @@ const GET_PRODUCT = 'GET_PRODUCT'
 /*
   action creators
 */
+const addProductAction = product => {
+  return {
+    type: ADD_PRODUCT,
+    product,
+  }
+}
 const updateAction = (id, updatedProduct) => {
   return {
     type: UPDATE_PRODUCT,
@@ -25,7 +32,7 @@ const deleteAction = id => {
   }
 }
 
-const getProductAction = product => {
+export const getProductAction = product => {
   return {
     type: GET_PRODUCT,
     product,
@@ -44,6 +51,12 @@ export const changeInputAction = (inputName, inputValue) => {
   thunk creators
 */
 
+export const addProductThunk = formData => {
+  return dispatch => {
+    // add to database
+    dispatch(addProductAction(formData))
+  }
+}
 export const updateProductThunk = (formData, productId) => {
   return dispatch => {
     // http request to api route for updating
@@ -61,6 +74,7 @@ export const deleteProductThunk = productId => {
 export const getProductThunk = productId => {
   return dispatch => {
     const dummyProduct = {
+      id: 2,
       name: 'Flamethrower',
       price: 1000,
       description: 'It throws flames!',
@@ -74,6 +88,7 @@ export const getProductThunk = productId => {
 
 const initialState = {
   currentProduct: {
+    id: 1,
     name: 'Basketball',
     price: 30,
     averageRating: 4.5,
@@ -88,8 +103,17 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCT:
       return { ...state, currentProduct: action.product }
+    case ADD_PRODUCT:
+      return {
+        ...state,
+        currentProduct: { ...state.currentProduct, new: true },
+      }
+    // add to products array when it's created
     case UPDATE_PRODUCT:
-      return { ...state, currentProduct: action.updatedProduct }
+      return {
+        ...state,
+        currentProduct: { ...state.currentProduct, updated: true },
+      }
     // will also need to update products array when that is created
     case DELETE_PRODUCT:
       return { ...state, currentProduct: null }

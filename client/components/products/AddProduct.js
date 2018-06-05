@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ProductForm from './ProductForm'
-import { getProductThunk } from '../../store/product'
+import { getProductAction, addProductThunk } from '../../store/product'
 
 const existingCategories = [
   { id: 1, name: 'Sports' },
@@ -11,14 +11,15 @@ const existingCategories = [
   { id: 5, name: 'Weird Stuff' },
 ]
 
-class EditProduct extends React.Component {
-  handleSubmit = event => {
-    alert('submitted')
+class AddProduct extends React.Component {
+  handleSubmit = (event, newProduct) => {
     event.preventDefault()
     // update database
+    this.props.addProduct(newProduct)
   }
   componentDidMount() {
-    this.props.fetchProduct()
+    // set currentProduct to blank
+    this.props.resetCurrentProduct()
   }
   render() {
     return (
@@ -32,11 +33,23 @@ class EditProduct extends React.Component {
 
 const mapDispatch = dispatch => {
   return {
-    fetchProduct: productId => dispatch(getProductThunk(productId)),
+    resetCurrentProduct: () =>
+      dispatch(
+        getProductAction({
+          name: '',
+          price: '',
+          description: '',
+          stock: '',
+          imageUrl: '',
+        })
+      ),
+    addProduct: newProduct => {
+      dispatch(addProductThunk(newProduct))
+    },
   }
 }
 
 export default connect(
   null,
   mapDispatch
-)(EditProduct)
+)(AddProduct)

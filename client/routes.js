@@ -8,6 +8,7 @@ import {
   UserHome,
   SingleProduct,
   EditProduct,
+  AddProduct,
 } from './components'
 import { me } from './store'
 
@@ -27,6 +28,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route exact path="/products/new" component={AddProduct} />
         <Route path="/products/:id/edit" component={EditProduct} />
         <Route path="/products/:id" component={SingleProduct} />
         {isLoggedIn && (

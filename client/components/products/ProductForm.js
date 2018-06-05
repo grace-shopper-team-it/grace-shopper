@@ -1,12 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { changeInputAction } from '../../store/product'
 
 export const ProductForm = props => {
-  const { existingCategories, currentProduct, handleChange } = props
+  const {
+    existingCategories,
+    currentProduct,
+    handleChange,
+    handleSubmit,
+  } = props
   console.log(currentProduct)
+  if (currentProduct.new || currentProduct.updated) {
+    return <Redirect to="/products/1" />
+  }
   return (
-    <form onChange={handleChange}>
+    <form
+      onChange={handleChange}
+      onSubmit={() => handleSubmit(event, currentProduct)}
+    >
       <label htmlFor="name">Product Name</label>
       <input type="text" name="name" id="name" value={currentProduct.name} />
 
@@ -27,6 +39,7 @@ export const ProductForm = props => {
         name="new-categories"
         id="new-categories"
         placeholder="Separate with a comma"
+        value={currentProduct.categories}
       />
 
       <label htmlFor="stock">Units in Stock</label>
@@ -40,11 +53,11 @@ export const ProductForm = props => {
         value={currentProduct.imageUrl}
       />
 
-      <select>
+      <select onChange={() => console.log('select changed')}>
         {existingCategories.map(category => {
           return (
-            <option value={category} key={category}>
-              {category}
+            <option value={category.id} key={category.id}>
+              {category.name}
             </option>
           )
         })}
