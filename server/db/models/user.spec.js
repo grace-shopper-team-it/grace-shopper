@@ -1,8 +1,12 @@
 /* global describe beforeEach it */
 
-const {expect} = require('chai')
+const {expect, assert} = require('chai')
 const db = require('../index')
 const User = db.model('user')
+const chaiAsPromised = require('chai-as-promised')
+const chai = require('chai')
+
+chai.use(chaiAsPromised)
 
 describe('User model', () => {
   describe('instanceMethods', () => {
@@ -51,8 +55,16 @@ describe('User model', () => {
       expect(codyLast).to.equal('Bones')
     })
     it('does not allow empty or null first or last names', async () => {
-      await expect(User.create({email: 'cody@puppybook.com',
-      password: 'bones'})).to.be.rejected;
+      
+      try {
+        const user = await User.create({
+          email: 'cody@puppybook.com',
+          password: 'bones'
+        });
+    } catch (error) {
+      expect(error.message).to.include('notNull Violation: user.firstName cannot be null');
+    }
+
     })
   })
 }) // end describe('User model')
