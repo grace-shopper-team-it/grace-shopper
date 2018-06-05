@@ -52,7 +52,15 @@ describe('Order model', async () => {
       expect(order.create({ status: 'fulfilled' })).to.be.rejected;
       expect(order.create({ status: 'Created' })).to.be.fulfilled;
     });
+    it('must belong to either a user or a guest session', async () => {
+      const order2 = await Order.build({guestId: null, status: 'Created'});
+      db.save()
+      expect(order2.userId).to.exist;
+      const order3 = await Order.build({guestId: 2, status: 'Processing'});
+      expect(order3.userId).to.be.null
+    })
   });
 });
 
 //note: these are probably not working (note from Emily)
+//also, need to find a way to freeze the price of the item at which it was ordered....possibly do this on the join table created by makoing the associations
