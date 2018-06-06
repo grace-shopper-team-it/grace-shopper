@@ -56,6 +56,7 @@ describe('User model', () => {
     })
     // it('does not allow empty or null first or last names', async () => {
 
+
     //   try {
     //     const user = await User.create({
     //       email: 'cody@puppybook.com',
