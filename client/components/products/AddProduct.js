@@ -1,7 +1,7 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import ProductForm from './ProductForm'
-import { getProductAction, addProductThunk } from '../../store/product'
+import React from 'react';
+import { connect } from 'react-redux';
+import ProductForm from './ProductForm';
+import { getProductAction, addProductThunk } from '../../store/product';
 
 const existingCategories = [
   { id: 1, name: 'Sports' },
@@ -9,12 +9,12 @@ const existingCategories = [
   { id: 3, name: 'Heavy Metal' },
   { id: 4, name: 'Jazz' },
   { id: 5, name: 'Weird Stuff' },
-]
+];
 
 class AddProduct extends React.Component {
   componentDidMount() {
     // set currentProduct to blank
-    this.props.resetCurrentProduct()
+    this.props.resetCurrentProduct();
   }
   render() {
     return (
@@ -22,7 +22,7 @@ class AddProduct extends React.Component {
         existingCategories={existingCategories}
         handleProduct={this.props.addProduct}
       />
-    )
+    );
   }
 }
 
@@ -34,17 +34,17 @@ const mapDispatch = dispatch => {
           name: '',
           price: '',
           description: '',
-          stock: '',
+          inventory: '',
           imageUrl: '',
         })
       ),
     addProduct: newProduct => {
-      dispatch(addProductThunk(newProduct))
+      dispatch(addProductThunk(newProduct));
     },
-  }
-}
+  };
+};
 
 export default connect(
   null,
   mapDispatch
-)(AddProduct)
+)(AddProduct);
