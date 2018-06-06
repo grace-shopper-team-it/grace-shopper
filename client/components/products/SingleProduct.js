@@ -8,9 +8,14 @@ const SingleProduct = props => {
   const { currentUser, currentProduct } = props
   return (
     <div className="container">
-      <Product product={currentProduct} />
-      {currentUser.admin && <Link to="/products/1/edit">Edit</Link>}
-      {currentUser.admin && <DeleteProduct />}
+      <Product key={currentProduct.id} product={currentProduct} />
+      {currentUser.admin && (
+        <div className="admin-product-options">
+          <Link to="/products/new">New Product</Link>
+          <Link to="/products/1/edit">Edit</Link>
+          <DeleteProduct />
+        </div>
+      )}
     </div>
   )
 }
