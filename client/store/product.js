@@ -51,16 +51,17 @@ export const changeInputAction = (inputName, inputValue) => {
   thunk creators
 */
 
-export const addProductThunk = formData => {
+export const addProductThunk = newProduct => {
   return dispatch => {
     // add to database
-    dispatch(addProductAction(formData))
+    dispatch(addProductAction(newProduct))
   }
 }
-export const updateProductThunk = (formData, productId) => {
+export const updateProductThunk = (updatedProduct, productId) => {
   return dispatch => {
     // http request to api route for updating
     // dispatch updated product to update state
+    dispatch(updateAction(productId, updatedProduct))
   }
 }
 

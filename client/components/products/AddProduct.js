@@ -12,11 +12,6 @@ const existingCategories = [
 ]
 
 class AddProduct extends React.Component {
-  handleSubmit = (event, newProduct) => {
-    event.preventDefault()
-    // update database
-    this.props.addProduct(newProduct)
-  }
   componentDidMount() {
     // set currentProduct to blank
     this.props.resetCurrentProduct()
@@ -25,7 +20,7 @@ class AddProduct extends React.Component {
     return (
       <ProductForm
         existingCategories={existingCategories}
-        handleSubmit={this.handleSubmit}
+        handleProduct={this.props.addProduct}
       />
     )
   }
