@@ -6,6 +6,7 @@ class DeleteProduct extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.deleteProduct(this.props.productId);
+    // REVIEW: redirect
   };
   render() {
     return (

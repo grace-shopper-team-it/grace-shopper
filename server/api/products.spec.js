@@ -15,6 +15,8 @@ const formData = {
 
 describe('Products routes', () => {
   let cody;
+  // REVIEW: this is also happening in test-setup.js
+  // kill both of these
   beforeEach(() => {
     return db.sync({ force: true });
   });

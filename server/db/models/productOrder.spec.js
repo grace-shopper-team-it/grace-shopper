@@ -15,6 +15,7 @@ describe('productOrder model', () => {
         await ProductOrder.create({
           quantity: 3
         })
+        // REVIEW: throw an error here to fail when the validation is missing
       } catch (error) {
         expect(error.message).to.include('notNull Violation')
       }

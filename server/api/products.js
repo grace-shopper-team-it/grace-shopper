@@ -16,6 +16,7 @@ router.get('/', (req, res, next) => {
 });
 
 // get specific product
+// REVIEW: make consistent use of async/await
 router.get('/:id', (req, res, next) => {
   return Product.findOne({
     where: {

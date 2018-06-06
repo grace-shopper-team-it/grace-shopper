@@ -8,6 +8,7 @@ const existingCategories = [
   { id: 2, name: 'Music' },
   { id: 3, name: 'Heavy Metal' },
   { id: 4, name: 'Jazz' },
+  // REVIEW: the best genre
   { id: 5, name: 'Weird Stuff' },
 ];
 

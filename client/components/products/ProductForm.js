@@ -3,12 +3,37 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { changeInputAction, getProductAction } from '../../store/product';
 
+const FormInput = (props) => {
+  // replace inline values with props
+  return (
+    <div className="form-group">
+      <label htmlFor="name">Product Name</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        value={currentProduct.name}
+        onChange={handleChange}
+        className="form-control"
+      />
+    </div>
+  )
+}
+
+import history from '../../history'
+
 export class ProductForm extends React.Component {
-  handleSubmit = event => {
-    event.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault()
+    this.handleProduct()
+  }
+
+  handleProduct = async (event) => {
     const productId = this.props.currentProduct.id;
-    this.props.handleProduct(this.props.currentProduct, productId);
+    await this.props.handleProduct(this.props.currentProduct, productId);
+    history.push(`/products/${this.props.currentProduct.id}`)
   };
+
   componentWillUnmount() {
     // set updated or new to false on currentProduct
     const { currentProduct, resetCurrentProduct } = this.props;
@@ -17,12 +42,23 @@ export class ProductForm extends React.Component {
 
   render() {
     const { existingCategories, currentProduct, handleChange } = this.props;
+    // REVIEW: redirect after awaiting handleSubmit
     if (currentProduct.new || currentProduct.updated) {
       return <Redirect to={`/products/${currentProduct.id}`} />;
     }
     return (
       <div className="container">
         <form onSubmit={event => this.handleSubmit(event, currentProduct)}>
+          {/* REVIEW: Good place for a higehr-order component? */}
+          {/* Maybe good to do before moving on to the next forms. */}
+          <FormInput
+            type="text"
+            name="name"
+            value={currentProduct.name}
+            onChange={handleChange}
+            label="Product Name"
+          />
+
           <div className="form-group">
             <label htmlFor="name">Product Name</label>
             <input

@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import React from 'react';
 import { ProductForm } from './ProductForm';
 
+// REVIEW: NICE
 const existingCategories = [
   'Sports',
   'Music',

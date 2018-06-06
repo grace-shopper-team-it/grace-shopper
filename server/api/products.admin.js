@@ -4,6 +4,7 @@ const { Product } = require('../db/models');
 productAdminRouter.post('/', async (req, res, next) => {
   try {
     const formData = {
+      // NICE!
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
@@ -17,6 +18,28 @@ productAdminRouter.post('/', async (req, res, next) => {
   }
 });
 
+
+// subtle async difference
+endpont = (req, res, next) => {
+  try {
+    SomeModel.create({})
+      .then(() => {})
+      .catch(next)
+  }
+  catch (err) {
+    // never reach here
+  }
+}
+
+endpont = async (req, res, next) => {
+  try {
+    await SomeModel.create({})
+  }
+  catch (err) {
+    // this actually happens
+  }
+}
+
 productAdminRouter.put('/:id', async (req, res, next) => {
   try {
     const formData = {
@@ -26,10 +49,12 @@ productAdminRouter.put('/:id', async (req, res, next) => {
       inventory: req.body.inventory,
       imageUrl: req.body.imageUrl,
     };
+    // REVIEW: use returning here?
     await Product.update(formData, { where: { id: req.params.id } });
     const updatedProduct = await Product.findById(req.params.id);
     res.json(updatedProduct);
   } catch (err) {
+    // REVIEW: what happens if we don't catch this error?
     next(err);
   }
 });
@@ -44,6 +69,7 @@ productAdminRouter.delete('/:id', async (req, res, next) => {
 });
 
 function isAdmin(req, res, next) {
+  // REVIEW: ;)
   next();
 }
 

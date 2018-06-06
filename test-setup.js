@@ -6,6 +6,10 @@ import db from './server/db'
 const adapter = new Adapter()
 enzyme.configure({ adapter })
 
-beforeEach(() => {
+before(() => {
+  return db.sync({force: true})
+})
+
+afterEach(() => {
   return db.sync({force: true})
 })

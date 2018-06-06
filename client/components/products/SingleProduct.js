@@ -19,6 +19,7 @@ class SingleProduct extends React.Component {
         <Product key={currentProduct.id} product={currentProduct} />
         {currentUser.admin && (
           <div className="admin-product-options">
+            {/* REVIEW: subtle indentation inconsistency */}
             <Link className="btn btn-primary" to="/products/new">
               New Product
             </Link>
