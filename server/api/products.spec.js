@@ -97,7 +97,7 @@ describe('Products routes', () => {
       return request(app)
         .put('/api/products/1')
         .send(formData)
-        .expect(204)
+        .expect(200)
         .then(res => {
           expect(res.body).to.be.an('object');
           return Product.findById(1).then(product => {

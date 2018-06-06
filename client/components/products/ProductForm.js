@@ -6,7 +6,8 @@ import { changeInputAction, getProductAction } from '../../store/product';
 export class ProductForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
-    this.props.handleProduct(this.props.currentProduct, 1);
+    const productId = this.props.currentProduct.id;
+    this.props.handleProduct(this.props.currentProduct, productId);
   };
   componentWillUnmount() {
     // set updated or new to false on currentProduct
@@ -72,7 +73,7 @@ export class ProductForm extends React.Component {
               type="text"
               name="inventory"
               id="inventory"
-              value={currentProduct.stock}
+              value={currentProduct.inventory}
               onChange={handleChange}
               className="form-control"
             />

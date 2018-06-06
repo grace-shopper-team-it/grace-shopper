@@ -21,7 +21,10 @@ class SingleProduct extends React.Component {
             <Link className="btn btn-primary" to="/products/new">
               New Product
             </Link>
-            <Link className="btn btn-success" to="/products/1/edit">
+            <Link
+              className="btn btn-success"
+              to={`/products/${currentProduct.id}/edit`}
+            >
               Edit
             </Link>
             <DeleteProduct />

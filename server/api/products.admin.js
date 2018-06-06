@@ -27,7 +27,8 @@ productAdminRouter.put('/:id', async (req, res, next) => {
       imageUrl: req.body.imageUrl,
     };
     await Product.update(formData, { where: { id: req.params.id } });
-    res.status(204).end();
+    const updatedProduct = await Product.findById(req.params.id);
+    res.json(updatedProduct);
   } catch (err) {
     next(err);
   }

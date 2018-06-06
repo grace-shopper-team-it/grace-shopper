@@ -61,10 +61,12 @@ export const addProductThunk = newProduct => {
   };
 };
 export const updateProductThunk = (updatedProduct, productId) => {
-  return dispatch => {
-    // http request to api route for updating
-    // dispatch updated product to update state
-    dispatch(updateAction(productId, updatedProduct));
+  return async dispatch => {
+    const { data } = await axios.put(
+      `/api/products/${productId}`,
+      updatedProduct
+    );
+    dispatch(updateAction(productId, data));
   };
 };
 
@@ -92,16 +94,7 @@ export const getProductThunk = productId => {
 };
 
 const initialState = {
-  currentProduct: {
-    id: 1,
-    name: 'Basketball',
-    price: 30,
-    averageRating: 4.5,
-    description: "You use it to play basketball. It's some obscure game",
-    inventory: 50,
-    imageUrl:
-      'https://i5.walmartimages.com/asr/62f061c8-9eae-460b-8964-84877f89dfc6_1.63cb4384ad2e3927105b7cfe8aa71fcc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF',
-  },
+  currentProduct: {},
 };
 
 export default function(state = initialState, action) {
