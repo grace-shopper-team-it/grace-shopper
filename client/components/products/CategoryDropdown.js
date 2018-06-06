@@ -9,12 +9,11 @@ export default class CategoryDropdow extends Component {
   }
   render() {
     let { category } = this.state.category;
-    console.log('Category===>', category);
 
-    categories = categories.filter(function(item, pos) {
-      return categories.indexOf(item.category) === pos;
+    category = category.map(categ => Object.values(categ.category).join(''));
+    category = category.filter((categ, pos) => {
+      return category.indexOf(categ) === pos;
     });
-    // console.log('Category===>', categories);
 
     return (
       <div className="dropdown">
@@ -29,15 +28,13 @@ export default class CategoryDropdow extends Component {
           Categories
         </button>
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a className="dropdown-item" href="#">
-            Action
-          </a>
-          <a className="dropdown-item" href="#">
-            Another action
-          </a>
-          <a className="dropdown-item" href="#">
-            Something else here
-          </a>
+          {category.map(categ => {
+            return (
+              <a className="dropdown-item" key={categ} href="#">
+                {categ}
+              </a>
+            );
+          })}
         </div>
       </div>
     );

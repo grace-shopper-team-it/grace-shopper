@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
 router.get('/products/:id', (req, res, next) => {
   return Product.findOne({
     where: {
-      productId: req.params.id,
+      id: req.params.id,
     },
   })
     .then(product => {
