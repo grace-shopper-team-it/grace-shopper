@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux';
 
-const products = [
+let products = [
   {
     id: 1,
     name: 'clown',
@@ -12,16 +12,17 @@ const products = [
       'https://images-na.ssl-images-amazon.com/images/I/41PKN8W5CDL.jpg',
     stock: 5,
     price: 30,
+    category: 'creepy',
   },
   {
     id: 2,
     name: 'nice clown',
     rating: 3.0,
     description: 'eiugrh fIOWAHGUIRW',
-    imageUrl:
-      'https://thetoystimeforgot.com/wp-content/uploads/2017/12/RONALD-MCDONALD1.jpg',
+    imageUrl: 'https://i.ebayimg.com/images/g/LFUAAOSwKtlWjzVd/s-l300.jpg',
     stock: 3,
     price: 20,
+    category: 'creepy',
   },
   {
     id: 3,
@@ -29,18 +30,28 @@ const products = [
     rating: 2.0,
     description: 'eiugrh fIOWAHGUIRW',
     imageUrl:
-      'https://thetoystimeforgot.com/wp-content/uploads/2017/12/RONALD-MCDONALD1.jpg',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbZZNPfu7n3fI5Zygu0qGXc1mtuXYGCD2oNGq-WxZ3hMBhYbhR',
     stock: 3.8,
     price: 25,
+    category: 'nice',
   },
 ];
 
 export default class AllProducts extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = { products: products };
-  // }
+  state = { searchCategory: null };
+
+  handleSearch(e) {
+    this.setState({ searchCategory: e.target.value });
+  }
   render() {
+    if (this.state.searchCategory) {
+      products = products.filter(product =>
+        Object.values(product)
+          .join('')
+          .toLowerCase()
+          .includes(this.state.searchCategory.toLowerCase())
+      );
+    }
     return (
       <div className="allProducts">
         <div className="pageHeader">
@@ -63,7 +74,7 @@ export default class AllProducts extends Component {
                   <form
                     className="navbar-form navbar-right"
                     role="search"
-                    // onSubmit={e => e.preventDefault()}
+                    onSubmit={e => e.preventDefault()}
                   >
                     <div className="form-group form-white">
                       <input
@@ -71,7 +82,7 @@ export default class AllProducts extends Component {
                         type="text"
                         className="form-control"
                         placeholder="Find your favorite product"
-                        // onChange={this.handleSearch.bind(this)}
+                        onChange={this.handleSearch.bind(this)}
                       />
                     </div>
                     <button type="submit" className="btn btn-white">
@@ -84,12 +95,15 @@ export default class AllProducts extends Component {
                 {products.map(product => {
                   return (
                     <div className="col-md-4" key={product.id}>
-                      <div>
+                      <div style={{}}>
                         <div
-                          className="card card-background"
+                          className="card card-raised card-background"
                           style={{ background: `url(${product.imageUrl})` }}
                         >
-                          <div className="card-content">
+                          <div
+                            className="card-content"
+                            style={{ minHeight: '280px' }}
+                          >
                             <Link to={'/products/category' + product.category}>
                               <h6 className="category">{product.category}</h6>
                             </Link>
@@ -104,7 +118,9 @@ export default class AllProducts extends Component {
                             <Link
                               className="btn btn-danger btn-round"
                               to={'/products/' + product.id}
-                            />
+                            >
+                              Detail
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -119,3 +135,11 @@ export default class AllProducts extends Component {
     );
   }
 }
+
+// const mapToProps = (state, ownProps) => {
+//   return {
+//     products: state.product,
+//   };
+// };
+
+// export default connect(mapToProps)(AllProducts);
