@@ -34,7 +34,7 @@ describe('User model', () => {
       })
     }) // end describe('correctPassword')
   }) // end describe('instanceMethods')
-  describe('name fields', () => {
+  xdescribe('name fields', () => {
     let cody
 
     beforeEach(() => {
@@ -55,7 +55,7 @@ describe('User model', () => {
       expect(codyLast).to.equal('Bones')
     })
     it('does not allow empty or null first or last names', async () => {
-      
+
       try {
         const user = await User.create({
           email: 'cody@puppybook.com',
