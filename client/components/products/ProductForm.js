@@ -16,7 +16,6 @@ export class ProductForm extends React.Component {
 
   render() {
     const { existingCategories, currentProduct, handleChange } = this.props
-    console.log(currentProduct)
     if (currentProduct.new || currentProduct.updated) {
       return <Redirect to="/products/1" />
     }
