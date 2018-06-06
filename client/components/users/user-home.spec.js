@@ -5,7 +5,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { UserHome } from './user-home'
 
-xdescribe('UserHome', () => {
+describe('UserHome', () => {
   let userHome
 
   beforeEach(() => {
