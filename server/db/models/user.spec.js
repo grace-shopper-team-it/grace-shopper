@@ -1,14 +1,14 @@
 /* global describe beforeEach it */
 
-const {expect} = require('chai')
+const {expect, assert} = require('chai')
 const db = require('../index')
 const User = db.model('user')
+const chaiAsPromised = require('chai-as-promised')
+const chai = require('chai')
+
+chai.use(chaiAsPromised)
 
 describe('User model', () => {
-  beforeEach(() => {
-    return db.sync({force: true})
-  })
-
   describe('instanceMethods', () => {
     describe('correctPassword', () => {
       let cody
@@ -16,7 +16,9 @@ describe('User model', () => {
       beforeEach(() => {
         return User.create({
           email: 'cody@puppybook.com',
-          password: 'bones'
+          password: 'bones',
+          firstName: 'Cody',
+          lastName: 'Bones'
         })
           .then(user => {
             cody = user
@@ -32,4 +34,37 @@ describe('User model', () => {
       })
     }) // end describe('correctPassword')
   }) // end describe('instanceMethods')
+  describe('name fields', () => {
+    let cody
+
+    beforeEach(() => {
+      return User.create({
+        email: 'cody@puppybook.com',
+        password: 'bones',
+        firstName: 'Cody',
+        lastName: 'Bones'
+      })
+        .then(user => {
+          cody = user
+        })
+    })
+    it('has a first and last name', () => {
+      const codyFirst = cody.firstName
+      const codyLast = cody.lastName
+      expect(codyFirst).to.equal('Cody')
+      expect(codyLast).to.equal('Bones')
+    })
+    it('does not allow empty or null first or last names', async () => {
+      
+      try {
+        const user = await User.create({
+          email: 'cody@puppybook.com',
+          password: 'bones'
+        });
+    } catch (error) {
+      expect(error.message).to.include('notNull Violation: user.firstName cannot be null');
+    }
+
+    })
+  })
 }) // end describe('User model')

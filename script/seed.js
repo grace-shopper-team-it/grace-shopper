@@ -21,9 +21,11 @@ async function seed () {
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({email: 'cody@email.com', password: '123', firstName: 'Cody', lastName: 'Bones'}),
+    User.create({email: 'murphy@email.com', password: '123', firstName: 'Cody', lastName: 'Bones'})
   ])
+  // console.log(users)
+  // return users
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)
@@ -36,10 +38,11 @@ async function seed () {
 if (module === require.main) {
   seed()
   .catch(err => {
+    console.log('here')
     console.error(err)
     process.exitCode = 1
   })
-  .finally(() => { // `finally` is like then + catch. It runs no matter what.
+  .finally( () => { // `finally` is like then + catch. It runs no matter what.
     console.log('closing db connection')
     db.close()
     console.log('db connection closed')
