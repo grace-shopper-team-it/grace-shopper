@@ -38,19 +38,20 @@ let products = [
 ];
 
 export default class AllProducts extends Component {
-  state = { searchCategory: null };
+  state = { searchProduct: null };
 
   handleSearch(e) {
-    this.setState({ searchCategory: e.target.value });
+    this.setState({ searchProduct: e.target.value });
   }
   render() {
-    if (this.state.searchCategory) {
+    if (this.state.searchProduct) {
       products = products.filter(product =>
         Object.values(product)
           .join('')
           .toLowerCase()
-          .includes(this.state.searchCategory.toLowerCase())
+          .includes(this.state.searchProduct.toLowerCase())
       );
+      console.log('Products ====>', products);
     }
     return (
       <div className="allProducts">
@@ -97,30 +98,26 @@ export default class AllProducts extends Component {
                     <div className="col-md-4" key={product.id}>
                       <div style={{}}>
                         <div
-                          className="card card-raised card-background"
+                          className="card"
                           style={{ background: `url(${product.imageUrl})` }}
                         >
                           <div
                             className="card-content"
                             style={{ minHeight: '280px' }}
                           >
+                            <Link to={'/products/' + product.id}>
+                              <h3 className="card-title">{product.name}</h3>
+                            </Link>
+
                             <Link to={'/products/category' + product.category}>
                               <h6 className="category">{product.category}</h6>
                             </Link>
-
-                            <h3 className="card-title">{product.name}</h3>
 
                             <p className="card-description">
                               {product.description.length < 50
                                 ? product.description
                                 : product.description.slice(0, 50) + '...'}
                             </p>
-                            <Link
-                              className="btn btn-danger btn-round"
-                              to={'/products/' + product.id}
-                            >
-                              Detail
-                            </Link>
                           </div>
                         </div>
                       </div>
