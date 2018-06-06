@@ -11,8 +11,12 @@ const SingleProduct = props => {
       <Product key={currentProduct.id} product={currentProduct} />
       {currentUser.admin && (
         <div className="admin-product-options">
-          <Link to="/products/new">New Product</Link>
-          <Link to="/products/1/edit">Edit</Link>
+          <Link className="btn btn-primary" to="/products/new">
+            New Product
+          </Link>
+          <Link className="btn btn-success" to="/products/1/edit">
+            Edit
+          </Link>
           <DeleteProduct />
         </div>
       )}

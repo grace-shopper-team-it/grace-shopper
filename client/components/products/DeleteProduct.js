@@ -3,7 +3,9 @@ import React from 'react'
 const DeleteProduct = props => {
   return (
     <form>
-      <button type="submit">Delete</button>
+      <button className="btn btn-danger" type="submit">
+        Delete
+      </button>
     </form>
   )
 }
