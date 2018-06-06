@@ -6,13 +6,13 @@ const Review = db.define('review', {
   content: {
     type: Sequelize.TEXT,
     validate: {
-      length: {
+      len: {
         min: 12
       }
     }
   },
   stars: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     validate: {
       min: 1,
       max: 5

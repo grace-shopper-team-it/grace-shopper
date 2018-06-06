@@ -4,7 +4,20 @@ const Review = require('./review')
 const Order = require('./order')
 const Category = require('./category')
 
+Product.belongsToMany(Category, { through: 'ProductCategory' })
+Category.belongsToMany(Product, { through: 'ProductCategory' })
 
+Review.belongsTo(Product)
+Product.hasMany(Review)
+
+Review.belongsTo(User)
+User.hasMany(Review)
+
+Order.belongsTo(User)
+User.hasMany(Order)
+
+Order.belongsToMany(Product, { through: 'ProductOrder'})
+Product.belongsToMany(Order, { through: 'ProductOrder'})
 
 module.exports = {
   User, Order, Product, Review, Category
@@ -22,7 +35,6 @@ module.exports = {
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
-
 
 //Product.belongsToMany(Order)
 //Order.hasMany(Product)
