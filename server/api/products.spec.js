@@ -84,9 +84,10 @@ describe('Products routes', () => {
         });
     });
   });
-  describe('PUT requests', () => {
-    it('/api/products/:id', async () => {
-      const superCool = await Product.create({
+  describe('PUT & DELETE requests', () => {
+    let superCool;
+    beforeEach(async () => {
+      superCool = await Product.create({
         name: 'Super Cool',
         description: 'It is super cool',
         price: 5,
@@ -94,6 +95,8 @@ describe('Products routes', () => {
         imageUrl:
           'https://images.reverb.com/image/upload/s--gF-GRKEs--/a_exif,c_limit,e_unsharp_mask:80,f_auto,fl_progressive,g_south,h_620,q_90,w_620/v1360300164/y48agn5ayq6bbfyfzs9t.jpg',
       });
+    });
+    it('PUT /api/products/:id', () => {
       return request(app)
         .put('/api/products/1')
         .send(formData)
@@ -103,6 +106,17 @@ describe('Products routes', () => {
           return Product.findById(1).then(product => {
             expect(product.name).to.equal('Gibson Les Paul');
             expect(product.inventory).to.equal(30);
+          });
+        });
+    });
+
+    it('DELETE /api/products/:id', () => {
+      return request(app)
+        .delete('/api/products/1')
+        .expect(204)
+        .then(() => {
+          return Product.findById(1).then(product => {
+            expect(product).to.equal(null);
           });
         });
     });
