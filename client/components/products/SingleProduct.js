@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Product from './Product';
 import DeleteProduct from './DeleteProduct';
 import { getProductThunk } from '../../store/product';
@@ -13,6 +13,7 @@ class SingleProduct extends React.Component {
 
   render() {
     const { currentUser, currentProduct } = this.props;
+    if (!currentProduct) return <Redirect to="/allProducts" />;
     return (
       <div className="container">
         <Product key={currentProduct.id} product={currentProduct} />
@@ -27,7 +28,7 @@ class SingleProduct extends React.Component {
             >
               Edit
             </Link>
-            <DeleteProduct />
+            <DeleteProduct productId={currentProduct.id} />
           </div>
         )}
       </div>
