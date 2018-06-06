@@ -16,7 +16,7 @@ describe('Order model', async () => {
     password: '12345',
   });
   //create new order
-  const codyOrder = await Order.create({ status: 'created' });
+  const codyOrder = await Order.create({ status: 'Created' });
   //find created user instance
   const foundCody = await User.findOne({
     where: {

@@ -1,27 +1,32 @@
-const User = require('./user')
-const Product = require('./product')
-const Review = require('./review')
-const Order = require('./order')
-const Category = require('./category')
+const User = require("./user");
+const Product = require("./product");
+const Review = require("./review");
+const Order = require("./order");
+const Category = require("./category");
+const ProductOrder = require("./productOrder")
 
-Product.belongsToMany(Category, { through: 'ProductCategory' })
-Category.belongsToMany(Product, { through: 'ProductCategory' })
+Product.belongsToMany(Category, { through: 'productCategories' });
+Category.belongsToMany(Product, { through: 'productCategories' });
 
-Review.belongsTo(Product)
-Product.hasMany(Review)
+Review.belongsTo(Product);
+Product.hasMany(Review);
 
-Review.belongsTo(User)
-User.hasMany(Review)
+Review.belongsTo(User);
+User.hasMany(Review);
 
-Order.belongsTo(User)
-User.hasMany(Order)
+Order.belongsTo(User);
+User.hasMany(Order);
 
-Order.belongsToMany(Product, { through: 'ProductOrder'})
-Product.belongsToMany(Order, { through: 'ProductOrder'})
+Order.belongsToMany(Product, { through: 'productOrder' });
+Product.belongsToMany(Order, { through: 'productOrder' });
 
 module.exports = {
-  User, Order, Product, Review, Category
-}
+  User,
+  Order,
+  Product,
+  Review,
+  Category
+};
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -49,4 +54,3 @@ module.exports = {
 //Category.belongsTo(Product)
 
 //also need methods that decrement the products when they are ordered....
-//also need a method that will push the review on the the reviews array in the products for user after someone creates it
