@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux';
+import CategoryDropdown from './CategoryDropdown';
 
 let items = [
   {
@@ -26,7 +27,7 @@ let items = [
   },
   {
     id: 3,
-    name: 'nice bug',
+    name: 'nice toy',
     rating: 2.0,
     description: 'eiugrh fIOWAHGUIRW',
     imageUrl:
@@ -68,7 +69,7 @@ export default class AllProducts extends Component {
           <div className="container">
             <div className="section">
               <div className="nav nav-bar">
-                <div>
+                <div style={{ display: 'flex' }}>
                   <h2 className="navbar-header" style={{ textAlign: 'center' }}>
                     Currently Available
                   </h2>
@@ -82,7 +83,6 @@ export default class AllProducts extends Component {
                         name="searchProduct"
                         type="text"
                         className="form-control"
-                        // value={this.state.searchProduct}
                         placeholder="Find your favorite product"
                         onChange={this.handleChange.bind(this)}
                       />
@@ -91,6 +91,7 @@ export default class AllProducts extends Component {
                       <i className="material-icons">search</i>
                     </button>
                   </form>
+                  <CategoryDropdown products={items} />
                 </div>
               </div>
               <div className="row">
