@@ -56,7 +56,6 @@ export const changeInputAction = (inputName, inputValue) => {
 export const addProductThunk = newProduct => {
   return async dispatch => {
     const { data } = await axios.post('/api/products', newProduct);
-    console.log('product added to database');
     dispatch(addProductAction(data));
   };
 };
@@ -79,15 +78,6 @@ export const deleteProductThunk = productId => {
 
 export const getProductThunk = productId => {
   return async dispatch => {
-    // const dummyProduct = {
-    //   id: 2,
-    //   name: 'Flamethrower',
-    //   price: 1000,
-    //   description: 'It throws flames!',
-    //   inventory: 5,
-    //   imageUrl:
-    //     'https://bloximages.chicago2.vip.townnews.com/umudynamo.com/content/tncms/assets/v3/editorial/8/7a/87af1dfe-9de1-11e5-a860-f3a3a84a7c7b/56672efd1aa54.image.png?resize=300%2C169',
-    // };
     const { data } = await axios.get(`/api/products/${productId}`);
     dispatch(getProductAction(data));
   };
