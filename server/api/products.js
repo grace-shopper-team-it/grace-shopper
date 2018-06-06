@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const { Product } = require('../db/models');
 const { Review } = require('../db/models');
+const { isAdmin, productAdminRouter } = require('./products.admin');
 
-module.exports = router;
+// admin routes
+router.use(isAdmin, productAdminRouter);
 
 // Get all the products
 router.get('/', (req, res, next) => {
@@ -14,7 +16,7 @@ router.get('/', (req, res, next) => {
 });
 
 // get specific product
-router.get('/products/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   return Product.findOne({
     where: {
       id: req.params.id,
@@ -36,3 +38,5 @@ router.get('/products/:id/reviews', (req, res, next) => {
     .then(reviews => res.json(reviews))
     .catch(next);
 });
+
+module.exports = router;
