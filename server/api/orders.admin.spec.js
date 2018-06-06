@@ -10,6 +10,7 @@ const productOrder = db.model('productOrder')
 
  //so I think I'm going to want to pull all orders and include productOrders as well....
 //testing for route authentication is not working here....
+//check out Kevin's telk telk
 
  const myServer = 'http://localhost:8080'
  const adminDetails = {email: 'drevets@gmail.com', password: '12345'}
