@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux';
 
-let products = [
+let items = [
   {
     id: 1,
     name: 'clown',
@@ -26,7 +26,7 @@ let products = [
   },
   {
     id: 3,
-    name: 'another nice clown',
+    name: 'nice bug',
     rating: 2.0,
     description: 'eiugrh fIOWAHGUIRW',
     imageUrl:
@@ -40,10 +40,11 @@ let products = [
 export default class AllProducts extends Component {
   state = { searchProduct: null };
 
-  handleSearch(e) {
+  handleChange(e) {
     this.setState({ searchProduct: e.target.value });
   }
   render() {
+    let products = items;
     if (this.state.searchProduct) {
       products = products.filter(product =>
         Object.values(product)
@@ -51,7 +52,6 @@ export default class AllProducts extends Component {
           .toLowerCase()
           .includes(this.state.searchProduct.toLowerCase())
       );
-      console.log('Products ====>', products);
     }
     return (
       <div className="allProducts">
@@ -82,8 +82,9 @@ export default class AllProducts extends Component {
                         name="searchProduct"
                         type="text"
                         className="form-control"
+                        // value={this.state.searchProduct}
                         placeholder="Find your favorite product"
-                        onChange={this.handleSearch.bind(this)}
+                        onChange={this.handleChange.bind(this)}
                       />
                     </div>
                     <button type="submit" className="btn btn-white">
