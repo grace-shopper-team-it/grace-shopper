@@ -10,10 +10,11 @@ const CLEAR_CART = 'CLEAR_CART'
 /*
   action creators
 */
-const addToCartAction = product => {
+const addToCartAction = (product, quantity) => {
   return {
     type: ADD_TO_CART,
-    product
+    product,
+    quantity
   }
 }
 
@@ -37,6 +38,10 @@ const updateQuantity = amount => {
   }
 }
 
+export const fetchCart() {
+  
+}
+
 const initialState = {
   cart: []
 }
@@ -44,6 +49,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case ADD_TO_CART:
+      const cartItem = Object.assign({}, )
       return { ...state, cart: [ ...state.cart, action.product ] }
     case REMOVE_FROM_CART:
       const updatedCart = state.cart.filter(product => Number(product.id) !== Number(action.product.id))

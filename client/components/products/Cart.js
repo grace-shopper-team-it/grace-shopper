@@ -45,9 +45,18 @@ export class Cart extends Component {
     }
   }
 
+  componentDidMount () {
+    try {
+      this.props.fetchCart()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   render() {
     const ok = this.state.ok
     console.log(ok)
+    console.log('testTEwst')
     return (
       <div>
         <h1> Cart </h1>
@@ -63,9 +72,15 @@ const mapState = state => {
   }
 }
 
-
+const mapDispatchToProps = function (dispatch) {
+  return {
+    fetchInitialCart: () => {
+      dispatch(fetchCart())
+    }
+  }
+}
 
 export default connect(
   mapState,
-  mapDispatch
+  mapDispatchToProps
 )(Cart)
