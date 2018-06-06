@@ -49,7 +49,7 @@ describe('Order routes', () => {
   describe('/api/orders/:id', () => {
     it('GET /api/orders/:id shows details of one order', () => {
       return request(app)
-      .get('/api/orders/:3')
+      .get('/api/orders/3')
       .expect(200)
       .then(res => {
         expect(res.body).to.be.an('object')
@@ -58,7 +58,8 @@ describe('Order routes', () => {
     })
     it('PUT /api/orders/:id updates one order', () => {
       return request(app)
-      .put('/api/orders/:3', {status: 'Created'})
+      .put('/api/orders/3')
+      .send({status: 'Created'})
       .expect(200)
       .then(res => {
         expect(res.body).to.be.an('object')
