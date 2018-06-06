@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux';
+import CategoryDropdown from './CategoryDropdown';
 
-let products = [
+let items = [
   {
     id: 1,
     name: 'clown',
@@ -26,7 +27,7 @@ let products = [
   },
   {
     id: 3,
-    name: 'another nice clown',
+    name: 'nice toy',
     rating: 2.0,
     description: 'eiugrh fIOWAHGUIRW',
     imageUrl:
@@ -38,18 +39,19 @@ let products = [
 ];
 
 export default class AllProducts extends Component {
-  state = { searchCategory: null };
+  state = { searchProduct: null };
 
-  handleSearch(e) {
-    this.setState({ searchCategory: e.target.value });
+  handleChange(e) {
+    this.setState({ searchProduct: e.target.value });
   }
   render() {
-    if (this.state.searchCategory) {
+    let products = items;
+    if (this.state.searchProduct) {
       products = products.filter(product =>
         Object.values(product)
           .join('')
           .toLowerCase()
-          .includes(this.state.searchCategory.toLowerCase())
+          .includes(this.state.searchProduct.toLowerCase())
       );
     }
     return (
@@ -67,7 +69,7 @@ export default class AllProducts extends Component {
           <div className="container">
             <div className="section">
               <div className="nav nav-bar">
-                <div>
+                <div style={{ display: 'flex' }}>
                   <h2 className="navbar-header" style={{ textAlign: 'center' }}>
                     Currently Available
                   </h2>
@@ -82,13 +84,14 @@ export default class AllProducts extends Component {
                         type="text"
                         className="form-control"
                         placeholder="Find your favorite product"
-                        onChange={this.handleSearch.bind(this)}
+                        onChange={this.handleChange.bind(this)}
                       />
                     </div>
                     <button type="submit" className="btn btn-white">
                       <i className="material-icons">search</i>
                     </button>
                   </form>
+                  <CategoryDropdown products={items} />
                 </div>
               </div>
               <div className="row">
@@ -97,30 +100,26 @@ export default class AllProducts extends Component {
                     <div className="col-md-4" key={product.id}>
                       <div style={{}}>
                         <div
-                          className="card card-raised card-background"
+                          className="card"
                           style={{ background: `url(${product.imageUrl})` }}
                         >
                           <div
                             className="card-content"
                             style={{ minHeight: '280px' }}
                           >
+                            <Link to={'/products/' + product.id}>
+                              <h3 className="card-title">{product.name}</h3>
+                            </Link>
+
                             <Link to={'/products/category' + product.category}>
                               <h6 className="category">{product.category}</h6>
                             </Link>
-
-                            <h3 className="card-title">{product.name}</h3>
 
                             <p className="card-description">
                               {product.description.length < 50
                                 ? product.description
                                 : product.description.slice(0, 50) + '...'}
                             </p>
-                            <Link
-                              className="btn btn-danger btn-round"
-                              to={'/products/' + product.id}
-                            >
-                              Detail
-                            </Link>
                           </div>
                         </div>
                       </div>
