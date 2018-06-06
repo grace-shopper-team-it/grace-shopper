@@ -6,7 +6,7 @@ const db = require('../db')
 const app = require('../index')
 const User = db.model('user')
 
-xdescribe('User routes', () => {
+describe('User routes', () => {
   describe('/api/users/', () => {
     const codysEmail = 'cody@puppybook.com'
 
@@ -18,7 +18,7 @@ xdescribe('User routes', () => {
       })
     })
 
-    xit('GET /api/users', () => {
+    it('GET /api/users', () => {
       return request(app)
         .get('/api/users')
         .expect(200)

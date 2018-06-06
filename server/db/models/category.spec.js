@@ -6,7 +6,7 @@ const chaiAsPromised = require('chai-as-promised')
 
 chai.use(chaiAsPromised)
 
-xdescribe('Category model', () => {
+describe('Category model', () => {
   it('has a name', async () => {
     try {
       await Category.create({})

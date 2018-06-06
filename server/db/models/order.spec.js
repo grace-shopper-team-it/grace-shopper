@@ -8,7 +8,7 @@ const chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 
-describe('Order model associations', async () => {
+xdescribe('Order model associations', async () => {
   // let codyOrder;
   // let foundCody;
   // let newProduct;
