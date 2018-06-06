@@ -6,8 +6,10 @@ import {
   Login,
   Signup,
   UserHome,
-  SingleProduct,
   EditProduct,
+  AddProduct,
+  SingleProduct,
+  AllProducts,
 } from './components'
 import { me } from './store'
 
@@ -27,6 +29,8 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route exact path="/products/new" component={AddProduct} />
+        <Route path="/allProducts" component={AllProducts} />
         <Route path="/products/:id/edit" component={EditProduct} />
         <Route path="/products/:id" component={SingleProduct} />
         {isLoggedIn && (
@@ -63,7 +67,12 @@ const mapDispatch = dispatch => {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default withRouter(
+  connect(
+    mapState,
+    mapDispatch
+  )(Routes)
+)
 
 /**
  * PROP TYPES

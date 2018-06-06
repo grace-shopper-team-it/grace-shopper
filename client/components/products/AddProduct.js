@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ProductForm from './ProductForm'
-import { getProductThunk, updateProductThunk } from '../../store/product'
+import { getProductAction, addProductThunk } from '../../store/product'
 
 const existingCategories = [
   { id: 1, name: 'Sports' },
@@ -11,15 +11,16 @@ const existingCategories = [
   { id: 5, name: 'Weird Stuff' },
 ]
 
-class EditProduct extends React.Component {
+class AddProduct extends React.Component {
   componentDidMount() {
-    this.props.fetchProduct()
+    // set currentProduct to blank
+    this.props.resetCurrentProduct()
   }
   render() {
     return (
       <ProductForm
         existingCategories={existingCategories}
-        handleProduct={this.props.updateProduct}
+        handleProduct={this.props.addProduct}
       />
     )
   }
@@ -27,9 +28,18 @@ class EditProduct extends React.Component {
 
 const mapDispatch = dispatch => {
   return {
-    fetchProduct: productId => dispatch(getProductThunk(productId)),
-    updateProduct: (updatedProduct, productId) => {
-      dispatch(updateProductThunk(updatedProduct, productId))
+    resetCurrentProduct: () =>
+      dispatch(
+        getProductAction({
+          name: '',
+          price: '',
+          description: '',
+          stock: '',
+          imageUrl: '',
+        })
+      ),
+    addProduct: newProduct => {
+      dispatch(addProductThunk(newProduct))
     },
   }
 }
@@ -37,4 +47,4 @@ const mapDispatch = dispatch => {
 export default connect(
   null,
   mapDispatch
-)(EditProduct)
+)(AddProduct)
