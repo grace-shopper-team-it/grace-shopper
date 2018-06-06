@@ -6,7 +6,7 @@ module.exports = router;
 
 // Get all the products
 router.get('/', (req, res, next) => {
-  Product.findAll({})
+  Product.findAll()
     .then(products => {
       res.json(products);
     })
@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 });
 
 // get specific product
-router.get('/products/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   return Product.findOne({
     where: {
       id: req.params.id,
@@ -27,7 +27,7 @@ router.get('/products/:id', (req, res, next) => {
 });
 
 // get review of a product
-router.get('/products/:id/reviews', (req, res, next) => {
+router.get('/:id/reviews', (req, res, next) => {
   return Review.findAll({
     where: {
       productId: req.params.productId,
