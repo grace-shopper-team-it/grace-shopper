@@ -17,7 +17,7 @@ export class ProductForm extends React.Component {
   render() {
     const { existingCategories, currentProduct, handleChange } = this.props;
     if (currentProduct.new || currentProduct.updated) {
-      return <Redirect to="/products/1" />;
+      return <Redirect to={`/products/${currentProduct.id}`} />;
     }
     return (
       <div className="container">
@@ -67,11 +67,11 @@ export class ProductForm extends React.Component {
           value={currentProduct.categories}
     />*/}
           <div className="form-group">
-            <label htmlFor="stock">Units in Stock</label>
+            <label htmlFor="inventory">Units in Stock</label>
             <input
               type="text"
-              name="stock"
-              id="stock"
+              name="inventory"
+              id="inventory"
               value={currentProduct.stock}
               onChange={handleChange}
               className="form-control"

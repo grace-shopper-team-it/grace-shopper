@@ -3,6 +3,7 @@ const { Product } = require('../db/models');
 const { Review } = require('../db/models');
 const { isAdmin, productAdminRouter } = require('./products.admin');
 
+// admin routes
 router.use(isAdmin, productAdminRouter);
 
 // Get all the products
@@ -18,7 +19,7 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   return Product.findOne({
     where: {
-      productId: req.params.id,
+      id: req.params.id,
     },
   })
     .then(product => {

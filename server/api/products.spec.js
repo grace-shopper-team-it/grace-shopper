@@ -18,6 +18,9 @@ describe('Products routes', () => {
   beforeEach(() => {
     return db.sync({ force: true });
   });
+  afterEach(() => {
+    return db.sync({ force: true });
+  });
   describe('api/products/', () => {
     let product1;
     let product2;
@@ -78,6 +81,29 @@ describe('Products routes', () => {
           expect(res.body).to.be.an('object');
           expect(res.body.name).to.equal('Gibson Les Paul');
           expect(res.body.inventory).to.equal(30);
+        });
+    });
+  });
+  describe('PUT requests', () => {
+    it('/api/products/:id', async () => {
+      const superCool = await Product.create({
+        name: 'Super Cool',
+        description: 'It is super cool',
+        price: 5,
+        inventory: 6,
+        imageUrl:
+          'https://images.reverb.com/image/upload/s--gF-GRKEs--/a_exif,c_limit,e_unsharp_mask:80,f_auto,fl_progressive,g_south,h_620,q_90,w_620/v1360300164/y48agn5ayq6bbfyfzs9t.jpg',
+      });
+      return request(app)
+        .put('/api/products/1')
+        .send(formData)
+        .expect(204)
+        .then(res => {
+          expect(res.body).to.be.an('object');
+          return Product.findById(1).then(product => {
+            expect(product.name).to.equal('Gibson Les Paul');
+            expect(product.inventory).to.equal(30);
+          });
         });
     });
   });

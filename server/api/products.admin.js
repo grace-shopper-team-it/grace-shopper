@@ -17,6 +17,22 @@ productAdminRouter.post('/', async (req, res, next) => {
   }
 });
 
+productAdminRouter.put('/:id', async (req, res, next) => {
+  try {
+    const formData = {
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      inventory: req.body.inventory,
+      imageUrl: req.body.imageUrl,
+    };
+    await Product.update(formData, { where: { id: req.params.id } });
+    res.status(204).end();
+  } catch (err) {
+    next(err);
+  }
+});
+
 function isAdmin(req, res, next) {
   next();
 }
