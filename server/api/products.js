@@ -2,8 +2,10 @@ const router = require('express').Router();
 const { Product } = require('../db/models');
 const { Review } = require('../db/models');
 const { Category } = require('../db/models');
+const { isAdmin, productAdminRouter } = require('./products.admin');
 
-module.exports = router;
+// admin routes
+router.use(isAdmin, productAdminRouter);
 
 // Get all the products
 router.get('/', (req, res, next) => {
@@ -37,3 +39,5 @@ router.get('/:id/reviews', (req, res, next) => {
     .then(reviews => res.json(reviews))
     .catch(next);
 });
+
+module.exports = router;

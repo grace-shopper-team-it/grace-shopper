@@ -62,38 +62,32 @@ export const getAllProducts = products => {
 */
 
 export const addProductThunk = newProduct => {
-  return dispatch => {
-    // add to database
-    dispatch(addProductAction(newProduct));
+  return async dispatch => {
+    const { data } = await axios.post('/api/products', newProduct);
+    dispatch(addProductAction(data));
   };
 };
 export const updateProductThunk = (updatedProduct, productId) => {
-  return dispatch => {
-    // http request to api route for updating
-    // dispatch updated product to update state
-    dispatch(updateAction(productId, updatedProduct));
+  return async dispatch => {
+    const { data } = await axios.put(
+      `/api/products/${productId}`,
+      updatedProduct
+    );
+    dispatch(updateAction(productId, data));
   };
 };
 
 export const deleteProductThunk = productId => {
-  return dispatch => {
-    // http request to api route for deleting
-    // dispatch to update state
+  return async dispatch => {
+    await axios.delete(`/api/products/${productId}`);
+    dispatch(deleteAction(productId));
   };
 };
 
 export const getProductThunk = productId => {
-  return dispatch => {
-    const dummyProduct = {
-      id: 2,
-      name: 'Flamethrower',
-      price: 1000,
-      description: 'It throws flames!',
-      stock: 5,
-      imageUrl:
-        'https://bloximages.chicago2.vip.townnews.com/umudynamo.com/content/tncms/assets/v3/editorial/8/7a/87af1dfe-9de1-11e5-a860-f3a3a84a7c7b/56672efd1aa54.image.png?resize=300%2C169',
-    };
-    dispatch(getProductAction(dummyProduct));
+  return async dispatch => {
+    const { data } = await axios.get(`/api/products/${productId}`);
+    dispatch(getProductAction(data));
   };
 };
 
@@ -132,13 +126,13 @@ export default function(state = initialState, action) {
     case ADD_PRODUCT:
       return {
         ...state,
-        currentProduct: { ...state.currentProduct, new: true },
+        currentProduct: { ...action.product, new: true },
       };
     // add to products array when it's created
     case UPDATE_PRODUCT:
       return {
         ...state,
-        currentProduct: { ...state.currentProduct, updated: true },
+        currentProduct: { ...action.updatedProduct, updated: true },
       };
     // will also need to update products array when that is created
     case DELETE_PRODUCT:
