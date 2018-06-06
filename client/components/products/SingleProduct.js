@@ -13,6 +13,7 @@ class SingleProduct extends React.Component {
 
   render() {
     const { currentUser, currentProduct } = this.props;
+    if (!currentProduct.id) return <div>LOADING...</div>;
     return (
       <div className="container">
         <Product key={currentProduct.id} product={currentProduct} />
@@ -28,6 +29,10 @@ class SingleProduct extends React.Component {
               Edit
             </Link>
             <DeleteProduct />
+            <h2>Categories</h2>
+            {currentProduct.categories.map(category => {
+              return <div key={category.id}>{category.name}</div>;
+            })}
           </div>
         )}
       </div>

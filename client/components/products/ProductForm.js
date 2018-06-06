@@ -59,14 +59,17 @@ export class ProductForm extends React.Component {
             />
           </div>
 
-          {/*<label htmlFor="new-categories">New Categories</label>
-        <input
-          type="text"
-          name="new-categories"
-          id="new-categories"
-          placeholder="Separate with a comma"
-          value={currentProduct.categories}
-    />*/}
+          <div className="form-group">
+            <label htmlFor="categories">New Categories</label>
+            <input
+              type="text"
+              name="categories"
+              id="categories"
+              placeholder="Separate with a space"
+              className="form-control"
+            />
+          </div>
+
           <div className="form-group">
             <label htmlFor="inventory">Units in Stock</label>
             <input

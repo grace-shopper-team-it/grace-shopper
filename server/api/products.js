@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const { Product } = require('../db/models');
-const { Review } = require('../db/models');
+const { Product, Review, Category } = require('../db/models');
 const { isAdmin, productAdminRouter } = require('./products.admin');
 
 // admin routes
@@ -18,6 +17,7 @@ router.get('/', (req, res, next) => {
 // get specific product
 router.get('/:id', (req, res, next) => {
   return Product.findOne({
+    include: [Category],
     where: {
       id: req.params.id,
     },
