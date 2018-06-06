@@ -91,7 +91,7 @@ export default class AllProducts extends Component {
                       <i className="material-icons">search</i>
                     </button>
                   </form>
-                  <CategoryDropdown products={items} />
+                  <CategoryDropdown category={items} />
                 </div>
               </div>
               <div className="row">
