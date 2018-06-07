@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changeInputAction, getProductAction } from '../../store/product';
 import history from '../../history';
+import CategoryForm from './CategoryForm';
 
 export class ProductForm extends React.Component {
   handleSubmit = event => {
@@ -97,15 +98,7 @@ export class ProductForm extends React.Component {
             />
           </div>
 
-          {/*<select onChange={() => console.log('select changed')}>
-          {existingCategories.map(category => {
-            return (
-              <option value={category.id} key={category.id}>
-                {category.name}
-              </option>
-            )
-          })}
-        </select>*/}
+          <CategoryForm categories={existingCategories} />
 
           <button className="btn btn-primary" type="submit">
             Save Changes
