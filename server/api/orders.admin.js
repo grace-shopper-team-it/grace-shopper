@@ -1,23 +1,35 @@
 const orderAdminRouter = require('express').Router();
 const { Product, productOrder, Order} = require('../db/models');
 
-const isAdmin = (user) => {
-  return user.isAdmin;
-}
-
 //do I need to call next here?? what was it that Collin
 //ok so something about this authorization technique does not work...maybe copy what Dustin did?
-// orderAdminRouter.use('/', (req, res, next) => {
-//   if (!isAdmin(req.user)) {
-//     res.status(400).send('Unauthorized user')
-//   }
-// })
+
+//if I write a function here, should export it so can re-use
+
+orderAdminRouter.use((req, res, next) => {
+  if (!req.user) {
+    console.log('no user')
+    res.status(403).send('Not Authorized')
+    next();
+  }
+  if (req.user) {
+    console.log('user')
+    if (!req.user.isAdmin) {
+    console.log('but not an admin')
+    res.status(403).send('Not Authorized')
+    next();
+    }
+    next();
+  }
+});
 
 // retrieve all the orders in the database
 // do I need to call next here??
 orderAdminRouter.get('/', async (req, res, next) => {
-  const orders = await Order.findAll()
-  res.json(orders)
+  try {
+    const orders = await Order.findAll()
+    res.json(orders)
+  } catch (err) {next(err)}
 });
 
 // //retrieve one order from the db, including its associated products // note: eager loading not working here...
