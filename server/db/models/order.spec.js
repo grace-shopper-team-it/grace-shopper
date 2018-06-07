@@ -9,7 +9,7 @@ const chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 
-xdescribe('Order model associations', async () => {
+// xdescribe('Order model associations', async () => {
   // let codyOrder;
   // let foundCody;
   // let newProduct;
@@ -113,4 +113,4 @@ xdescribe('Order model associations', async () => {
 //   });
 // });
 
-//these tests are not working and I do not know why << note from Emily
+//these tests are not working and I do not know why note from
