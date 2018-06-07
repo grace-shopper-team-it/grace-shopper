@@ -12,10 +12,12 @@ productAdminRouter.post('/', async (req, res, next) => {
       categories: req.body.categories.split(' '),
     };
     const product = await Product.create(formData);
-    console.log(
-      'categories array:',
-      Product.handleCategories(formData.categories, Category)
+    const categories = await Product.createCategories(
+      formData.categories,
+      Category
     );
+    product.setCategories(categories);
+    console.log('response body:', product);
     res.status(201).json(product);
   } catch (err) {
     next(err);

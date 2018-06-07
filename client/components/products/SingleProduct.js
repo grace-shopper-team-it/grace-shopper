@@ -13,7 +13,9 @@ class SingleProduct extends React.Component {
 
   render() {
     const { currentUser, currentProduct } = this.props;
-    if (!currentProduct.id) return <div>LOADING...</div>;
+    if (!currentProduct.id || !currentProduct.categories) {
+      return <div>LOADING...</div>;
+    }
     return (
       <div className="container">
         <Product key={currentProduct.id} product={currentProduct} />

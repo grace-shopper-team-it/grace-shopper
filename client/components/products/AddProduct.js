@@ -36,6 +36,7 @@ const mapDispatch = dispatch => {
           description: '',
           inventory: '',
           imageUrl: '',
+          categories: '',
         })
       ),
     addProduct: newProduct => {

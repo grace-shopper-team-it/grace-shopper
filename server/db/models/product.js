@@ -38,17 +38,10 @@ const Product = db.define('product', {
   class methods
 */
 
-Product.handleCategories = function(categories, categoryModel) {
-  return categories.map(category => {
-    return categoryModel.findOrCreate({
-      where: {
-        name: category,
-      },
-      defaults: {
-        name: category,
-      },
-    });
-  });
+Product.createCategories = function(categories, categoryModel) {
+  return Promise.all(
+    categories.map(category => categoryModel.create({ name: category }))
+  );
 };
 
 module.exports = Product;

@@ -67,6 +67,8 @@ export class ProductForm extends React.Component {
               id="categories"
               placeholder="Separate with a space"
               className="form-control"
+              onChange={handleChange}
+              value={currentProduct.categories}
             />
           </div>
 
