@@ -40,8 +40,8 @@ const updateQuantity = amount => {
   }
 }
 
-export const fetchCart() {
-  
+export const fetchCart = () => {
+
 }
 
 const initialState = {
