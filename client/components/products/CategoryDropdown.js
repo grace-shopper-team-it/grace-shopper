@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getAllCategoriesThunk } from '../../store/category';
 
 class CategoryDropdow extends Component {
+  async componentDidMount() {
+    await this.props.getAllCategoriesThunk();
+  }
   render() {
-    // let { category } = this.state.category;
+    let category = this.props.categories.categories;
 
-    // category = category.map(categ => Object.values(categ.category).join(''));
-    // category = category.filter((categ, pos) => {
-    //   return category.indexOf(categ) === pos;
-    // });
+    category = category.map(categ => Object.values(categ.name).join(''));
+    category = category.filter((categ, pos) => {
+      return category.indexOf(categ) === pos;
+    });
 
     return (
       <div className="dropdown">
@@ -38,10 +42,19 @@ class CategoryDropdow extends Component {
 
 const mapToProps = (state, ownProps) => {
   return {
-    categories: state.categories,
+    categories: state.category,
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {};
+  return {
+    getAllCategoriesThunk() {
+      dispatch(getAllCategoriesThunk());
+    },
+  };
 };
+
+export default connect(
+  mapToProps,
+  mapDispatchToProps
+)(CategoryDropdow);

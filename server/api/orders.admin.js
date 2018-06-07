@@ -1,5 +1,5 @@
 const orderAdminRouter = require('express').Router();
-const { Product, productOrder, Order, User } = require('../db/models');
+const { Product, ProductOrder, Order, User } = require('../db/models');
 
 //check to see if there is a user; if there is, see if it's authorized; if neither one of those, send status 403; otherwise, go to next;
 
@@ -26,12 +26,11 @@ orderAdminRouter.get('/', async (req, res, next) => {
   }
 });
 
-// //retrieve one order from the db, including its associated products // note: eager loading not working here...
+// //retrieve one order from the db, including its associated products
 orderAdminRouter.get('/:id', async (req, res, next) => {
-  const order = await Order.findOne(
-    { where: { id: req.params.id } },
-    { include: { model: productOrder } }
-  );
+  const order = await Order.findById(req.params.id, {
+    include: [Product],
+  });
   res.json(order);
 });
 
