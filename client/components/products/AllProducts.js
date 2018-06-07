@@ -15,7 +15,6 @@ class AllProducts extends Component {
   }
   render() {
     let products = this.props.products.products;
-
     if (this.state.searchProduct) {
       products = products.filter(product =>
         Object.values(product)
