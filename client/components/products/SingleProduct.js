@@ -13,10 +13,10 @@ class SingleProduct extends React.Component {
 
   render() {
     const { currentUser, currentProduct } = this.props;
+    if (!currentProduct) return <Redirect to="/allProducts" />;
     if (!currentProduct.id || !currentProduct.categories) {
       return <div>LOADING...</div>;
     }
-    if (!currentProduct) return <Redirect to="/allProducts" />;
     return (
       <div className="container">
         <Product key={currentProduct.id} product={currentProduct} />
