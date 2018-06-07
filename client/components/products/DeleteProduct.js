@@ -1,11 +1,32 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import { deleteProductThunk } from '../../store/product';
 
-const DeleteProduct = props => {
-  return (
-    <form>
-      <button type="submit">Delete</button>
-    </form>
-  )
+class DeleteProduct extends React.Component {
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.deleteProduct(this.props.productId);
+  };
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <button className="btn btn-danger" type="submit">
+          Delete
+        </button>
+      </form>
+    );
+  }
 }
 
-export default DeleteProduct
+const mapDispatch = dispatch => {
+  return {
+    deleteProduct: productId => {
+      dispatch(deleteProductThunk(productId));
+    },
+  };
+};
+
+export default connect(
+  null,
+  mapDispatch
+)(DeleteProduct);
