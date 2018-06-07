@@ -17,9 +17,9 @@ productAdminRouter.post('/', async (req, res, next) => {
       Category
     );
     product.setCategories(categories);
-    console.log('response body:', product);
     res.status(201).json(product);
   } catch (err) {
+    console.error('COMING FROM POST ROUTE:', err.message);
     next(err);
   }
 });

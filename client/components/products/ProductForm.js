@@ -1,25 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { changeInputAction, getProductAction } from '../../store/product';
+import history from '../../history';
 
 export class ProductForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
-    const productId = this.props.currentProduct.id;
-    this.props.handleProduct(this.props.currentProduct, productId);
+    this.handleData();
   };
-  componentWillUnmount() {
-    // set updated or new to false on currentProduct
-    const { currentProduct, resetCurrentProduct } = this.props;
-    resetCurrentProduct({ ...currentProduct, new: false, updated: false });
-  }
+  handleData = async () => {
+    const productId = this.props.currentProduct.id;
+    await this.props.handleProduct(this.props.currentProduct, productId);
+    history.push(`/products/${this.props.currentProduct.id}`);
+  };
+  handleChange = event => {
+    this.props.handleInput(event.target.name, event.target.value);
+  };
 
   render() {
-    const { existingCategories, currentProduct, handleChange } = this.props;
-    if (currentProduct.new || currentProduct.updated) {
-      return <Redirect to={`/products/${currentProduct.id}`} />;
-    }
+    const { existingCategories, currentProduct } = this.props;
+    const { handleChange } = this;
+
     return (
       <div className="container">
         <form onSubmit={event => this.handleSubmit(event, currentProduct)}>
@@ -65,7 +66,7 @@ export class ProductForm extends React.Component {
               type="text"
               name="categories"
               id="categories"
-              placeholder="Separate with a space"
+              placeholder="Separate with a comma"
               className="form-control"
               onChange={handleChange}
               value={currentProduct.categories}
@@ -122,8 +123,8 @@ const mapState = state => {
 };
 const mapDispatch = dispatch => {
   return {
-    handleChange: event => {
-      dispatch(changeInputAction(event.target.name, event.target.value));
+    handleInput: (name, value) => {
+      dispatch(changeInputAction(name, value));
     },
     resetCurrentProduct: currentProduct => {
       dispatch(getProductAction(currentProduct));

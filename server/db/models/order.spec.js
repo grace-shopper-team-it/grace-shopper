@@ -9,47 +9,47 @@ const chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 
-xdescribe('Order model associations', async () => {
-  // let codyOrder;
-  // let foundCody;
-  // let newProduct;
-  // let newProduct2;
-  // let cody;
-  // await db.sync({force: true})
-  // try {
-  //   [cody, created] = await User.findOrCreate({where: {
-  //     firstName: 'Cody',
-  //     lastName: 'Bone',
-  //     email: 'hellothere@gmail.com',
-  //     password: '12345',
-  //   }});
-  //   codyOrder = await Order.build({ status: 'Created' });
-  //   await codyOrder.save();
-  //   //find created user instance
-  //   foundCody = await User.findOne({
-  //     where: {
-  //       email: 'hellothere@gmail.com',
-  //     },
-  //   });
-  //   //create products
-  //   newProduct = await Product.build({
-  //     name: 'shoes',
-  //     description: 'some shoes',
-  //     price: 3.5,
-  //     inventory: 5,
-  //   });
-  //   newProduct2 = await Product.build({
-  //     name: 'shirt',
-  //     description: 'some shirt',
-  //     price: 1.5,
-  //     inventory: 3,
-  //   });
-  //   //save products
-  //   await newProduct.save();
-  //   await newProduct2.save();
-  // } catch (error) {
-  //   console.error(error);
-  // }
+// xdescribe('Order model associations', async () => {
+// let codyOrder;
+// let foundCody;
+// let newProduct;
+// let newProduct2;
+// let cody;
+// await db.sync({force: true})
+// try {
+//   [cody, created] = await User.findOrCreate({where: {
+//     firstName: 'Cody',
+//     lastName: 'Bone',
+//     email: 'hellothere@gmail.com',
+//     password: '12345',
+//   }});
+//   codyOrder = await Order.build({ status: 'Created' });
+//   await codyOrder.save();
+//   //find created user instance
+//   foundCody = await User.findOne({
+//     where: {
+//       email: 'hellothere@gmail.com',
+//     },
+//   });
+//   //create products
+//   newProduct = await Product.build({
+//     name: 'shoes',
+//     description: 'some shoes',
+//     price: 3.5,
+//     inventory: 5,
+//   });
+//   newProduct2 = await Product.build({
+//     name: 'shirt',
+//     description: 'some shirt',
+//     price: 1.5,
+//     inventory: 3,
+//   });
+//   //save products
+//   await newProduct.save();
+//   await newProduct2.save();
+// } catch (error) {
+//   console.error(error);
+// }
 //   it('has a user id', async () => {
 //     await codyOrder.setUser(foundCody);
 //     expect(codyOrder.userId).to.equal(cody[0].id);
@@ -113,4 +113,4 @@ xdescribe('Order model associations', async () => {
 //   });
 // });
 
-//these tests are not working and I do not know why << note from Emily
+//these tests are not working and I do not know why

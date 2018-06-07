@@ -40,7 +40,7 @@ const mapDispatch = dispatch => {
         })
       ),
     addProduct: newProduct => {
-      dispatch(addProductThunk(newProduct));
+      return dispatch(addProductThunk(newProduct));
     },
   };
 };

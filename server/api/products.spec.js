@@ -80,16 +80,10 @@ describe('Products routes', () => {
         });
     });
   });
-<<<<<<< HEAD
-  xdescribe('PUT requests', () => {
-    it('/api/products/:id', async () => {
-      const superCool = await Product.create({
-=======
-  describe('PUT & DELETE requests', () => {
+  xdescribe('PUT & DELETE requests', () => {
     let superCool;
     beforeEach(async () => {
       superCool = await Product.create({
->>>>>>> cc1bcc852faa0fcb90da38b468d89272fc03eb2b
         name: 'Super Cool',
         description: 'It is super cool',
         price: 5,

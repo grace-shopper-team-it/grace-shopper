@@ -7,7 +7,7 @@ router.use(isAdmin, productAdminRouter);
 
 // Get all the products
 router.get('/', (req, res, next) => {
-  Product.findAll({})
+  Product.findAll({ include: [Category] })
     .then(products => {
       res.json(products);
     })
@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
 // get specific product
 router.get('/:id', (req, res, next) => {
   return Product.findOne({
-    include: [Category],
+    include: [{ model: Category }],
     where: {
       id: req.params.id,
     },
