@@ -2,6 +2,7 @@ const orderAdminRouter = require('express').Router();
 const { Product, productOrder, Order, User } = require('../db/models');
 
 //check to see if there is a user; if there is, see if it's authorized; if neither one of those, send status 403; otherwise, go to next;
+
 orderAdminRouter.use((req, res, next) => {
   if (!req.user) {
     res.status(403).send('Not Authorized');
