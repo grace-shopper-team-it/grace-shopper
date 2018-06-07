@@ -7,7 +7,7 @@ router.use(isAdmin, productAdminRouter);
 
 // Get all the products
 router.get('/', (req, res, next) => {
-  Product.findAll({ include: [Category] })
+  Product.findAll()
     .then(products => {
       res.json(products);
     })
@@ -29,13 +29,20 @@ router.get('/:id', (req, res, next) => {
 });
 
 // get review of a product
-router.get('/products/:id/reviews', (req, res, next) => {
+router.get('/:id/reviews', (req, res, next) => {
   return Review.findAll({
     where: {
       productId: req.params.productId,
     },
   })
     .then(reviews => res.json(reviews))
+    .catch(next);
+});
+
+// get all categories
+router.get('/category', (req, res, next) => {
+  return Category.findAll()
+    .then(categories => res.json(categories))
     .catch(next);
 });
 
