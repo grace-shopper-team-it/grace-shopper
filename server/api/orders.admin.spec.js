@@ -44,7 +44,7 @@ describe('Order routes', () => {
         .then(res => {
           console.log('res.body', res.body);
           expect(res.body).to.be.an('object');
-          expect(res.body.productOrders.length).to.be.an('integer');
+          expect(res.body.products.length).to.exist;
         });
     });
     it('PUT /api/orders/:id updates one order', () => {
