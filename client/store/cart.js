@@ -85,7 +85,7 @@ export default function (state = initialState, action) {
     // find product to update, creates new obj with updated quantity, filters out old obj of state, adds newObj to newArr
       const objToBeUpdated = state.cart.find((product) => product.id === action.product.id)
       const newObj = Object.assign(objToBeUpdated, { cartQuantity: action.quantity })
-      const updatedCart = state.cart.filter(product => Number(product.id) !== Number(action.product.id)) 
+      const updatedCart = state.cart.filter(product => Number(product.id) !== Number(action.product.id))
       return { ...state, cart: [ ...updatedCart, newObj ]}
     }
     case REMOVE_FROM_CART: {
