@@ -11,9 +11,8 @@ import {
   Cart,
   AddProduct,
   SingleProduct,
-} from './components'
+} from './components';
 import { me } from './store';
-
 
 /**
  * COMPONENT

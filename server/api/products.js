@@ -9,10 +9,8 @@ router.use(isAdmin, productAdminRouter);
 
 // Get all the products
 router.get('/', (req, res, next) => {
-  Product.findAll({ include: [Category] })
+  Product.findAll()
     .then(products => {
-      console.log('All Products', products);
-
       res.json(products);
     })
     .catch(next);
@@ -39,6 +37,13 @@ router.get('/:id/reviews', (req, res, next) => {
     },
   })
     .then(reviews => res.json(reviews))
+    .catch(next);
+});
+
+// get all categories
+router.get('/category', (req, res, next) => {
+  return Category.findAll()
+    .then(categories => res.json(categories))
     .catch(next);
 });
 

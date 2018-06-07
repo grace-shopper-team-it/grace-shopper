@@ -80,10 +80,6 @@ class AllProducts extends Component {
                               <h3 className="card-title">{product.name}</h3>
                             </Link>
 
-                            {/* <Link to={'/products/category' + product.category}>
-                              <h6 className="category">{product.category}</h6>
-                            </Link> */}
-
                             <p className="card-description">
                               {product.description.length < 50
                                 ? product.description
