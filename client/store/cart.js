@@ -38,10 +38,6 @@ const updateQuantity = (quantity) => {
   }
 }
 
-export const fetchCart = () => {
-
-}
-
 const initialState = {
   //dummy data
   cart: [ {
