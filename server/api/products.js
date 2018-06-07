@@ -5,6 +5,13 @@ const { isAdmin, productAdminRouter } = require('./products.admin');
 // admin routes
 router.use(isAdmin, productAdminRouter);
 
+router.get('/test-categories', async (req, res, next) => {
+  const categories = await Category.findAll({
+    include: [Product],
+  });
+  res.json(categories);
+});
+
 // Get all the products
 router.get('/', (req, res, next) => {
   Product.findAll()

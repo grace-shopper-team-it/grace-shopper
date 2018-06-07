@@ -44,10 +44,16 @@ productAdminRouter.put('/:id', async (req, res, next) => {
 productAdminRouter.post(
   '/:productId/new/categories/:categoryId/',
   async (req, res, next) => {
-    const category = await Category.findById(req.params.categoryId);
-    const product = await Product.findById(req.params.productId);
-    await product.setCategories([category]);
-    res.status(201).send(product);
+    const [category, product] = await Promise.all([
+      Category.findById(req.params.categoryId),
+      Product.findById(req.params.productId),
+    ]);
+    const currentCategories = await product.getCategories();
+    await product.setCategories([...currentCategories, category]);
+    const productWithDetail = await Product.findById(product.id, {
+      include: [Category],
+    });
+    res.status(201).send(productWithDetail);
   }
 );
 

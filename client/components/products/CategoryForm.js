@@ -1,14 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  addExistingCategoryThunk,
-  changeInputAction,
-} from '../../store/product';
+import { addExistingCategoryThunk } from '../../store/product';
 
 class CategoryForm extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      categoryId: 0,
+    };
+  }
   handleSubmit = event => {
     event.preventDefault();
-    this.props.addCategory(this.props.currentProduct.id, event.target.value);
+    console.log('productId:', this.props.currentProduct.id);
+    console.log('categoryId:', this.state.categoryId);
+    this.props.addCategory(this.props.currentProduct.id, this.state.categoryId);
+  };
+  handleChange = event => {
+    this.setState({
+      categoryId: event.target.value,
+    });
+    console.log('LOCAL STATE:', this.state);
   };
 
   render() {
@@ -16,7 +27,7 @@ class CategoryForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="categories">Existing Categories</label>
-        <select id="categories" name="categories">
+        <select id="categories" name="categories" onChange={this.handleChange}>
           {categories.map(category => {
             return (
               <option value={category.id} key={category.id}>
