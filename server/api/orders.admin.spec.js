@@ -12,21 +12,21 @@ const productOrder = db.model('productOrder')
 //testing for route authentication is not working here....
 //check out Kevin's telk telk
 
- const myServer = 'http://localhost:8080'
- const adminDetails = {email: 'drevets@gmail.com', password: '12345'}
+//  const myServer = 'http://localhost:8080'
+//  const adminDetails = {email: 'drevets@gmail.com', password: '12345'}
 
- const createAuthenticatedRequest = (server, loginDetails, done) => {
-   const authenticatedRequest = request.agent();
-   authenticatedRequest
-    .get(server)
-    .send(loginDetails)
-    .end((err, res) => {
-      if (err) {
-        throw (err)
-      }
-      done(authenticatedRequest)
-    })
- }
+//  const createAuthenticatedRequest = (server, loginDetails, done) => {
+//    const authenticatedRequest = request.agent();
+//    authenticatedRequest
+//     .get(server)
+//     .send(loginDetails)
+//     .end((err, res) => {
+//       if (err) {
+//         throw (err)
+//       }
+//       done(authenticatedRequest)
+//     })
+//  }
 
 describe('Order routes', () => {
   describe('/api/orders', () => {
@@ -36,7 +36,6 @@ describe('Order routes', () => {
       .expect(200)
       .then(res => {
         expect(res.body).to.be.an('array')
-        expect(res.body[0].productOrders).to.have.property(length)
       })
     })
     it('GET /api/orders only shows orders to authorized users', () => {
