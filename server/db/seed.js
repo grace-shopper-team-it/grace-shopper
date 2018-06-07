@@ -197,7 +197,7 @@ function seed() {
       // create reviews
       for (var i = 0; i < reviews.length; i++) {
         reviews[i].userId = createdUsers[i].id;
-        reviews[i].productsId = createdProducts[i].id;
+        reviews[i].productsId = createdUsers[i].id;
       }
       return Promise.all(reviews.map(review => Review.create(review)));
     })
