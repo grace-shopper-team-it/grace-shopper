@@ -41,6 +41,15 @@ productAdminRouter.put('/:id', async (req, res, next) => {
   }
 });
 
+productAdminRouter.delete('/:id', async (req, res, next) => {
+  try {
+    await Product.destroy({ where: { id: req.params.id } });
+    res.status(204).end();
+  } catch (err) {
+    next(err);
+  }
+});
+
 function isAdmin(req, res, next) {
   next();
 }

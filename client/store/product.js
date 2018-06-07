@@ -70,9 +70,9 @@ export const updateProductThunk = (updatedProduct, productId) => {
 };
 
 export const deleteProductThunk = productId => {
-  return dispatch => {
-    // http request to api route for deleting
-    // dispatch to update state
+  return async dispatch => {
+    await axios.delete(`/api/products/${productId}`);
+    dispatch(deleteAction(productId));
   };
 };
 
