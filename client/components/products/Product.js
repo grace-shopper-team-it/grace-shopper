@@ -9,8 +9,8 @@ class Product extends React.Component {
     this.state = {
       quantity: 1,
     };
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -21,12 +21,11 @@ class Product extends React.Component {
     event.preventDefault();
     const product = this.props.product;
     const quantity = this.state.quantity;
-    this.props.addToCart(product, quantity)
+    this.props.addToCart(product, quantity);
   }
 
   render() {
     const { product } = this.props;
-    // console.log(product);
     return (
       <div>
         <h3>{product.name}</h3>

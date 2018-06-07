@@ -35,9 +35,10 @@ const clearCartAction = () => {
   };
 };
 
-const updateQuantity = (quantity) => {
+const updateQuantityAction = (product, quantity) => {
   return {
     type: UPDATE_QUANTITY,
+    product,
     quantity
   }
 }
@@ -45,6 +46,13 @@ const updateQuantity = (quantity) => {
 export const addToCartThunk = (product, quantity) => {
   return (dispatch) => {
     const action = addToCartAction(product, quantity);
+    dispatch(action);
+  };
+};
+
+export const updateQuantityThunk = (product, quantity) => {
+  return (dispatch) => {
+    const action = updateQuantityAction(product, quantity);
     dispatch(action);
   };
 };
@@ -61,6 +69,7 @@ const initialState = {
     stock: 5,
     price: 30,
     category: 'creepy',
+    quantity: 2
   },
   {
     id: 2,
@@ -71,6 +80,7 @@ const initialState = {
     stock: 3,
     price: 20,
     category: 'creepy',
+    quantity: 3
   },
   {
     id: 3,
@@ -82,6 +92,7 @@ const initialState = {
     stock: 3.8,
     price: 25,
     category: 'nice',
+    quantity: 4
   } ]
 }
 
@@ -89,19 +100,19 @@ export default function (state = initialState, action) {
   // adding 'quantity' property to products when they are passed to the cart
   switch (action.type) {
     case ADD_TO_CART: {
-      const cartItem = Object.assign(action.product, { cartQuantity: action.quantity })
-      return { ...state, cart: [ ...state.cart, cartItem ] }
+      const cartItem = Object.assign(action.product, { cartQuantity: action.quantity });
+      return { ...state, cart: [ ...state.cart, cartItem ] };
     }
     case UPDATE_QUANTITY: {
     // find product to update, creates new obj with updated quantity, filters out old obj of state, adds newObj to newArr
-      const objToBeUpdated = state.cart.find((product) => product.id === action.product.id)
+      const objToBeUpdated = state.cart.find((product) => product.id === action.product.id);
       const newObj = Object.assign(objToBeUpdated, { cartQuantity: action.quantity })
-      const updatedCart = state.cart.filter(product => Number(product.id) !== Number(action.product.id))
-      return { ...state, cart: [ ...updatedCart, newObj ]}
+      const updatedCart = state.cart.filter(product => Number(product.id) !== Number(action.product.id));
+      return { ...state, cart: [ ...updatedCart, newObj ]};
     }
     case REMOVE_FROM_CART: {
-      const updatedCart = state.cart.filter(product => Number(product.id) !== Number(action.product.id))
-      return { ...state, cart: updatedCart }
+      const updatedCart = state.cart.filter(product => Number(product.id) !== Number(action.product.id));
+      return { ...state, cart: updatedCart };
     }
     case CLEAR_CART:
       return { ...state, cart: [] };
