@@ -13,6 +13,7 @@ const CLEAR_CART = 'CLEAR_CART';
 /*
   action creators
 */
+
 const addToCartAction = (product, quantity) => {
   return {
     type: ADD_TO_CART,
