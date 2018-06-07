@@ -5,17 +5,18 @@ import { Link } from 'react-router-dom'
 
 const Cart = (props) => {
   console.log('testTEwst')
-  const { items } = props
+  const items = props.cart.cart
+  console.log(items)
   return (
     <div>
-      <h1> Cart </h1>
-      {
-        props.map((product) => {
-          <div key={product.id}>
-            <h3>{product.name}</h3>
-          </div>
-        })
-      }
+    <h1> Cart </h1>
+    {
+      items.map(product => 
+       <div key={product.id}>
+          <h3>{product.name}</h3>
+        </div>
+      )
+    }
     </div>
   )
 }
