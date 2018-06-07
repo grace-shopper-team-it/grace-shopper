@@ -3,7 +3,7 @@ import axios from 'axios';
 //ACTION TYPES
 
 const GET_ORDERS = 'GET_ORDERS';
-const UPDATE_ORDER = 'UPDATE_ORDERS';
+const UPDATE_ORDER = 'UPDATE_ORDER';
 
 //INITIAL STATE
 
@@ -33,7 +33,7 @@ export const fetchOrders = () => {
   };
 };
 
-export const updateOrder = (orderId, update) => {
+export const updateOrderInDB = (orderId, update) => {
   return async dispatch => {
     const updatedOrder = await axios.put(`/api/orders/${orderId}`, update)
     dispatch(updateOrder(updatedOrder.data))
@@ -45,7 +45,7 @@ export default function(state = defaultOrders, action) {
     case GET_ORDERS:
       return action.orders;
     case UPDATE_ORDER:
-      return state.map(order => {
+      return state.orders.map(order => {
         if (order.id === action.order.id) {
           return action.order;
         }
