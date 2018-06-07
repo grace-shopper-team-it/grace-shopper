@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import CategoryDropdown from './CategoryDropdown';
+// import CategoryDropdown from './CategoryDropdown';
 import { getAllProductsThunk } from '../../store/product';
 
 class AllProducts extends Component {
