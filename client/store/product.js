@@ -117,13 +117,13 @@ export default function(state = initialState, action) {
     case ADD_PRODUCT:
       return {
         ...state,
-        currentProduct: { ...action.product, new: true },
+        currentProduct: action.product,
       };
     // add to products array when it's created
     case UPDATE_PRODUCT:
       return {
         ...state,
-        currentProduct: { ...action.updatedProduct, updated: true },
+        currentProduct: action.updatedProduct,
       };
     // will also need to update products array when that is created
     case DELETE_PRODUCT:

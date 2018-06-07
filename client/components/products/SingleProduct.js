@@ -14,6 +14,9 @@ class SingleProduct extends React.Component {
   render() {
     const { currentUser, currentProduct } = this.props;
     if (!currentProduct) return <Redirect to="/allProducts" />;
+    if (!currentProduct.id || !currentProduct.categories) {
+      return <div>LOADING...</div>;
+    }
     return (
       <div className="container">
         <Product key={currentProduct.id} product={currentProduct} />
@@ -29,6 +32,10 @@ class SingleProduct extends React.Component {
               Edit
             </Link>
             <DeleteProduct productId={currentProduct.id} />
+            <h2>Categories</h2>
+            {currentProduct.categories.map(category => {
+              return <div key={category.id}>{category.name}</div>;
+            })}
           </div>
         )}
       </div>

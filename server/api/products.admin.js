@@ -1,5 +1,5 @@
 const productAdminRouter = require('express').Router();
-const { Product } = require('../db/models');
+const { Product, Category } = require('../db/models');
 
 productAdminRouter.post('/', async (req, res, next) => {
   try {
@@ -9,10 +9,17 @@ productAdminRouter.post('/', async (req, res, next) => {
       price: req.body.price,
       inventory: req.body.inventory,
       imageUrl: req.body.imageUrl,
+      categories: req.body.categories.split(' '),
     };
     const product = await Product.create(formData);
+    const categories = await Product.createCategories(
+      formData.categories,
+      Category
+    );
+    product.setCategories(categories);
     res.status(201).json(product);
   } catch (err) {
+    console.error('COMING FROM POST ROUTE:', err.message);
     next(err);
   }
 });

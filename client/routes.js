@@ -30,7 +30,6 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
 
-        <Route exact path="/cart" component={Cart} />
         <Route exact path="/" render={() => <Redirect to="/allProducts" />} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
@@ -39,6 +38,7 @@ class Routes extends Component {
         <Route path="/products/:id/edit" component={EditProduct} />
         <Route path="/products/:id/review" component={AddReview} />
         <Route path="/products/:id" component={SingleProduct} />
+        <Route path="/cart" component={Cart} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
