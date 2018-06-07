@@ -17,13 +17,14 @@ User.hasMany(Review);
 Order.belongsTo(User);
 User.hasMany(Order);
 
-Order.belongsToMany(Product, { through: 'productOrder' });
-Product.belongsToMany(Order, { through: 'productOrder' });
+Order.belongsToMany(Product, {through: 'productOrder' });
+Product.belongsToMany(Order, {through: 'productOrder' });
 
 module.exports = {
   User,
   Order,
   Product,
   Review,
-  Category
+  Category,
+  ProductOrder
 };
