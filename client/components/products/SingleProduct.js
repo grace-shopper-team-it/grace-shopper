@@ -17,7 +17,7 @@ class SingleProduct extends React.Component {
     return (
       <div className="container">
         <Product key={currentProduct.id} product={currentProduct} />
-        {currentUser.admin && (
+        {currentUser.isAdmin && (
           <div className="admin-product-options">
             <Link className="btn btn-primary" to="/products/new">
               New Product
