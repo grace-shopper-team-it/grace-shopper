@@ -8,13 +8,11 @@ class CategoryDropdow extends Component {
   }
   render() {
     let category = this.props.categories.categories;
-    console.log(category);
 
     category = category.map(categ => Object.values(categ.name).join(''));
     category = category.filter((categ, pos) => {
       return category.indexOf(categ) === pos;
     });
-    console.log(category);
 
     return (
       <div className="dropdown">
