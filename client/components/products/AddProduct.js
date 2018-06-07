@@ -36,10 +36,11 @@ const mapDispatch = dispatch => {
           description: '',
           inventory: '',
           imageUrl: '',
+          categories: '',
         })
       ),
     addProduct: newProduct => {
-      dispatch(addProductThunk(newProduct));
+      return dispatch(addProductThunk(newProduct));
     },
   };
 };

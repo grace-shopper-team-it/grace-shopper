@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import CategoryDropdown from './CategoryDropdown';
+import CategoryDropdown from './CategoryDropdown';
 import { getAllProductsThunk } from '../../store/product';
 
 class AllProducts extends Component {
@@ -36,30 +36,29 @@ class AllProducts extends Component {
           <div className="container">
             <div className="section">
               <div className="nav nav-bar">
-                <div style={{ display: 'flex' }}>
-                  <h2 className="navbar-header" style={{ textAlign: 'center' }}>
-                    Currently Available
-                  </h2>
-                  <form
-                    className="navbar-form navbar-right"
-                    role="search"
-                    onSubmit={e => e.preventDefault()}
-                  >
-                    <div className="form-group form-white">
-                      <input
-                        name="searchProduct"
-                        type="text"
-                        className="form-control"
-                        placeholder="Find your favorite product"
-                        onChange={this.handleChange.bind(this)}
-                      />
-                    </div>
-                    <button type="submit" className="btn btn-white">
-                      <i className="material-icons">search</i>
-                    </button>
-                  </form>
-                  {/* <CategoryDropdown /> */}
-                </div>
+                <h2 className="navbar-header" style={{ textAlign: 'center' }}>
+                  Currently Available
+                </h2>
+                <form
+                  style={{ display: 'flex' }}
+                  className="navbar-form navbar-left"
+                  role="search"
+                  onSubmit={e => e.preventDefault()}
+                >
+                  <div className="form-group form-white">
+                    <input
+                      name="searchProduct"
+                      type="text"
+                      className="form-control"
+                      placeholder="Find your favorite product"
+                      onChange={this.handleChange.bind(this)}
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-white">
+                    <i className="material-icons">search</i>
+                  </button>
+                </form>
+                <CategoryDropdown />
               </div>
               <div className="row">
                 {products.map(product => {
