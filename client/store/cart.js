@@ -42,6 +42,13 @@ const updateQuantity = (quantity) => {
   }
 }
 
+export const addToCartThunk = (product, quantity) => {
+  return (dispatch) => {
+    const action = addToCartAction(product, quantity);
+    dispatch(action);
+  };
+};
+
 const initialState = {
   //dummy data
   cart: [ {
