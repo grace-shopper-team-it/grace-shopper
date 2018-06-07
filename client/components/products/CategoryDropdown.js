@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class CategoryDropdow extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      category: props,
-    };
-  }
+class CategoryDropdow extends Component {
   render() {
-    let { category } = this.state.category;
+    // let { category } = this.state.category;
 
-    category = category.map(categ => Object.values(categ.category).join(''));
-    category = category.filter((categ, pos) => {
-      return category.indexOf(categ) === pos;
-    });
+    // category = category.map(categ => Object.values(categ.category).join(''));
+    // category = category.filter((categ, pos) => {
+    //   return category.indexOf(categ) === pos;
+    // });
 
     return (
       <div className="dropdown">
@@ -40,3 +35,13 @@ export default class CategoryDropdow extends Component {
     );
   }
 }
+
+const mapToProps = (state, ownProps) => {
+  return {
+    categories: state.categories,
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {};
+};
