@@ -11,6 +11,8 @@ router.use(isAdmin, productAdminRouter);
 router.get('/', (req, res, next) => {
   Product.findAll({ include: [Category] })
     .then(products => {
+      console.log('All Products', products);
+
       res.json(products);
     })
     .catch(next);
