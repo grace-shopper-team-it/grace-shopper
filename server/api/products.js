@@ -16,6 +16,13 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+// get all categories
+router.get('/category', (req, res, next) => {
+  return Category.findAll()
+    .then(categories => res.json(categories))
+    .catch(next);
+});
+
 // get specific product
 router.get('/:id', (req, res, next) => {
   return Product.findOne({
@@ -37,13 +44,6 @@ router.get('/:id/reviews', (req, res, next) => {
     },
   })
     .then(reviews => res.json(reviews))
-    .catch(next);
-});
-
-// get all categories
-router.get('/category', (req, res, next) => {
-  return Category.findAll()
-    .then(categories => res.json(categories))
     .catch(next);
 });
 
