@@ -26,7 +26,6 @@ class Product extends React.Component {
 
   render() {
     const { product } = this.props;
-    // console.log(product);
     return (
       <div>
         <h3>{product.name}</h3>
