@@ -19,7 +19,6 @@ productAdminRouter.post('/', async (req, res, next) => {
     product.setCategories(categories);
     res.status(201).json(product);
   } catch (err) {
-    console.error('COMING FROM POST ROUTE:', err.message);
     next(err);
   }
 });
@@ -40,6 +39,17 @@ productAdminRouter.put('/:id', async (req, res, next) => {
     next(err);
   }
 });
+
+// add an existing category to a specified product
+productAdminRouter.post(
+  '/:productId/new/categories/:categoryId/',
+  async (req, res, next) => {
+    const category = await Category.findById(req.params.categoryId);
+    const product = await Product.findById(req.params.productId);
+    await product.setCategories([category]);
+    res.status(201).send(product);
+  }
+);
 
 productAdminRouter.delete('/:id', async (req, res, next) => {
   try {

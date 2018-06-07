@@ -10,6 +10,7 @@ const DELETE_PRODUCT = 'DELETE_PRODUCT';
 const CHANGE_INPUT = 'CHANGE_INPUT';
 const GET_PRODUCT = 'GET_PRODUCT';
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
+const ADD_EXISTING_CATEGORY = 'ADD_EXISTING_CATEGORY';
 
 /*
   action creators
@@ -57,6 +58,13 @@ export const getAllProducts = products => {
   };
 };
 
+const addExistingCategoryAction = product => {
+  return {
+    type: ADD_EXISTING_CATEGORY,
+    product,
+  };
+};
+
 /*
   thunk creators
 */
@@ -91,8 +99,18 @@ export const getProductThunk = productId => {
   };
 };
 
+export const addExistingCategoryThunk = (productId, categoryId) => {
+  return async dispatch => {
+    const { data } = await axios.post(
+      `/api/products/${productId}/new/categories/${categoryId}`
+    );
+    dispatch(addExistingCategoryAction(data));
+  };
+};
+
 const initialState = {
   products: [],
+  currentProduct: {},
   // currentProduct: {
   //   id: 1,
   //   name: 'Basketball',
@@ -129,6 +147,11 @@ export default function(state = initialState, action) {
         currentProduct: action.product,
       };
     // add to products array when it's created
+    case ADD_EXISTING_CATEGORY:
+      return {
+        ...state,
+        currentProduct: action.product,
+      };
     case UPDATE_PRODUCT:
       return {
         ...state,

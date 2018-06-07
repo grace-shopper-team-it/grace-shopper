@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changeInputAction, getProductAction } from '../../store/product';
 import history from '../../history';
-import CategoryForm from './CategoryForm';
 
 export class ProductForm extends React.Component {
   handleSubmit = event => {
@@ -19,9 +18,8 @@ export class ProductForm extends React.Component {
   };
 
   render() {
-    const { existingCategories, currentProduct } = this.props;
+    const { currentProduct } = this.props;
     const { handleChange } = this;
-
     return (
       <div className="container">
         <form onSubmit={event => this.handleSubmit(event, currentProduct)}>
@@ -97,8 +95,6 @@ export class ProductForm extends React.Component {
               className="form-control"
             />
           </div>
-
-          <CategoryForm categories={existingCategories} />
 
           <button className="btn btn-primary" type="submit">
             Save Changes
