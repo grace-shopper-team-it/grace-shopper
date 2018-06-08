@@ -34,9 +34,7 @@ class Product extends React.Component {
       <div>
         <h3>{product.name}</h3>
         <img src={product.imageUrl} />
-        {
-          !isInCart
-        ?
+        {!isInCart ? (
           <div>
             <form>
               <label>
@@ -55,11 +53,11 @@ class Product extends React.Component {
               />
             </form>
           </div>
-        :
-        <div>
-          <p style={{color: "red"}}>Added to cart!</p>
-        </div>
-        }
+        ) : (
+          <div>
+            <p style={{ color: 'red' }}>Added to cart!</p>
+          </div>
+        )}
         <p>{product.description}</p>
         <Link
           className="btn btn-secondary"
@@ -72,17 +70,13 @@ class Product extends React.Component {
   }
 }
 
-<<<<<<< HEAD
-const mapDispatch = dispatch => {
-=======
-const mapState = (state) => {
+const mapState = state => {
   return {
-    cart: state.cart
+    cart: state.cart,
   };
 };
 
-const mapDispatch = (dispatch) => {
->>>>>>> 01c68c6cf61756f9d165050ae2c99fa0ff28cc6c
+const mapDispatch = dispatch => {
   return {
     addToCart: (product, quantity) =>
       dispatch(addToCartThunk(product, quantity)),
