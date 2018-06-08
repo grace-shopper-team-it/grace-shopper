@@ -15,14 +15,14 @@ install:
   - npm i -g npm # delete once default travis npm supports `ci` command
   - npm ci       # faster, goes only from package-lock
 before_script:
-  - psql -c 'create database "it";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - psql -c 'create database "it-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: clowntown # see README
+  api_key:
+    secure: "g4ub9fsvZZE7fGLwjB654gP8+PgEPWG5Mbsd1VPXtsMVrwHiZJIcebRPL7AQjSkMdBnvEEEYijfWTuyZunMdTHskRE2rAw5FiSZo5DCOeFgdnYaSeWYPADC2jwaIFChBVrqUcomya58k/pS6Y0+MXaGWQrchAWqHGH6ZCP1v6aDLmEU1ZVhQUrrXnmrf+EQTwyolX5owfw137BeFk0SDi1xvXgpmOszkdipeiCdEPBnr94SGH6gtcDf66+WbVJcpRXhhgoyPDYMQhslD8wGaYJlT3aNansA7d3MRwPPzz+XK+DqXw68dVuYam5lRisGCwgqibtpzEJ2rVlvy1xSnx4ZoZwv09fkU5ZJddG/GwpUuhHwesNYvBDUmf1FhzHHlX4wK2bJ9k7UYz7pE2kuOvHWvH3L2YPnTTQbDgXOBw3RCY9y4ciXPhv/f88DyXxUg0zhiZQwN5KvErTiuRhI60afIGgKCthZnhoNKlJ+WSFpsNrNU3O7KLWvsBw78qs8Y/rXr4HtPYjczih2DRwn8KUguAVK6rrHNhLE5n22rl6T1t9J9g4CVBuNbbxHcsIc+sSEL5CV4qcueyxouVglNB3ic8CO31XiaVDcHKecnGHoEKWCOnNJvEopbJOUBKPzashzfP2EHUcVvDdqcGWRc9iNzo0eeA039VSXvo35+chg=" # see README

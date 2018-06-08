@@ -21,10 +21,10 @@ const addToCartAction = (product, quantity) => {
   };
 };
 
-const removeFromCartAction = product => {
+const removeFromCartAction = productId => {
   return {
     type: REMOVE_FROM_CART,
-    product,
+    productId,
   };
 };
 
@@ -34,9 +34,10 @@ const clearCartAction = () => {
   };
 };
 
-const updateQuantity = quantity => {
+const updateQuantityAction = (product, quantity) => {
   return {
     type: UPDATE_QUANTITY,
+    product,
     quantity,
   };
 };
@@ -44,6 +45,27 @@ const updateQuantity = quantity => {
 export const addToCartThunk = (product, quantity) => {
   return dispatch => {
     const action = addToCartAction(product, quantity);
+    dispatch(action);
+  };
+};
+
+export const updateQuantityThunk = (product, quantity) => {
+  return dispatch => {
+    const action = updateQuantityAction(product, quantity);
+    dispatch(action);
+  };
+};
+
+export const removeFromCartThunk = productId => {
+  return dispatch => {
+    const action = removeFromCartAction(productId);
+    dispatch(action);
+  };
+};
+
+export const clearCartThunk = () => {
+  return dispatch => {
+    const action = clearCartAction();
     dispatch(action);
   };
 };
@@ -77,7 +99,7 @@ export default function(state = initialState, action) {
     }
     case REMOVE_FROM_CART: {
       const updatedCart = state.cart.filter(
-        product => Number(product.id) !== Number(action.product.id)
+        product => Number(product.id) !== Number(action.productId)
       );
       return { ...state, cart: updatedCart };
     }
