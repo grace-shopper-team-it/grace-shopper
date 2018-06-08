@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 /*
@@ -22,7 +21,7 @@ const addToCartAction = (product, quantity) => {
   };
 };
 
-const removeFromCartAction = (productId) => {
+const removeFromCartAction = productId => {
   return {
     type: REMOVE_FROM_CART,
     productId,
@@ -39,58 +38,68 @@ const updateQuantityAction = (product, quantity) => {
   return {
     type: UPDATE_QUANTITY,
     product,
-    quantity
-  }
-}
+    quantity,
+  };
+};
 
 export const addToCartThunk = (product, quantity) => {
-  return (dispatch) => {
+  return dispatch => {
     const action = addToCartAction(product, quantity);
     dispatch(action);
   };
 };
 
 export const updateQuantityThunk = (product, quantity) => {
-  return (dispatch) => {
+  return dispatch => {
     const action = updateQuantityAction(product, quantity);
     dispatch(action);
   };
 };
 
-export const removeFromCartThunk = (productId) => {
-  return (dispatch) => {
+export const removeFromCartThunk = productId => {
+  return dispatch => {
     const action = removeFromCartAction(productId);
     dispatch(action);
   };
 };
 
 export const clearCartThunk = () => {
-  return (dispatch) => {
+  return dispatch => {
     const action = clearCartAction();
     dispatch(action);
-  }
-}
+  };
+};
 
 const initialState = {
   cart: []
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   // adding 'quantity' property to products when they are passed to the cart
   switch (action.type) {
     case ADD_TO_CART: {
-      const cartItem = Object.assign(action.product, { cartQuantity: action.quantity });
-      return { ...state, cart: [ ...state.cart, cartItem ] };
+      const cartItem = Object.assign(action.product, {
+        cartQuantity: action.quantity,
+      });
+      return { ...state, cart: [...state.cart, cartItem] };
     }
     case UPDATE_QUANTITY: {
-    // find product to update, creates new obj with updated quantity, filters out old obj of state, adds newObj to newArr
-      const objToBeUpdated = state.cart.find((product) => product.id === action.product.id);
-      const newObj = Object.assign(objToBeUpdated, { cartQuantity: action.quantity })
-      const updatedCart = state.cart.filter(product => Number(product.id) !== Number(action.product.id));
-      return { ...state, cart: [ ...updatedCart, newObj ]};
+      // find product to update, creates new obj with updated quantity, filters out old obj of state, adds newObj to newArr
+      const objToBeUpdated = state.cart.find(
+        product => product.id === action.product.id
+      );
+      const newObj = Object.assign(objToBeUpdated, {
+        cartQuantity: action.quantity,
+      });
+      const updatedCart = state.cart.filter(
+        product => Number(product.id) !== Number(action.product.id)
+      );
+      return { ...state, cart: [...updatedCart, newObj] };
     }
     case REMOVE_FROM_CART: {
-      const updatedCart = state.cart.filter(product => Number(product.id) !== Number(action.productId));
+      const updatedCart = state.cart.filter(
+        product => Number(product.id) !== Number(action.productId)
+      );
       return { ...state, cart: updatedCart };
     }
     case CLEAR_CART:

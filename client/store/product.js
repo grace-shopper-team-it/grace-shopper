@@ -111,16 +111,6 @@ export const addExistingCategoryThunk = (productId, categoryId) => {
 const initialState = {
   products: [],
   currentProduct: {},
-  // currentProduct: {
-  //   id: 1,
-  //   name: 'Basketball',
-  //   price: 30,
-  //   averageRating: 4.5,
-  //   description: "You use it to play basketball. It's some obscure game",
-  //   stock: 50,
-  //   imageUrl:
-  //     'https://i5.walmartimages.com/asr/62f061c8-9eae-460b-8964-84877f89dfc6_1.63cb4384ad2e3927105b7cfe8aa71fcc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF',
-  // },
 };
 
 export const getAllProductsThunk = () => {
