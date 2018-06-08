@@ -64,6 +64,13 @@ export const removeFromCartThunk = (productId) => {
   };
 };
 
+export const clearCartThunk = () => {
+  return (dispatch) => {
+    const action = clearCartAction();
+    dispatch(action);
+  }
+}
+
 const initialState = {
   //dummy data
   cart: []

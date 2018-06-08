@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CartItem from './CartItem';
 import { Link } from 'react-router-dom';
-import { removeFromCartThunk } from '../../store/cart';
-import ClearCart from './ClearCart';
+import { removeFromCartThunk, clearCartThunk } from '../../store/cart';
 
 class Cart extends Component {
   constructor() {
-    super()
+    super();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
     this.props.removeItemFromCart(event.target.value);
+  }
+
+  handleClearCartSubmit(event) {
+    event.preventDefault();
+    this.props.clearCart();
   }
 
   render() {
@@ -25,6 +29,8 @@ class Cart extends Component {
         {
           items.length
         ?
+        <div>
+        {
           items.map(product =>
           (
             <div key={product.id}>
@@ -38,6 +44,14 @@ class Cart extends Component {
               </button>
             </div>
             ))
+        }
+            <button
+            type="submit"
+            onClick={this.handleClearCartSubmit}
+            >
+            Clear cart
+            </button>
+        </div>
         :
         <h4>Nothing in cart</h4>
       }
@@ -55,7 +69,8 @@ const mapState = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeItemFromCart: (productId) => dispatch(removeFromCartThunk(productId))
+    removeItemFromCart: (productId) => dispatch(removeFromCartThunk(productId)),
+    clearCart: () => dispatch(clearCartThunk())
   };
 };
 
