@@ -1,32 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CartItem from './CartItem';
+import { Link } from 'react-router-dom';
+import { removeFromCartThunk } from '../../store/cart';
+import ClearCart from './ClearCart';
 
 class Cart extends Component {
+  constructor() {
+    super()
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   handleSubmit(event) {
-    console.log(event.target.value);
+    event.preventDefault();
+    this.props.removeItemFromCart(event.target.value);
   }
 
   render() {
     const items = this.props.cart.cart;
     return (
       <div>
-      <h1> Cart </h1>
-      {
-        items.map(product =>
+      <h1> My Cart </h1>
+        <div>
+        <ClearCart />
+        {
+          items.length ?
+          items.map(product =>
           (
-          <div key={product.id}>
-            <CartItem item={product} />
-            <button
-              type="submit"
-              onClick={this.handleSubmit}
-              value={product}>
-              Remove this item
-            </button>
-          </div>
+            <div key={product.id}>
+              <Link to={`/products/${product.id}`} />
+              <CartItem item={product} />
+              <button
+                type="submit"
+                onClick={this.handleSubmit}
+                value={product.id}>
+                Remove this item
+              </button>
+            </div>
           ))
-        }
+      : <h4>Nothing in cart</h4>
+      }
+        </div>
       </div>
     );
   }
@@ -38,7 +52,13 @@ const mapState = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeItemFromCart: (productId) => dispatch(removeFromCartThunk(productId))
+  };
+};
+
 export default connect(
   mapState,
-  null
+  mapDispatchToProps
 )(Cart);
