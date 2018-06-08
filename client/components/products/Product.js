@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { addToCartThunk } from '../../store/cart';
 // import ItemSubmittedToCart from '../cart/'
@@ -35,14 +35,19 @@ class Product extends React.Component {
         <div>
           <form>
             <label>
-              Quantity: <input
+              Quantity:{' '}
+              <input
                 type="number"
                 min="1"
                 value={this.state.quantity}
                 onChange={this.handleChange}
-                />
+              />
             </label>
-            <input type="submit" value="Add to cart" onClick={this.handleSubmit} />
+            <input
+              type="submit"
+              value="Add to cart"
+              onClick={this.handleSubmit}
+            />
           </form>
         
         </div>
@@ -66,7 +71,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    addToCart: (product, quantity) => dispatch(addToCartThunk(product, quantity))
+    addToCart: (product, quantity) =>
+      dispatch(addToCartThunk(product, quantity)),
   };
 };
 

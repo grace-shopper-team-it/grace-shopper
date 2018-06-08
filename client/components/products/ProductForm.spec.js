@@ -26,7 +26,7 @@ const editCompWrapper = shallow(
   />
 );
 
-describe('fields in edit form', () => {
+xdescribe('fields in edit form', () => {
   it('should contain a form element', () => {
     expect(editCompWrapper.find('form').length).to.equal(1);
   });

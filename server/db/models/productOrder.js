@@ -10,6 +10,6 @@ const ProductOrder = db.define('productOrder', {
     type: Sequelize.INTEGER,
     allowNull: false
   }
-})
+});
 
 module.exports = ProductOrder
