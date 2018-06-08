@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
 
 // get all categories
 router.get('/category', (req, res, next) => {
-  return Category.findAll()
+  return Category.findAll({ include: [Product] })
     .then(categories => res.json(categories))
     .catch(next);
 });

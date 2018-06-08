@@ -29,7 +29,7 @@ class CategoryDropdow extends Component {
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           {category.map(categ => {
             return (
-              <a className="dropdown-item" key={categ} href="#">
+              <a className="dropdown-item" key={categ} value={categ} href="#">
                 {categ}
               </a>
             );
