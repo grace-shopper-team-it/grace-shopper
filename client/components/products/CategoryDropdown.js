@@ -6,8 +6,12 @@ class CategoryDropdow extends Component {
   async componentDidMount() {
     await this.props.getAllCategoriesThunk();
   }
+
   render() {
     let category = this.props.categories.categories;
+    if (category.length > 0) {
+      console.log(category[0].products);
+    }
 
     category = category.map(categ => Object.values(categ.name).join(''));
     category = category.filter((categ, pos) => {
