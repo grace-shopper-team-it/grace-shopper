@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ItemSubmittedToCart = () => {
+const ItemAddedToCart = () => {
   return (
     <text>Item added to cart!</text>
   );
 };
 
-export default ItemSubmittedToCart;
+export default ItemAddedToCart;

@@ -8,6 +8,7 @@ class Cart extends Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClearCartSubmit = this.handleClearCartSubmit.bind(this);
   }
 
   handleSubmit(event) {
