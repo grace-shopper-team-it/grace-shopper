@@ -66,42 +66,8 @@ export const removeFromCartThunk = (productId) => {
 
 const initialState = {
   //dummy data
-  cart: [ {
-    id: 1,
-    name: 'clown',
-    rating: 3.5,
-    description: 'eiugrh fIOWAHGUIRW ofejhguieroils',
-    imageUrl:
-      'https://images-na.ssl-images-amazon.com/images/I/41PKN8W5CDL.jpg',
-    stock: 5,
-    price: 30,
-    category: 'creepy',
-    quantity: 2
-  },
-  {
-    id: 2,
-    name: 'nice clown',
-    rating: 3.0,
-    description: 'eiugrh fIOWAHGUIRW',
-    imageUrl: 'https://i.ebayimg.com/images/g/LFUAAOSwKtlWjzVd/s-l300.jpg',
-    stock: 3,
-    price: 20,
-    category: 'creepy',
-    quantity: 3
-  },
-  {
-    id: 3,
-    name: 'nice toy',
-    rating: 2.0,
-    description: 'eiugrh fIOWAHGUIRW',
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbZZNPfu7n3fI5Zygu0qGXc1mtuXYGCD2oNGq-WxZ3hMBhYbhR',
-    stock: 3.8,
-    price: 25,
-    category: 'nice',
-    quantity: 4
-  } ]
-}
+  cart: []
+};
 
 export default function (state = initialState, action) {
   // adding 'quantity' property to products when they are passed to the cart

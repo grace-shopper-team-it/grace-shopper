@@ -22,9 +22,9 @@ class Cart extends Component {
       <div>
       <h1> My Cart </h1>
         <div>
-        <ClearCart />
         {
-          items.length ?
+          items.length
+        ?
           items.map(product =>
           (
             <div key={product.id}>
@@ -37,8 +37,9 @@ class Cart extends Component {
                 Remove this item
               </button>
             </div>
-          ))
-      : <h4>Nothing in cart</h4>
+            ))
+        :
+        <h4>Nothing in cart</h4>
       }
         </div>
       </div>

@@ -7,8 +7,9 @@ class CartItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: props.item.quantity
-    }
+      quantity: props.item.cartQuantity
+    };
+    console.log(props.item.cartQuantity);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }

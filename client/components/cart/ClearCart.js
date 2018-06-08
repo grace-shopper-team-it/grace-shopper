@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+// import React, { Component } from 'react';
+// import { connect } from 'react-redux';
 
-class ClearCart extends Component {
-  Constructor() {
-    super()
-  }
+// class ClearCart extends Component {
+//   Constructor() {
+//     super()
+//   }
 
-  render() {
-    return (
-      
-    )
-  }
-}
+//   render() {
+//     return (
 
-export default ClearCart
+//     )
+//   }
+// }
+
+// export default ClearCart
