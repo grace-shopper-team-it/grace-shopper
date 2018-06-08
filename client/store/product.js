@@ -10,6 +10,7 @@ const DELETE_PRODUCT = 'DELETE_PRODUCT';
 const CHANGE_INPUT = 'CHANGE_INPUT';
 const GET_PRODUCT = 'GET_PRODUCT';
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
+const ADD_EXISTING_CATEGORY = 'ADD_EXISTING_CATEGORY';
 
 /*
   action creators
@@ -57,6 +58,13 @@ export const getAllProducts = products => {
   };
 };
 
+const addExistingCategoryAction = product => {
+  return {
+    type: ADD_EXISTING_CATEGORY,
+    product,
+  };
+};
+
 /*
   thunk creators
 */
@@ -91,9 +99,28 @@ export const getProductThunk = productId => {
   };
 };
 
+export const addExistingCategoryThunk = (productId, categoryId) => {
+  return async dispatch => {
+    const { data } = await axios.post(
+      `/api/products/${productId}/new/categories/${categoryId}`
+    );
+    dispatch(addExistingCategoryAction(data));
+  };
+};
+
 const initialState = {
   products: [],
   currentProduct: {},
+  // currentProduct: {
+  //   id: 1,
+  //   name: 'Basketball',
+  //   price: 30,
+  //   averageRating: 4.5,
+  //   description: "You use it to play basketball. It's some obscure game",
+  //   stock: 50,
+  //   imageUrl:
+  //     'https://i5.walmartimages.com/asr/62f061c8-9eae-460b-8964-84877f89dfc6_1.63cb4384ad2e3927105b7cfe8aa71fcc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF',
+  // },
 };
 
 export const getAllProductsThunk = () => {
@@ -120,6 +147,11 @@ export default function(state = initialState, action) {
         currentProduct: action.product,
       };
     // add to products array when it's created
+    case ADD_EXISTING_CATEGORY:
+      return {
+        ...state,
+        currentProduct: action.product,
+      };
     case UPDATE_PRODUCT:
       return {
         ...state,

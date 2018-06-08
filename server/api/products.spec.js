@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 const db = require('../db');
 const app = require('../index');
-const { Product } = require('../db/models');
+const { Product, Category } = require('../db/models');
 
 const formData = {
   name: 'Gibson Les Paul',
@@ -14,7 +14,7 @@ const formData = {
   categories: 'hello goodbye',
 };
 
-describe('Products routes', () => {
+xdescribe('Products routes', () => {
   let cody;
 
   xdescribe('api/products/', () => {
@@ -78,6 +78,26 @@ describe('Products routes', () => {
           expect(res.body.name).to.equal('Gibson Les Paul');
           expect(res.body.inventory).to.equal(30);
         });
+    });
+    it('/api/products/:id/new/categories/:categoryId', () => {
+      return Promise.all([
+        Product.create(formData),
+        Category.create({ name: 'Swords' }),
+      ]).then(([product, category]) => {
+        return request(app)
+          .post(`/api/products/${product.id}/new/categories/${category.id}`)
+          .expect(201)
+          .then(res => {
+            expect(res.body).to.be.an('object');
+            expect(res.body.name).to.equal('Gibson Les Paul');
+            return Product.findById(product.id, { include: [Category] }).then(
+              foundProduct => {
+                expect(foundProduct.categories.length).to.equal(1);
+                expect(foundProduct.categories[0].name).to.equal('Swords');
+              }
+            );
+          });
+      });
     });
   });
   xdescribe('PUT & DELETE requests', () => {
