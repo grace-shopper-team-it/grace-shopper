@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { addToCartThunk } from '../../store/cart';
+// import ItemSubmittedToCart from '../cart/'
 
 class Product extends React.Component {
   constructor() {
     super();
     this.state = {
       quantity: 1,
+      submitted: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,6 +49,7 @@ class Product extends React.Component {
               onClick={this.handleSubmit}
             />
           </form>
+        
         </div>
         <p>{product.description}</p>
         <Link
@@ -60,7 +63,13 @@ class Product extends React.Component {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapState = (state) => {
+  return {
+    cart: state.cart
+  };
+};
+
+const mapDispatch = (dispatch) => {
   return {
     addToCart: (product, quantity) =>
       dispatch(addToCartThunk(product, quantity)),
@@ -68,6 +77,6 @@ const mapDispatch = dispatch => {
 };
 
 export default connect(
-  null,
+  mapState,
   mapDispatch
 )(Product);
