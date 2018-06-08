@@ -72,7 +72,6 @@ export const clearCartThunk = () => {
 }
 
 const initialState = {
-  //dummy data
   cart: []
 };
 
