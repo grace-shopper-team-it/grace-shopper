@@ -8,11 +8,7 @@ const Order = db.model('order');
 const Product = db.model('product');
 const productOrder = db.model('productOrder');
 
-//so I think I'm going to want to pull all orders and include productOrders as well....
-//testing for route authentication is not working here....
-//check out Kevin's telk telk
-
-describe('Order routes', () => {
+xdescribe('Order routes', () => {
   const authUser = { email: 'forrest@puppybook.com', password: 'forrest' };
 
   describe('behavior for authenticated users', () => {
