@@ -18,9 +18,8 @@ export class ProductForm extends React.Component {
   };
 
   render() {
-    const { existingCategories, currentProduct } = this.props;
+    const { currentProduct } = this.props;
     const { handleChange } = this;
-
     return (
       <div className="container">
         <form onSubmit={event => this.handleSubmit(event, currentProduct)}>
@@ -96,16 +95,6 @@ export class ProductForm extends React.Component {
               className="form-control"
             />
           </div>
-
-          {/*<select onChange={() => console.log('select changed')}>
-          {existingCategories.map(category => {
-            return (
-              <option value={category.id} key={category.id}>
-                {category.name}
-              </option>
-            )
-          })}
-        </select>*/}
 
           <button className="btn btn-primary" type="submit">
             Save Changes
