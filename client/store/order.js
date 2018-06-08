@@ -41,11 +41,12 @@ export const updateOrderInDB = (orderId, update) => {
 }
 
 export default function(state = defaultOrders, action) {
+  console.log('state.orders', state.orders, 'state', state)
   switch (action.type) {
     case GET_ORDERS:
       return action.orders;
     case UPDATE_ORDER:
-      return state.orders.map(order => {
+      return state.map(order => {
         if (order.id === action.order.id) {
           return action.order;
         }

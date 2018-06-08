@@ -14,6 +14,7 @@ const fakeOrders = [
   { id: 2, status: 'Created' },
   { id: 3, status: 'Created' },
 ];
+
 const fakeUpdate = { id: 1, status: 'Cancelled' };
 
 const fakeUpdatedOrders = [
@@ -82,11 +83,8 @@ describe('thunk creators', () => {
       expect(orderState).to.be.deep.equal(fakeOrders)
     });
     it('correctly updates orders on state', () => {
-      let orderState = reducer(initialState, updateAction)
+      let orderState = reducer(fakeOrders, updateAction)
       expect(orderState).to.be.deep.equal(fakeUpdatedOrders);
     });
   });
 });
-
-//so, map is not working! but that's do-able;
-//maybe tomorrow I'll finally get to write some front-end stuff
