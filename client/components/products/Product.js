@@ -9,7 +9,6 @@ class Product extends React.Component {
     super();
     this.state = {
       quantity: 1,
-      submitted: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,29 +27,39 @@ class Product extends React.Component {
 
   render() {
     const { product } = this.props;
+    const cartArr = this.props.cart.cart;
+    const isInCart = cartArr.includes(product);
+    console.log(isInCart);
     return (
       <div>
         <h3>{product.name}</h3>
         <img src={product.imageUrl} />
-        <div>
-          <form>
-            <label>
-              Quantity:{' '}
+        {
+          !isInCart
+        ?
+          <div>
+            <form>
+              <label>
+                Quantity:{' '}
+                <input
+                  type="number"
+                  min="1"
+                  value={this.state.quantity}
+                  onChange={this.handleChange}
+                />
+              </label>
               <input
-                type="number"
-                min="1"
-                value={this.state.quantity}
-                onChange={this.handleChange}
+                type="submit"
+                value="Add to cart"
+                onClick={this.handleSubmit}
               />
-            </label>
-            <input
-              type="submit"
-              value="Add to cart"
-              onClick={this.handleSubmit}
-            />
-          </form>
-        
+            </form>
+          </div>
+        :
+        <div>
+          <p style={{color: "red"}}>Added to cart!</p>
         </div>
+        }
         <p>{product.description}</p>
         <Link
           className="btn btn-secondary"
