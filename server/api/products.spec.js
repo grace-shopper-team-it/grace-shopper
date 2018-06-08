@@ -14,7 +14,7 @@ const formData = {
   categories: 'hello goodbye',
 };
 
-describe('Products routes', () => {
+xdescribe('Products routes', () => {
   let cody;
 
   xdescribe('api/products/', () => {

@@ -6,7 +6,7 @@ const chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 
-describe('Product model', () => {
+xdescribe('Product model', () => {
   describe('Product attributes', () => {
     it('has a name which is not an empty string', async () => {
       try {

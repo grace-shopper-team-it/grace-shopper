@@ -8,7 +8,7 @@ const chai = require('chai')
 
 chai.use(chaiAsPromised)
 
-describe('User model', () => {
+xdescribe('User model', () => {
   describe('instanceMethods', () => {
     describe('correctPassword', () => {
       let cody
