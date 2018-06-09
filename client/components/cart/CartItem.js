@@ -9,7 +9,6 @@ class CartItem extends Component {
     this.state = {
       quantity: props.item.cartQuantity
     };
-    console.log(props.item.cartQuantity);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -29,7 +28,9 @@ class CartItem extends Component {
     const item = this.props.item;
     return (
       <div>
+      <Link to={`/products/${item.id}`}>
         <h4>{item.name}</h4>
+      </Link>
         <form>
           <label>
             <input

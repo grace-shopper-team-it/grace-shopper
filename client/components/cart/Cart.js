@@ -35,7 +35,6 @@ class Cart extends Component {
           items.map(product =>
           (
             <div key={product.id}>
-              <Link to={`/products/${product.id}`} />
               <CartItem item={product} />
               <button
                 type="submit"
