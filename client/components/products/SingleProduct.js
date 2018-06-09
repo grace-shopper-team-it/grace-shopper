@@ -4,6 +4,21 @@ import { Link, Redirect } from 'react-router-dom';
 import Product from './Product';
 import DeleteProduct from './DeleteProduct';
 import { getProductThunk } from '../../store/product';
+import CategoryForm from './CategoryForm';
+
+/*
+  dummy data
+*/
+const existingCategories = [
+  { id: 1, name: 'Sports' },
+  { id: 2, name: 'Music' },
+  { id: 3, name: 'Heavy Metal' },
+  { id: 4, name: 'Jazz' },
+  { id: 5, name: 'Weird Stuff' },
+];
+/*
+  dummy data
+*/
 
 class SingleProduct extends React.Component {
   componentDidMount() {
@@ -36,6 +51,7 @@ class SingleProduct extends React.Component {
             {currentProduct.categories.map(category => {
               return <div key={category.id}>{category.name}</div>;
             })}
+            <CategoryForm categories={existingCategories} />
           </div>
         )}
       </div>

@@ -19,7 +19,6 @@ productAdminRouter.post('/', async (req, res, next) => {
     product.setCategories(categories);
     res.status(201).json(product);
   } catch (err) {
-    console.error('COMING FROM POST ROUTE:', err.message);
     next(err);
   }
 });
@@ -41,6 +40,23 @@ productAdminRouter.put('/:id', async (req, res, next) => {
   }
 });
 
+// add an existing category to a specified product
+productAdminRouter.post(
+  '/:productId/new/categories/:categoryId/',
+  async (req, res, next) => {
+    const [category, product] = await Promise.all([
+      Category.findById(req.params.categoryId),
+      Product.findById(req.params.productId),
+    ]);
+    const currentCategories = await product.getCategories();
+    await product.setCategories([...currentCategories, category]);
+    const productWithDetail = await Product.findById(product.id, {
+      include: [Category],
+    });
+    res.status(201).send(productWithDetail);
+  }
+);
+
 productAdminRouter.delete('/:id', async (req, res, next) => {
   try {
     await Product.destroy({ where: { id: req.params.id } });
@@ -50,8 +66,4 @@ productAdminRouter.delete('/:id', async (req, res, next) => {
   }
 });
 
-function isAdmin(req, res, next) {
-  next();
-}
-
-module.exports = { productAdminRouter, isAdmin };
+module.exports = productAdminRouter;

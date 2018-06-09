@@ -3,26 +3,13 @@ import { connect } from 'react-redux';
 import ProductForm from './ProductForm';
 import { getProductAction, addProductThunk } from '../../store/product';
 
-const existingCategories = [
-  { id: 1, name: 'Sports' },
-  { id: 2, name: 'Music' },
-  { id: 3, name: 'Heavy Metal' },
-  { id: 4, name: 'Jazz' },
-  { id: 5, name: 'Weird Stuff' },
-];
-
 class AddProduct extends React.Component {
   componentDidMount() {
     // set currentProduct to blank
     this.props.resetCurrentProduct();
   }
   render() {
-    return (
-      <ProductForm
-        existingCategories={existingCategories}
-        handleProduct={this.props.addProduct}
-      />
-    );
+    return <ProductForm handleProduct={this.props.addProduct} />;
   }
 }
 
