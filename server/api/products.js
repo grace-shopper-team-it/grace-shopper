@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Product, Review, Category } = require('../db/models');
-const { isAdmin, productAdminRouter } = require('./products.admin');
+const productAdminRouter = require('./products.admin');
+const isAdmin = require('./auth.middleware');
 
 router.get('/test-categories', async (req, res, next) => {
   const categories = await Category.findAll({

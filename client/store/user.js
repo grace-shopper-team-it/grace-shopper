@@ -10,11 +10,7 @@ const REMOVE_USER = 'REMOVE_USER';
 /**
  * INITIAL STATE
  */
-const defaultUser = {
-  firstName: 'Pennywise',
-  lastName: 'The Clown',
-  admin: true,
-};
+const defaultUser = {};
 
 /**
  * ACTION CREATORS
