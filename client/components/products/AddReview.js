@@ -1,16 +1,34 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import './AddReview.css';
+import { addReviewThunk } from '../../store/review';
 
 class AddReview extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      content: '',
+      stars: 0,
+      productId: 0,
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleChange(event) {
+    let productNumber = this.props.match.params.id;
+    this.setState({
+      productId: productNumber,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  handleSubmit() {}
+
   render() {
+    console.log(this.state);
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="exampleFormControlTextarea1">
             Write your Review Here
@@ -19,24 +37,39 @@ class AddReview extends React.Component {
             className="form-control"
             id="exampleFormControlTextarea1"
             rows="3"
+            name="content"
+            onChange={this.handleChange}
           />
         </div>
         <div className="section">
           <fieldset className="rating">
-            <input type="radio" id="star5" name="rating" value="5" />
+            <input
+              type="radio"
+              id="star5"
+              name="stars"
+              value="5"
+              onChange={this.handleChange}
+            />
             <label className="full" htmlFor="star5" title="Awesome - 5 stars" />
             <input
               type="radio"
               id="star4half"
-              name="rating"
-              value="4 and a half"
+              name="stars"
+              value="4.5"
+              onChange={this.handleChange}
             />
             <label
               className="half"
               htmlFor="star4half"
               title="Pretty good - 4.5 stars"
             />
-            <input type="radio" id="star4" name="rating" value="4" />
+            <input
+              type="radio"
+              id="star4"
+              name="stars"
+              value="4"
+              onChange={this.handleChange}
+            />
             <label
               className="full"
               htmlFor="star4"
@@ -45,28 +78,42 @@ class AddReview extends React.Component {
             <input
               type="radio"
               id="star3half"
-              name="rating"
-              value="3 and a half"
+              name="stars"
+              value="3.5"
+              onChange={this.handleChange}
             />
             <label
               className="half"
               htmlFor="star3half"
               title="Meh - 3.5 stars"
             />
-            <input type="radio" id="star3" name="rating" value="3" />
+            <input
+              type="radio"
+              id="star3"
+              name="stars"
+              value="3"
+              onChange={this.handleChange}
+            />
             <label className="full" htmlFor="star3" title="Meh - 3 stars" />
             <input
               type="radio"
               id="star2half"
-              name="rating"
-              value="2 and a half"
+              name="stars"
+              value="2.5"
+              onChange={this.handleChange}
             />
             <label
               className="half"
               htmlFor="star2half"
               title="Kinda bad - 2.5 stars"
             />
-            <input type="radio" id="star2" name="rating" value="2" />
+            <input
+              type="radio"
+              id="star2"
+              name="stars"
+              value="2"
+              onChange={this.handleChange}
+            />
             <label
               className="full"
               htmlFor="star2"
@@ -75,21 +122,34 @@ class AddReview extends React.Component {
             <input
               type="radio"
               id="star1half"
-              name="rating"
-              value="1 and a half"
+              name="stars"
+              value="1.5"
+              onChange={this.handleChange}
             />
             <label
               className="half"
               htmlFor="star1half"
               title="Meh - 1.5 stars"
             />
-            <input type="radio" id="star1" name="rating" value="1" />
+            <input
+              type="radio"
+              id="star1"
+              name="stars"
+              value="1"
+              onChange={this.handleChange}
+            />
             <label
               className="full"
               htmlFor="star1"
               title="Sucks big time - 1 star"
             />
-            <input type="radio" id="starhalf" name="rating" value="half" />
+            <input
+              type="radio"
+              id="starhalf"
+              name="stars"
+              value="0.5"
+              onChange={this.handleChange}
+            />
             <label
               className="half"
               htmlFor="starhalf"
