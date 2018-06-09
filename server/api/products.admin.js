@@ -66,8 +66,4 @@ productAdminRouter.delete('/:id', async (req, res, next) => {
   }
 });
 
-function isAdmin(req, res, next) {
-  next();
-}
-
-module.exports = { productAdminRouter, isAdmin };
+module.exports = productAdminRouter;
