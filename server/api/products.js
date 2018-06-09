@@ -51,7 +51,23 @@ router.get('/:id/reviews', (req, res, next) => {
     .catch(next);
 });
 
+
+// post review for a product
+router.post('/:id/reviews', (req, res, next) => {
+  return Review.create(
+    { ...req.body, productId: req.params.id },
+    {
+      where: {
+        productId: req.params.productId,
+      },
+    }
+  )
+    .then(review => res.json(review))
+    .catch(next);
+});
+
 // admin routes
 router.use(isAdmin, productAdminRouter);
+
 
 module.exports = router;
