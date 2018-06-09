@@ -20,8 +20,8 @@ import { me } from './store';
  * COMPONENT
  */
 class Routes extends Component {
-  async componentDidMount() {
-    await this.props.loadInitialData();
+  componentDidMount() {
+    this.props.loadInitialData();
   }
 
   render() {

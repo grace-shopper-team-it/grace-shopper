@@ -14,7 +14,7 @@ import category from './category';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart'],
+  whitelist: ['cart', 'user'],
   stateReconciler: autoMergeLevel2,
 };
 

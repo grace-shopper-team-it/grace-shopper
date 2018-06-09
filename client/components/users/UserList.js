@@ -2,10 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import UserInfo from './UserInfo';
 import { getAllUsersThunk } from '../../store/user.admin';
-// import history from './../../history';
+import history from './../../history';
 
 class UserList extends React.Component {
   componentDidMount() {
+    const { currentUser } = this.props;
+    if (currentUser && !currentUser.isAdmin) {
+      history.push('/allProducts');
+    }
     this.props.fetchUsers();
   }
 
