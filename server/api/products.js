@@ -1,9 +1,7 @@
 const router = require('express').Router();
 const { Product, Review, Category } = require('../db/models');
-const { isAdmin, productAdminRouter } = require('./products.admin');
-
-// admin routes
-router.use(isAdmin, productAdminRouter);
+const productAdminRouter = require('./products.admin');
+const isAdmin = require('./auth.middleware');
 
 router.get('/test-categories', async (req, res, next) => {
   const categories = await Category.findAll({
@@ -53,6 +51,7 @@ router.get('/:id/reviews', (req, res, next) => {
     .catch(next);
 });
 
+
 // post review for a product
 router.post('/:id/reviews', (req, res, next) => {
   return Review.create(
@@ -66,5 +65,9 @@ router.post('/:id/reviews', (req, res, next) => {
     .then(review => res.json(review))
     .catch(next);
 });
+
+// admin routes
+router.use(isAdmin, productAdminRouter);
+
 
 module.exports = router;

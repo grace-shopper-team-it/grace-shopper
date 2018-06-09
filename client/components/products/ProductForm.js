@@ -4,6 +4,14 @@ import { changeInputAction, getProductAction } from '../../store/product';
 import history from '../../history';
 
 export class ProductForm extends React.Component {
+  componentDidMount() {
+    if (
+      !this.props.currentUser ||
+      (this.props.currentUser && !this.props.currentUser.isAdmin)
+    ) {
+      history.push('/allProducts');
+    }
+  }
   handleSubmit = event => {
     event.preventDefault();
     this.handleData();
@@ -108,6 +116,7 @@ export class ProductForm extends React.Component {
 const mapState = state => {
   return {
     currentProduct: state.product.currentProduct,
+    currentUser: state.user,
   };
 };
 const mapDispatch = dispatch => {
