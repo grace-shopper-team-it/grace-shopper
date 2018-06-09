@@ -27,9 +27,8 @@ class Product extends React.Component {
 
   render() {
     const { product } = this.props;
-    const cartArr = this.props.cart.cart;
-    const isInCart = cartArr.includes(product);
-    console.log(isInCart);
+    const cartIdArr = this.props.cart.cart.map(singleProduct =>  singleProduct.id);
+    const isInCart = cartIdArr.includes(product.id);
     return (
       <div>
         <h3>{product.name}</h3>
