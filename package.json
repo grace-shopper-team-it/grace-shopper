@@ -34,6 +34,7 @@
     "latest": "^0.2.0",
     "morgan": "^1.8.1",
     "node": "^10.0.0",
+    "npm": "^6.1.0",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
     "pg": "^6.1.2",

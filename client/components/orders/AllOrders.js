@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {fetchOrders, updateOrderInDB} from '../../store/orders'
+import { fetchOrders, updateOrderInDB } from '../../store/orders';
+import { SingleOrderItem } from './SingleOrderItem';
 
 //things I need this component to do:
 //render a list of orders in the database
@@ -12,21 +13,47 @@ import {fetchOrders, updateOrderInDB} from '../../store/orders'
 
 //am exporting this class as well as default exporting in order to make it easier to test
 
+//okay so now this should render a list of single orders....
+//so how would I do filtering....?
+
 export class AllOrders extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
   }
 
-  render(){
-    return <h1>All Orders</h1>
+  componentDidMount() {
+    props.getOrders();
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>All Orders</h1>
+        {props.orders.map(order => {
+          return (
+            <SingleOrderItem order={order} updateOrder={props.updateOrder} />
+          );
+        })}
+      </div>
+    );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = state => {
+  return {
+    orders: state.orders,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
   return {
     getOrders: () => dispatch(fetchOrders()),
-    updateOrder: (orderId, update) => dispatch(updateOrderInDB(orderId, update))
-  }
-}
+    updateOrder: (orderId, update) =>
+      dispatch(updateOrderInDB(orderId, update)),
+  };
+};
 
-export default connect(null, mapDispatchToProps)(AllOrders)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AllOrders);
