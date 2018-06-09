@@ -7,7 +7,8 @@ class CartItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: props.item.cartQuantity
+      quantity: props.item.cartQuantity,
+      totalPrice: ( props.item.cartQuantity * props.item.price )
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,6 +22,7 @@ class CartItem extends Component {
     event.preventDefault();
     const product = this.props.item;
     const quantity = this.state.quantity;
+    this.setState( {totalPrice: (product.price * quantity) } );
     this.props.adjustQuantity(product, quantity);
   }
 
@@ -31,6 +33,7 @@ class CartItem extends Component {
       <Link to={`/products/${item.id}`}>
         <h4>{item.name}</h4>
       </Link>
+      <h6>Subtotal - ${this.state.totalPrice}</h6>
         <form>
           <label>
             <input
