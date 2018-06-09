@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import './AddReview.css';
-import { addReviewThunk } from '../../store/review';
+import axios from 'axios';
 
 class AddReview extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       content: '',
       stars: 0,
       productId: 0,
+      review: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +23,16 @@ class AddReview extends React.Component {
     });
   }
 
-  handleSubmit() {}
+  async handleSubmit(event) {
+    event.preventDefault();
+    let newReview = { content: this.state.content, stars: this.state.stars };
+    let review = await axios.post(
+      `/api/products/${this.state.productId}/reviews`,
+      newReview
+    );
+
+    this.props.history.push(`/products/${this.state.productId}`);
+  }
 
   render() {
     console.log(this.state);
@@ -164,4 +173,5 @@ class AddReview extends React.Component {
     );
   }
 }
+
 export default AddReview;
