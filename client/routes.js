@@ -12,6 +12,7 @@ import {
   AddProduct,
   SingleProduct,
   AddReview,
+  UserList,
 } from './components';
 import { me } from './store';
 
@@ -19,8 +20,8 @@ import { me } from './store';
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
-    this.props.loadInitialData();
+  async componentDidMount() {
+    await this.props.loadInitialData();
   }
 
   render() {
@@ -39,6 +40,7 @@ class Routes extends Component {
         <Route path="/products/:id/review" component={AddReview} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
+        <Route path="/users" component={UserList} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -66,7 +68,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
-      dispatch(me());
+      return dispatch(me());
     },
   };
 };
