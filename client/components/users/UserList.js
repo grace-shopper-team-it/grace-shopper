@@ -29,7 +29,7 @@ class UserList extends React.Component {
 
 const mapState = state => {
   return {
-    users: state.userAdmin,
+    users: state.userAdmin.users,
     currentUser: state.user,
   };
 };
