@@ -3,31 +3,62 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
+// import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div>
-    <h1>ClownTown</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-      <Link to="/allProducts">View All Products</Link>
-      <Link to="/cart">View My Cart</Link>
-    </nav>
-    <hr />
-  </div>
+const Header = ({ handleClick, isLoggedIn }) => (
+  <nav className="navbar navbar-light" style={{ backgroundColor: '#e3f2fd' }}>
+    <a className="navbar-brand" href="#">
+      ClownTown
+    </a>
+    {isLoggedIn ? (
+      <div>
+        {/* The navbar will show these links after you log in */}
+        <Link
+          to="/home"
+          style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
+        >
+          Home
+        </Link>
+        <a
+          href="#"
+          style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
+          onClick={handleClick}
+        >
+          Logout
+        </a>
+      </div>
+    ) : (
+      <div>
+        {/* The navbar will show these links before you log in */}
+        <Link
+          to="/login"
+          style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
+        >
+          Login
+        </Link>
+        <Link
+          to="/signup"
+          style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
+        >
+          Sign Up
+        </Link>
+      </div>
+    )}
+    <div>
+      <Link
+        to="/allProducts"
+        style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
+      >
+        View All Products
+      </Link>
+      <Link
+        to="/cart"
+        style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
+      >
+        View My Cart
+      </Link>
+    </div>
+  </nav>
 );
 
 /**
@@ -50,12 +81,12 @@ const mapDispatch = dispatch => {
 export default connect(
   mapState,
   mapDispatch
-)(Navbar);
+)(Header);
 
 /**
  * PROP TYPES
  */
-Navbar.propTypes = {
+Header.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
 };
