@@ -80,8 +80,10 @@ const mapDispatch = dispatch => {
       evt.preventDefault();
       const formName = evt.target.name;
       const email = evt.target.email.value;
-      const firstName = evt.target.firstName.value || null;
-      const lastName = evt.target.lastName.value || null;
+      const firstName =
+        (evt.target.firstName && evt.target.firstName.value) || null;
+      const lastName =
+        (evt.target.lastName && evt.target.lastName.value) || null;
       const password = evt.target.password.value;
       const userInfo = { firstName, lastName, email };
       dispatch(auth(userInfo, password, formName));
