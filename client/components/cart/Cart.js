@@ -22,16 +22,16 @@ class Cart extends Component {
 
   handleSubmitOrderSubmit(event) {
     event.preventDefault();
-
+    this.props.submitOrder();
   }
 
   render() {
     const items = this.props.cart.cart;
-    // Getting subtotal of all items
+      // Getting subtotal of all items
     const subTotalArr = items.map((item) => {
       return (Number(item.cartQuantity) * Number(item.price));
     });
-    // func to find total
+      // func to find total
     const orderTotalFunc = (arr) => {
       let total = 0;
       for (let i = 0; i < arr.length; i++) {
@@ -39,7 +39,7 @@ class Cart extends Component {
       }
       return total;
     }; 
-    // calls func on subtotal arr
+      // calls func on subtotal arr
     const orderTotal = orderTotalFunc(subTotalArr);
     return (
       <div>
@@ -58,7 +58,7 @@ class Cart extends Component {
                 type="submit"
                 onClick={this.handleSubmit}
                 value={product.id}>
-                Remove this item
+                  Remove this item
               </button>
             </div>
             ))
@@ -66,15 +66,14 @@ class Cart extends Component {
           <button
           type="submit"
           onClick={this.handleSubmitOrderSubmit}>
-          Submit Order
+            Submit Order
           </button>
             <h3>Cart Total -${orderTotal}</h3>
             <br />
           <button
           type="submit"
-          onClick={this.handleClearCartSubmit}
-          >
-          Clear cart
+          onClick={this.handleClearCartSubmit}>
+            Clear cart
           </button>
         </div>
         :

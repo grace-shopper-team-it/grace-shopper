@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { addToCartThunk } from '../../store/cart';
-// import ItemSubmittedToCart from '../cart/'
 
 class Product extends React.Component {
   constructor() {
