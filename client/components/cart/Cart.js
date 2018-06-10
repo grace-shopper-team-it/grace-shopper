@@ -8,6 +8,7 @@ class Cart extends Component {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClearCartSubmit = this.handleClearCartSubmit.bind(this);
+    this.handleSubmitOrderSubmit = this.handleSubmitOrderSubmit.bind(this);
   }
 
   handleSubmit(event) {
@@ -22,6 +23,7 @@ class Cart extends Component {
 
   handleSubmitOrderSubmit(event) {
     event.preventDefault();
+    console.log('handlesub', this.props.cart.cart)
     this.props.submitOrder();
   }
 
@@ -63,12 +65,12 @@ class Cart extends Component {
             </div>
             ))
             }
+            <h3>Cart Total - ${orderTotal}</h3>
           <button
           type="submit"
           onClick={this.handleSubmitOrderSubmit}>
-            Submit Order
+            Checkout
           </button>
-            <h3>Cart Total -${orderTotal}</h3>
             <br />
           <button
           type="submit"
