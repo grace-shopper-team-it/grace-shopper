@@ -27,7 +27,7 @@ export class AllOrders extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='allOrders'>
         <h1>All Orders</h1>
         {props.orders.map(order => {
           return (
