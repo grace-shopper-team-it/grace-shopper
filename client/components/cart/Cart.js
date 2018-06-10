@@ -23,7 +23,7 @@ class Cart extends Component {
 
   handleSubmitOrderSubmit(event) {
     event.preventDefault();
-    console.log('handlesub', this.props.cart.cart)
+    console.log('handlesub', this.props.cart.cart);
     this.props.submitOrder();
   }
 
