@@ -39,26 +39,27 @@ class AllProducts extends Component {
                 <h2 className="navbar-header" style={{ textAlign: 'center' }}>
                   Currently Available
                 </h2>
+                <CategoryDropdown />
                 <form
                   style={{ display: 'flex' }}
-                  className="navbar-form navbar-left"
+                  className="form-inline"
                   role="search"
                   onSubmit={e => e.preventDefault()}
                 >
-                  <div className="form-group form-white">
-                    <input
-                      name="searchProduct"
-                      type="text"
-                      className="form-control"
-                      placeholder="Find your favorite product"
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <button type="submit" className="btn btn-white">
+                  <input
+                    name="searchProduct"
+                    type="text"
+                    className="form-control mr-sm-2"
+                    placeholder="Find your favorite product"
+                    onChange={this.handleChange.bind(this)}
+                  />
+                  <button
+                    type="submit"
+                    className="btn btn-outline-success my-2 my-sm-0"
+                  >
                     <i className="material-icons">search</i>
                   </button>
                 </form>
-                <CategoryDropdown />
               </div>
               <div className="row">
                 {products.map(product => {
