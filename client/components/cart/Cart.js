@@ -21,6 +21,11 @@ class Cart extends Component {
     this.props.clearCart();
   }
 
+  handleSubmitOrderSubmit(event) {
+    event.preventDefault();
+
+  }
+
   render() {
     const items = this.props.cart.cart;
     return (
@@ -31,7 +36,7 @@ class Cart extends Component {
           items.length
         ?
         <div>
-        {
+          {
           items.map(product =>
           (
             <div key={product.id}>
@@ -44,17 +49,23 @@ class Cart extends Component {
               </button>
             </div>
             ))
-        }
-            <button
-            type="submit"
-            onClick={this.handleClearCartSubmit}
-            >
-            Clear cart
-            </button>
+            }
+          <button
+          type="submit"
+          onClick={this.handleSubmitOrderSubmit}>
+          Submit Order
+          </button>
+            <br />
+          <button
+          type="submit"
+          onClick={this.handleClearCartSubmit}
+          >
+          Clear cart
+          </button>
         </div>
         :
         <h4>Nothing in cart</h4>
-      }
+          }
         </div>
       </div>
     );
@@ -70,7 +81,8 @@ const mapState = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     removeItemFromCart: (productId) => dispatch(removeFromCartThunk(productId)),
-    clearCart: () => dispatch(clearCartThunk())
+    clearCart: () => dispatch(clearCartThunk()),
+    submitOrder: () => dispatch()
   };
 };
 
