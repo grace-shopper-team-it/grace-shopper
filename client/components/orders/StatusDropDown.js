@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 const statuses = ['Completed', 'Cancelled', 'Created', 'Processing']
 
-class StatusDropDown extends Component {
+export class StatusDropDown extends Component {
   constructor(){
     super()
   }

@@ -9,7 +9,7 @@ import sinon from 'sinon'
 //how to test for authorization with react components??
 //do I need to import these from the AllOrders component??
 
-fakeOrders = [{orderId: 1, date: 1/2/3, products: [prod1, prod2, status: 'Completed'}, {orderId: 1, date: 1/2/3, products: [prod1, prod2], status: 'Fulfilled'}, {orderId: 1, date: 1/2/3, products: [prod1, prod2], status: 'Completed'}]
+fakeOrders = [{orderId: 1, date: 1/2/3, products: [prod1, prod2,], status: 'Completed'}, {orderId: 1, date: 1/2/3, products: [prod1, prod2], status: 'Fulfilled'}, {orderId: 1, date: 1/2/3, products: [prod1, prod2], status: 'Completed'}]
 
 describe('AllOrders component', () => {
   const mockGetOrders = sinon.spy(getOrders);
