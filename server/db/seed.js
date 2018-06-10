@@ -162,11 +162,11 @@ const reviews = [
 ];
 
 const orders = [
-  { status: 'Created', userEmail: 'person@gmail.com' , street1: '444 tub Street' , street2: null, city: 'Chicago', state: 'IL', zipCode: 60606 },
-  { status: 'Processing', userEmail: 'person2@gmail.com' , street1: '444 tub Street' , street2: 'apt 2', city: 'Chicago', state: 'IL', zipCode: 60606 },
-  { status: 'Created', userEmail: 'person3@gmail.com' , street1: '444 tub Street' , street2: 'apt 4', city: 'Chicago', state: 'IL', zipCode: 60606 },
-  { status: 'Cancelled', userEmail: 'person4@gmail.com' , street1: '444 tub Street' , street2: 'apt 3', city: 'Chicago', state: 'IL', zipCode: 60606 },
-  { status: 'Completed', userEmail: 'person5@gmail.com' , street1: '444 tub Street' , street2: null, city: 'Chicago', state: 'IL', zipCode: 60606 },
+  { status: 'Created', userEmail: 'person@gmail.com', street1: '444 tub Street', street2: null, city: 'Chicago', state: 'IL', zipCode: 60606 },
+  { status: 'Processing', userEmail: 'person2@gmail.com', street1: '444 tub Street', street2: 'apt 2', city: 'Chicago', state: 'IL', zipCode: 60606 },
+  { status: 'Created', userEmail: 'person3@gmail.com', street1: '444 tub Street', street2: 'apt 4', city: 'Chicago', state: 'IL', zipCode: 60606 },
+  { status: 'Cancelled', userEmail: 'person4@gmail.com', street1: '444 tub Street', street2: 'apt 3', city: 'Chicago', state: 'IL', zipCode: 60606 },
+  { status: 'Completed', userEmail: 'person5@gmail.com', street1: '444 tub Street', street2: null, city: 'Chicago', state: 'IL', zipCode: 60606 },
 ];
 
 const categories = [{ name: 'nice' }, { name: 'creepy' }];

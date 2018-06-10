@@ -8,7 +8,6 @@ const ADD_TO_CART = 'ADD_TO_CART';
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
 const CLEAR_CART = 'CLEAR_CART';
-const SUBMIT_ORDER = 'SUBMIT_ORDER';
 
 /*
   action creators
@@ -43,13 +42,6 @@ const updateQuantityAction = (product, quantity) => {
   };
 };
 
-const submitOrderAction = (cartArr) => {
-  return {
-    type: SUBMIT_ORDER,
-    cartArr
-  }
-}
-
 export const addToCartThunk = (product, quantity) => {
   return dispatch => {
     const action = addToCartAction(product, quantity);
@@ -72,6 +64,13 @@ export const removeFromCartThunk = productId => {
 };
 
 export const clearCartThunk = () => {
+  return dispatch => {
+    const action = clearCartAction();
+    dispatch(action);
+  };
+};
+
+export const submitOrderThunk = (items, userInfo) => {
   return dispatch => {
     const action = clearCartAction();
     dispatch(action);

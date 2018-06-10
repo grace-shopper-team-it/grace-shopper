@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CartItem from './CartItem';
 import { removeFromCartThunk, clearCartThunk } from '../../store/cart';
+import { Link } from 'react-router-dom'
 
 class Cart extends Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClearCartSubmit = this.handleClearCartSubmit.bind(this);
-    this.handleSubmitOrderSubmit = this.handleSubmitOrderSubmit.bind(this);
   }
 
   handleSubmit(event) {
@@ -19,12 +19,6 @@ class Cart extends Component {
   handleClearCartSubmit(event) {
     event.preventDefault();
     this.props.clearCart();
-  }
-
-  handleSubmitOrderSubmit(event) {
-    event.preventDefault();
-    console.log('handlesub', this.props.cart.cart);
-    this.props.submitOrder();
   }
 
   render() {
@@ -66,10 +60,15 @@ class Cart extends Component {
             ))
             }
             <h3>Cart Total - ${orderTotal}</h3>
+          <Link to="/checkout">
+            <button type="button">
+              Checkout
+            </button>
+          </Link>
           <button
           type="submit"
           onClick={this.handleSubmitOrderSubmit}>
-            Checkout
+            Checkout(placeheld)
           </button>
             <br />
           <button
