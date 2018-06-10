@@ -68,6 +68,7 @@ class Cart extends Component {
           onClick={this.handleSubmitOrderSubmit}>
           Submit Order
           </button>
+            <h3>Cart Total -${orderTotal}</h3>
             <br />
           <button
           type="submit"
