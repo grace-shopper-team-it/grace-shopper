@@ -65,9 +65,9 @@ class SingleProduct extends React.Component {
               })}
             </div>
             <CategoryForm />
-            <Reviews reviews={this.state.reviews} />
           </div>
         )}
+        <Reviews reviews={this.state.reviews} />
       </div>
     );
   }
