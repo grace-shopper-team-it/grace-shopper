@@ -6,7 +6,7 @@ const { isAdmin } = require('./auth.middleware');
 router.get('/:id', async (req, res, next) => {
   if (req.user && (req.user.isAdmin || +req.user.id === +req.params.id)) {
     const user = await User.findById(req.params.id, {
-      attributes: ['firstName', 'lastName', 'email'],
+      attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
     });
     res.json(user);
   } else {

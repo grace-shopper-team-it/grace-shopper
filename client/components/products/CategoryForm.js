@@ -11,15 +11,12 @@ class CategoryForm extends React.Component {
   }
   handleSubmit = event => {
     event.preventDefault();
-    console.log('productId:', this.props.currentProduct.id);
-    console.log('categoryId:', this.state.categoryId);
     this.props.addCategory(this.props.currentProduct.id, this.state.categoryId);
   };
   handleChange = event => {
     this.setState({
       categoryId: event.target.value,
     });
-    console.log('LOCAL STATE:', this.state);
   };
 
   render() {
