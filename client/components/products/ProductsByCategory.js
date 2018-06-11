@@ -17,7 +17,7 @@ class ProductsByCategory extends Component {
   render() {
     return (
       <div>
-        <h1>Currently Available</h1>,
+        <h1>Currently Available</h1>
         <ProductsCard products={this.state.products} />
       </div>
     );
