@@ -14,3 +14,5 @@ export { default as AllProducts } from './products/AllProducts';
 export { default as AddReview } from './products/AddReview';
 export { default as UserList } from './users/UserList';
 export { default as SingleUser } from './users/SingleUser';
+export { default as AllOrders } from './orders/AllOrders';
+export { default as SingleOrderPage } from './orders/SingleOrderPage';
