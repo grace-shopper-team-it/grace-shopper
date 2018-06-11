@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import Product from './Product';
 import DeleteProduct from './DeleteProduct';

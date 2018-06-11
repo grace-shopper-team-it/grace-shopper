@@ -1,5 +1,5 @@
 const userAdminRouter = require('express').Router();
-const { User } = require('../db/models');
+const { User, Order, Product } = require('../db/models');
 
 userAdminRouter.get('/', async (req, res, next) => {
   const allUsers = await User.findAll({
@@ -20,6 +20,7 @@ userAdminRouter.put('/:id', async (req, res, next) => {
   );
   const updatedUser = await User.findById(req.params.id, {
     attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
+    include: [{ model: Order, inlude: [Product] }],
   });
   res.json(updatedUser);
 });
