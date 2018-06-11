@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addExistingCategoryThunk } from '../../store/product';
+import {
+  addExistingCategoryThunk,
+  getAllCategoriesThunk,
+} from '../../store/product';
 
 class CategoryForm extends React.Component {
   constructor() {
@@ -8,6 +11,9 @@ class CategoryForm extends React.Component {
     this.state = {
       categoryId: 0,
     };
+  }
+  componentDidMount() {
+    this.props.fetchCategories();
   }
   handleSubmit = event => {
     event.preventDefault();
@@ -22,20 +28,30 @@ class CategoryForm extends React.Component {
   render() {
     const { categories } = this.props;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="categories">Existing Categories</label>
-        <select id="categories" name="categories" onChange={this.handleChange}>
-          {categories.map(category => {
-            return (
-              <option value={category.id} key={category.id}>
-                {category.name}
-              </option>
-            );
-          })}
-        </select>
-        <button type="submit" className="btn btn-success">
-          Add Category
-        </button>
+      <form onSubmit={this.handleSubmit} id="category-form">
+        <div id="category-dropdown">
+          <label htmlFor="categories">
+            <strong>Existing Categories</strong>
+          </label>
+          <select
+            className="form-control category-select"
+            id="categories"
+            name="categories"
+            onChange={this.handleChange}
+          >
+            <option key="nothing">-----</option>
+            {categories.map(category => {
+              return (
+                <option value={category.id} key={category.id}>
+                  {category.name}
+                </option>
+              );
+            })}
+          </select>
+          <button type="submit" className="btn btn-success category-btn">
+            Add Category
+          </button>
+        </div>
       </form>
     );
   }
@@ -44,6 +60,7 @@ class CategoryForm extends React.Component {
 const mapState = state => {
   return {
     currentProduct: state.product.currentProduct,
+    categories: state.product.categories,
   };
 };
 
@@ -52,6 +69,7 @@ const mapDispatch = dispatch => {
     addCategory: (productId, categoryId) => {
       dispatch(addExistingCategoryThunk(productId, categoryId));
     },
+    fetchCategories: () => dispatch(getAllCategoriesThunk()),
   };
 };
 
