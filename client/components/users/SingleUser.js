@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getUserInfoThunk } from '../../store/user.admin';
 import UserInfo from './UserInfo';
 import AdminActions from './AdminActions';
+import SingleOrderPage from '../orders/SingleOrderPage';
 
 class SingleUser extends React.Component {
   componentDidMount() {
@@ -17,11 +18,9 @@ class SingleUser extends React.Component {
       <div className="container">
         <UserInfo user={selectedUser} />
         <h3>Order History</h3>
-        <ul>
-          {selectedUser.orders[0].products.map(product => {
-            return <li key={product.id}>{product.name}</li>;
-          })}
-        </ul>
+        {selectedUser.orders.map(order => {
+          return <SingleOrderPage key={order.id} orderId={order.id} />;
+        })}
         {currentUser.isAdmin && (
           <div>
             <p>
