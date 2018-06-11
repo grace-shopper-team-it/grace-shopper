@@ -7,7 +7,7 @@ const Order = db.define('order', {
     defaultValue: 'Created'
   },
   guestId: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   userEmail: {
     type: Sequelize.STRING,
