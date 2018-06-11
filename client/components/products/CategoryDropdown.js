@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getAllCategoriesThunk } from '../../store/category';
+import { Link } from 'react-router-dom';
 
 class CategoryDropdow extends Component {
-  async componentDidMount() {
-    await this.props.getAllCategoriesThunk();
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
   render() {
-    let category = this.props.categories.categories;
-    if (category.length > 0) {
-      console.log(category[0].products);
-    }
+    let category = this.props.categories;
 
-    category = category.map(categ => Object.values(categ.name).join(''));
-    category = category.filter((categ, pos) => {
-      return category.indexOf(categ) === pos;
-    });
+    // category = category.map(categ => Object.values(categ.name).join(''));
+    // category = category.filter((categ, pos) => {
+    //   return category.indexOf(categ) === pos;
+    // });
 
     return (
       <div className="dropdown">
@@ -33,9 +30,14 @@ class CategoryDropdow extends Component {
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           {category.map(categ => {
             return (
-              <a className="dropdown-item" key={categ} value={categ} href="#">
-                {categ}
-              </a>
+              <Link
+                to={'/category/' + categ.id}
+                className="dropdown-item"
+                key={categ.id}
+                value={categ}
+              >
+                {categ.name}
+              </Link>
             );
           })}
         </div>
@@ -44,21 +46,4 @@ class CategoryDropdow extends Component {
   }
 }
 
-const mapToProps = (state, ownProps) => {
-  return {
-    categories: state.category,
-  };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    getAllCategoriesThunk() {
-      dispatch(getAllCategoriesThunk());
-    },
-  };
-};
-
-export default connect(
-  mapToProps,
-  mapDispatchToProps
-)(CategoryDropdow);
+export default CategoryDropdow;
