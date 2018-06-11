@@ -10,6 +10,11 @@ import userAdmin from './user.admin';
 import product from './product';
 import cart from './cart';
 
+import category from './category';
+import order from './order';
+
+
+
 const persistConfig = {
   key: 'root',
   storage,
@@ -17,7 +22,18 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
-const reducer = combineReducers({ user, userAdmin, product, cart });
+
+const reducer = combineReducers({
+  user,
+  userAdmin,
+  product,
+  cart,
+  category,
+  order,
+});
+
+
+
 const pReducer = persistReducer(persistConfig, reducer);
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
