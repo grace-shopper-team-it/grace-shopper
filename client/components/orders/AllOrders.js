@@ -2,8 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchOrders, updateOrderInDB } from '../../store/order';
 import { SingleOrderItem } from './SingleOrderItem';
+import {store} from '../../store'
 
 const statuses = ['Completed', 'Cancelled', 'Created', 'Processing'];
+
+const state = store.getState()
+console.log('state', state)
 
 export class AllOrders extends React.Component {
   constructor(props) {
@@ -15,8 +19,12 @@ export class AllOrders extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.getOrders();
-    this.setState({orders: this.props.orders ? this.props.orders : []})
+    if (this.props.currentUser.isAdmin) {
+      await this.props.getOrders();
+      this.setState({orders: this.props.orders ? this.props.orders : []})
+    } else {
+      this.props.history.push('/allProducts')
+    }
   }
 
   handleChange = event => {
@@ -73,6 +81,7 @@ export class AllOrders extends React.Component {
 const mapStateToProps = state => {
   return {
     orders: state.order.orders,
+    currentUser: state.user
   };
 };
 
