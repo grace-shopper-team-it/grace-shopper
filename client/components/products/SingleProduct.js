@@ -7,7 +7,6 @@ import DeleteProduct from './DeleteProduct';
 import { getProductThunk } from '../../store/product';
 import CategoryForm from './CategoryForm';
 import Reviews from './Reviews';
-import axios from 'axios';
 
 /*
   dummy data
