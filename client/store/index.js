@@ -9,10 +9,6 @@ import user from './user';
 import userAdmin from './user.admin';
 import product from './product';
 import cart from './cart';
-<<<<<<< HEAD
-import category from './category';
-=======
->>>>>>> ea251e671b7f16e72deaad0f39a302a63e044ec2
 import order from './order';
 
 const persistConfig = {
