@@ -20,6 +20,7 @@ class Checkout extends Component {
     event.preventDefault();
     console.log('handlesub', this.props.cart.cart);
     this.props.submitOrder();
+    // await thunk to create order (create order responds with orderId), get orderId from thunk, assign orderId to objects to post to productOrders
   }
 
   handleInputChange(event) {
