@@ -11,6 +11,7 @@ const CHANGE_INPUT = 'CHANGE_INPUT';
 const GET_PRODUCT = 'GET_PRODUCT';
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 const ADD_EXISTING_CATEGORY = 'ADD_EXISTING_CATEGORY';
+const GET_CATEGORIES = 'GET_CATEGORIES';
 
 /*
   action creators
@@ -65,9 +66,22 @@ const addExistingCategoryAction = product => {
   };
 };
 
+export const getCategories = categories => {
+  return {
+    type: GET_CATEGORIES,
+    categories,
+  };
+};
+
 /*
   thunk creators
 */
+
+const initialState = {
+  products: [],
+  currentProduct: {},
+  categories: [],
+};
 
 export const addProductThunk = newProduct => {
   return async dispatch => {
@@ -108,9 +122,16 @@ export const addExistingCategoryThunk = (productId, categoryId) => {
   };
 };
 
-const initialState = {
-  products: [],
-  currentProduct: {},
+export const getAllCategoriesThunk = () => {
+  return function thunk(dispatch) {
+    return axios
+      .get('/api/products/category')
+      .then(res => res.data)
+      .then(categories => {
+        const action = getCategories(categories);
+        dispatch(action);
+      });
+  };
 };
 
 export const getAllProductsThunk = () => {
@@ -159,6 +180,8 @@ export default function(state = initialState, action) {
           [action.inputName]: action.inputValue,
         },
       };
+    case GET_CATEGORIES:
+      return { ...state, categories: action.categories };
     default:
       return state;
   }
