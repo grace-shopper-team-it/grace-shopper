@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 const ProductsCard = props => (
   <div className="row">
     {props.products.map(product => {
-      // console.log(props);
       return (
         <div className="col-md-4" key={product.id}>
           <div>
