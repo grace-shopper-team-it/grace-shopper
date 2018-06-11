@@ -5,6 +5,7 @@ import Product from './Product';
 import DeleteProduct from './DeleteProduct';
 import { getProductThunk } from '../../store/product';
 import CategoryForm from './CategoryForm';
+import Reviews from './Reviews';
 
 /*
   dummy data
@@ -52,6 +53,7 @@ class SingleProduct extends React.Component {
               return <div key={category.id}>{category.name}</div>;
             })}
             <CategoryForm categories={existingCategories} />
+            <Reviews />
           </div>
         )}
       </div>
