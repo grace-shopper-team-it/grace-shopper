@@ -20,7 +20,6 @@ class AllProducts extends Component {
   render() {
     let products = this.props.products.products;
     let categories = this.props.products.categories;
-    console.log(categories);
     if (this.state.searchProduct) {
       products = products.filter(product =>
         Object.values(product)
@@ -45,7 +44,6 @@ class AllProducts extends Component {
                 <h2 className="navbar-header" style={{ textAlign: 'center' }}>
                   Currently Available
                 </h2>
-                <CategoryDropdown />
                 <form
                   style={{ display: 'flex' }}
                   className="form-inline"
@@ -66,9 +64,7 @@ class AllProducts extends Component {
                     <i className="material-icons">search</i>
                   </button>
                 </form>
-
                 <CategoryDropdown categories={categories} />
-
               </div>
               <div className="row">
                 {products.map(product => {
