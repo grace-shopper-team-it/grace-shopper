@@ -6,6 +6,7 @@ import DeleteProduct from './DeleteProduct';
 import { getProductThunk } from '../../store/product';
 import CategoryForm from './CategoryForm';
 import Reviews from './Reviews';
+import axios from 'axios';
 
 /*
   dummy data
@@ -22,9 +23,17 @@ const existingCategories = [
 */
 
 class SingleProduct extends React.Component {
-  componentDidMount() {
+  constructor() {
+    super();
+    this.state = {
+      reviews: [],
+    };
+  }
+  async componentDidMount() {
     const productId = this.props.match.params.id;
     this.props.fetchProduct(productId);
+    let reviews = await axios.get(`/api/products/${productId}/reviews`);
+    this.setState({ reviews: reviews.data });
   }
 
   render() {
@@ -53,7 +62,7 @@ class SingleProduct extends React.Component {
               return <div key={category.id}>{category.name}</div>;
             })}
             <CategoryForm categories={existingCategories} />
-            <Reviews />
+            <Reviews reviews={this.state.reviews} />
           </div>
         )}
       </div>

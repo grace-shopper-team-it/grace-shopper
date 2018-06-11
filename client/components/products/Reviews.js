@@ -2,11 +2,16 @@ import React from 'react';
 import './Reviews.css';
 
 class Reviews extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
   }
   render() {
+    console.log(this.props.reviews);
+    let reviews = this.props.reviews;
+    let average =
+      reviews.reduce((total, score) => total + score.stars, 0) / reviews.length;
+    console.log(average);
     return (
       <div className="container" style={{ display: 'flex' }}>
         <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>Reviews</h1>
