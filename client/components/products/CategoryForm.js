@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addExistingCategoryThunk } from '../../store/product';
+import {
+  addExistingCategoryThunk,
+  getAllCategoriesThunk,
+} from '../../store/product';
 
 class CategoryForm extends React.Component {
   constructor() {
@@ -8,6 +11,9 @@ class CategoryForm extends React.Component {
     this.state = {
       categoryId: 0,
     };
+  }
+  componentDidMount() {
+    this.props.fetchCategories();
   }
   handleSubmit = event => {
     event.preventDefault();
@@ -44,6 +50,7 @@ class CategoryForm extends React.Component {
 const mapState = state => {
   return {
     currentProduct: state.product.currentProduct,
+    categories: state.product.categories,
   };
 };
 
@@ -52,6 +59,7 @@ const mapDispatch = dispatch => {
     addCategory: (productId, categoryId) => {
       dispatch(addExistingCategoryThunk(productId, categoryId));
     },
+    fetchCategories: () => dispatch(getAllCategoriesThunk()),
   };
 };
 
