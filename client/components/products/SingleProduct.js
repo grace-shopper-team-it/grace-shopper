@@ -5,7 +5,6 @@ import Product from './Product';
 import DeleteProduct from './DeleteProduct';
 import { getProductThunk } from '../../store/product';
 import CategoryForm from './CategoryForm';
-<<<<<<< HEAD
 import Reviews from './Reviews';
 import axios from 'axios';
 
@@ -22,9 +21,7 @@ const existingCategories = [
 /*
   dummy data
 */
-=======
 import './SingleProduct.css';
->>>>>>> c928b2123ab6c706622fbb6e9ca032787b3e507b
 
 class SingleProduct extends React.Component {
   constructor() {
@@ -68,6 +65,7 @@ class SingleProduct extends React.Component {
               })}
             </div>
             <CategoryForm />
+            <Reviews reviews={this.state.reviews} />
           </div>
         )}
       </div>

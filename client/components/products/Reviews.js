@@ -11,6 +11,7 @@ class Reviews extends React.Component {
     let reviews = this.props.reviews;
     let average =
       reviews.reduce((total, score) => total + score.stars, 0) / reviews.length;
+    average = Math.round(average * 10) / 10;
     console.log(average);
     return (
       <div className="container" style={{ display: 'flex' }}>
