@@ -7,7 +7,7 @@ const ProductsCard = props => (
       return (
         <div
           className="col-md-4"
-          key={props.products.id}
+          key={product.id}
           style={{ paddingBottom: '15px' }}
         >
           <div className="card" key={product.id}>
