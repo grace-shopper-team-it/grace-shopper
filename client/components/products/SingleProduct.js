@@ -5,20 +5,7 @@ import Product from './Product';
 import DeleteProduct from './DeleteProduct';
 import { getProductThunk } from '../../store/product';
 import CategoryForm from './CategoryForm';
-
-/*
-  dummy data
-*/
-const existingCategories = [
-  { id: 1, name: 'Sports' },
-  { id: 2, name: 'Music' },
-  { id: 3, name: 'Heavy Metal' },
-  { id: 4, name: 'Jazz' },
-  { id: 5, name: 'Weird Stuff' },
-];
-/*
-  dummy data
-*/
+import './SingleProduct.css';
 
 class SingleProduct extends React.Component {
   componentDidMount() {
@@ -37,21 +24,23 @@ class SingleProduct extends React.Component {
         <Product key={currentProduct.id} product={currentProduct} />
         {currentUser.isAdmin && (
           <div className="admin-product-options">
-            <Link className="btn btn-primary" to="/products/new">
+            <Link className="btn btn-primary form-links" to="/products/new">
               New Product
             </Link>
             <Link
-              className="btn btn-success"
+              className="btn btn-success form-links"
               to={`/products/${currentProduct.id}/edit`}
             >
               Edit
             </Link>
             <DeleteProduct productId={currentProduct.id} />
-            <h2>Categories</h2>
-            {currentProduct.categories.map(category => {
-              return <div key={category.id}>{category.name}</div>;
-            })}
-            <CategoryForm categories={existingCategories} />
+            <div className="current-categories">
+              <h2>Categories</h2>
+              {currentProduct.categories.map(category => {
+                return <div key={category.id}>{category.name}</div>;
+              })}
+            </div>
+            <CategoryForm />
           </div>
         )}
       </div>
