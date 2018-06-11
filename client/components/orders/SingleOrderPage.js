@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-
-=======
 import StatusDropDown from './StatusDropDown';
 import {Link} from 'react-router-dom'
 import {updateOrderInDB, fetchOrder} from '../../store/order'
@@ -67,4 +64,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleOrderPage)
->>>>>>> 7190236a5dc633e7811554f897256a09db5bb298

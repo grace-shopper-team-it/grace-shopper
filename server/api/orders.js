@@ -7,8 +7,9 @@ const { Order } = require('../db/models');
 
 router.post('/', async(req, res) => {
   try {
-    await Order.create(req.body);
-    res.sendStatus(201)
+    const response = await Order.create(req.body);
+    res.status(201)
+    res.send(response);
   } catch (error) {
     console.error(error);
   }

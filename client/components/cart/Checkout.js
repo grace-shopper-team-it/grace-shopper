@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { submitOrderThunk, clearCartThunk } from '../../store/cart';
+import axios from 'axios'
 
 class Checkout extends Component {
   constructor() {
@@ -9,18 +11,33 @@ class Checkout extends Component {
       street2: '',
       city: '',
       state: '',
-      zipcode: 0,
-      email: ''
+      zipCode: 0,
+      userEmail: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    console.log('handlesub', this.props.cart.cart);
-    this.props.submitOrder();
+    const userId = this.props.user.id;
+    const orderObj = {
+      userId,
+      ...this.state,
+      zipCode: Number(this.state.zipCode)
+    };
+    await this.props.submitOrderObj(orderObj);
+    const newOrderId = this.props.cart.order.id;
+    const newCartArr = this.props.cart.cart.map((item) => {
+      item.productId = item.id;
+      item.orderId = newOrderId;
+      item.price = Number(item.price);
+      item.cartQuantity = Number(item.cartQuantity);
+      return item;
+    })
+    await axios.post('/api/orderItems', newCartArr)
     // await thunk to create order (create order responds with orderId), get orderId from thunk, assign orderId to objects to post to productOrders
+    this.props.clearCart();
   }
 
   handleInputChange(event) {
@@ -33,8 +50,6 @@ class Checkout extends Component {
   }
 
   render() {
-    const items = this.props.cart.cart;
-    console.log(items);
     return (
       <div>
         <h2>Checkout Page</h2>
@@ -82,19 +97,19 @@ class Checkout extends Component {
           <label>
             Zip Code
             <input
-              name="zipcode"
+              name="zipCode"
               type="text"
-              value={this.state.zipcode}
+              value={this.state.zipCode}
               onChange={this.handleInputChange} />
               (required)
           </label>
             <h4>Confirm your email</h4>
           <label>
-            Email
+            email
             <input
-              name="email"
+              name="userEmail"
               type="text"
-              value={this.state.email}
+              value={this.state.userEmail}
               onChange={this.handleInputChange} />
               (required)
           </label>
@@ -108,14 +123,15 @@ class Checkout extends Component {
 
 const mapState = (state) => {
   return {
-    cart: state.cart,
-
+    user: state.user,
+    cart: state.cart
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    submitOrder: (items, userInfo) => dispatch(submitOrderThunk(items, userInfo))
+    submitOrderObj: (orderObj) => dispatch(submitOrderThunk(orderObj)),
+    clearCart: () => dispatch(clearCartThunk())
   };
 };
 

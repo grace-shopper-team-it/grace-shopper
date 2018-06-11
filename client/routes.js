@@ -18,7 +18,6 @@ import {
   SingleOrderPage,
   AllOrders,
   ProductsByCategory,
-
 } from './components';
 import { me } from './store';
 
