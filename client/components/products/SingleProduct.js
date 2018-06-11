@@ -21,6 +21,7 @@ const existingCategories = [
 /*
   dummy data
 */
+
 import './SingleProduct.css';
 
 class SingleProduct extends React.Component {

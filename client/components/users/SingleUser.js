@@ -12,6 +12,7 @@ class SingleUser extends React.Component {
   }
   render() {
     const { currentUser, selectedUser } = this.props;
+
     const adminStatus = selectedUser.isAdmin ? 'Admin User' : 'Regular User';
     if (!selectedUser.id) return <div>LOADING...</div>;
     return (
@@ -26,7 +27,8 @@ class SingleUser extends React.Component {
             <p>
               User Type: <strong>{adminStatus}</strong>
             </p>
-            <AdminActions selectedUser={selectedUser} />
+            <AdminActions selectedUser={userForView} />
+       
           </div>
         )}
       </div>
