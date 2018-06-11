@@ -12,3 +12,5 @@ export { default as Cart } from './cart/Cart';
 export { default as AddProduct } from './products/AddProduct';
 export { default as AllProducts } from './products/AllProducts';
 export { default as AddReview } from './products/AddReview';
+export {default as AllOrders } from './orders/AllOrders';
+export {default as SingleOrderPage} from './orders/SingleOrderPage'

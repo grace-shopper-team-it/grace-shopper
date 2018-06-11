@@ -1,39 +1,70 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchOrders, updateOrderInDB } from '../../store/orders';
+import { fetchOrders, updateOrderInDB } from '../../store/order';
 import { SingleOrderItem } from './SingleOrderItem';
 
-//things I need this component to do:
-//render a list of orders in the database
-//allow filtering (or sorting) based on status and order id
-//link to single order page (or show single order details in a drop-down fashion
-//so....should this have any kind of state on it?
-//view details or edit button
-//export this into index
-
-//am exporting this class as well as default exporting in order to make it easier to test
-
-//okay so now this should render a list of single orders....
-//so how would I do filtering....?
+const statuses = ['Completed', 'Cancelled', 'Created', 'Processing'];
 
 export class AllOrders extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      filter: '',
+      orders: [],
+    };
   }
 
-  componentDidMount() {
-    props.getOrders();
+  async componentDidMount() {
+    await this.props.getOrders();
+    this.setState({orders: this.props.orders ? this.props.orders : []})
+  }
+
+  handleChange = event => {
+    this.setState({filter: event.target.value})
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.setState(() => {
+      return {orders: this.props.orders.filter(order => {
+        return order.status === this.state.filter
+      })}
+    })
+  };
+
+  clearStatus = () => {
+    this.setState(() => {
+      return {filter: '', orders: this.props.orders}
+    })
   }
 
   render() {
     return (
-      <div className='allOrders'>
+      <div className="allOrders">
         <h1>All Orders</h1>
-        {props.orders.map(order => {
+        <form
+          className="form-group"
+          onChange={this.handleChange}
+          onSubmit={this.handleSubmit}
+        >
+          <label htmlFor="filter">Search by Status</label>
+          <select defaultValue='Choose Status'>
+            <option>Choose Status</option>
+            {statuses.map(status => {
+              return <option key={status} value={status}>{status}</option>;
+            })}
+          </select>
+          <button type='submit'>Submit</button><button onClick={() => {this.clearStatus()}} type='button'>Clear</button>
+        </form>
+        {this.state.orders.length ?
+        this.state.orders.map(order => {
           return (
-            <SingleOrderItem order={order} updateOrder={props.updateOrder} />
+            <SingleOrderItem key={order.id}
+              order={order}
+              updateOrder={this.props.updateOrder}
+            />
           );
-        })}
+        }) : <span>No matching orders</span>}
       </div>
     );
   }
@@ -41,7 +72,7 @@ export class AllOrders extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    orders: state.orders,
+    orders: state.order.orders,
   };
 };
 
