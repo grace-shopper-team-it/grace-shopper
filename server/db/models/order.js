@@ -42,7 +42,7 @@ const Order = db.define('order', {
       return this.getDataValue('street1') + ' ' + this.getDataValue('street2') + ' ' + this.getDataValue('city') + ' ' + this.getDataValue('state') + ' ' + this.getDataValue('zipCode')
     }
   }
-})
+});
 
 
 module.exports = Order
