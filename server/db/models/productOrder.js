@@ -6,7 +6,7 @@ const ProductOrder = db.define('productOrder', {
     type: Sequelize.DECIMAL(13, 2),
     allowNull: false
   },
-  quantity: {
+  cartQuantity: {
     type: Sequelize.INTEGER,
     allowNull: false
   }

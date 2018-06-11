@@ -15,5 +15,6 @@ export { default as AddReview } from './products/AddReview';
 export { default as ProductsByCategory } from './products/ProductsByCategory';
 export { default as UserList } from './users/UserList';
 export { default as SingleUser } from './users/SingleUser';
+export { default as Checkout } from './cart/Checkout';
 export { default as AllOrders } from './orders/AllOrders';
 export { default as SingleOrderPage } from './orders/SingleOrderPage';
