@@ -21,8 +21,22 @@ router.get('/', (req, res, next) => {
 
 // get all categories
 router.get('/category', (req, res, next) => {
-  return Category.findAll()
+  return Category.findAll({ include: [Product] })
     .then(categories => res.json(categories))
+    .catch(next);
+});
+
+// get specific category
+router.get('/category/:id', (req, res, next) => {
+  return Category.findOne({
+    include: [{ model: Product }],
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then(category => {
+      res.json(category);
+    })
     .catch(next);
 });
 
@@ -51,7 +65,6 @@ router.get('/:id/reviews', (req, res, next) => {
     .catch(next);
 });
 
-
 // post review for a product
 router.post('/:id/reviews', (req, res, next) => {
   return Review.create(
@@ -68,6 +81,5 @@ router.post('/:id/reviews', (req, res, next) => {
 
 // admin routes
 router.use(isAdmin, productAdminRouter);
-
 
 module.exports = router;

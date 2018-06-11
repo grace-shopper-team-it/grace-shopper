@@ -8,4 +8,20 @@ userAdminRouter.get('/', async (req, res, next) => {
   res.json(allUsers);
 });
 
+userAdminRouter.put('/:id', async (req, res, next) => {
+  const adminStatus = req.body.isAdmin;
+  await User.update(
+    { isAdmin: adminStatus },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  );
+  const updatedUser = await User.findById(req.params.id, {
+    attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
+  });
+  res.json(updatedUser);
+});
+
 module.exports = userAdminRouter;

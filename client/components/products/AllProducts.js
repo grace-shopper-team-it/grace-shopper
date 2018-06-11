@@ -2,19 +2,24 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CategoryDropdown from './CategoryDropdown';
-import { getAllProductsThunk } from '../../store/product';
+import {
+  getAllProductsThunk,
+  getAllCategoriesThunk,
+} from '../../store/product';
 
 class AllProducts extends Component {
   state = { searchProduct: null };
 
   componentDidMount() {
     this.props.getAllProductsThunk();
+    this.props.getAllCategoriesThunk();
   }
   handleChange(e) {
     this.setState({ searchProduct: e.target.value });
   }
   render() {
     let products = this.props.products.products;
+    let categories = this.props.products.categories;
     if (this.state.searchProduct) {
       products = products.filter(product =>
         Object.values(product)
@@ -39,7 +44,6 @@ class AllProducts extends Component {
                 <h2 className="navbar-header" style={{ textAlign: 'center' }}>
                   Currently Available
                 </h2>
-                <CategoryDropdown />
                 <form
                   style={{ display: 'flex' }}
                   className="form-inline"
@@ -60,6 +64,7 @@ class AllProducts extends Component {
                     <i className="material-icons">search</i>
                   </button>
                 </form>
+                <CategoryDropdown categories={categories} />
               </div>
               <div className="row">
                 {products.map(product => {
@@ -109,6 +114,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
   return {
     getAllProductsThunk() {
       dispatch(getAllProductsThunk());
+    },
+    getAllCategoriesThunk() {
+      dispatch(getAllCategoriesThunk());
     },
   };
 };
