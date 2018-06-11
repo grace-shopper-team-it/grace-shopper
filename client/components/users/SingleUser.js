@@ -3,28 +3,30 @@ import { connect } from 'react-redux';
 import { getUserInfoThunk } from '../../store/user.admin';
 import UserInfo from './UserInfo';
 import AdminActions from './AdminActions';
+import SingleOrderPage from '../orders/SingleOrderPage';
 
 class SingleUser extends React.Component {
   componentDidMount() {
     const userId = this.props.match.params.id;
-    if (this.props.currentUser.id !== userId) {
-      this.props.fetchUser(userId);
-    }
+    this.props.fetchUser(userId);
   }
   render() {
     const { currentUser, selectedUser } = this.props;
-    const userId = this.props.match.params.id;
-    const userForView = currentUser.id !== userId ? selectedUser : currentUser;
-    const adminStatus = userForView.isAdmin ? 'Admin User' : 'Regular User';
+    const adminStatus = selectedUser.isAdmin ? 'Admin User' : 'Regular User';
+    if (!selectedUser.id) return <div>LOADING...</div>;
     return (
       <div className="container">
-        <UserInfo user={userForView} />
+        <UserInfo user={selectedUser} />
+        <h3>Order History</h3>
+        {selectedUser.orders.map(order => {
+          return <SingleOrderPage key={order.id} orderId={order.id} />;
+        })}
         {currentUser.isAdmin && (
           <div>
             <p>
               User Type: <strong>{adminStatus}</strong>
             </p>
-            <AdminActions selectedUser={userForView} />
+            <AdminActions selectedUser={selectedUser} />
           </div>
         )}
       </div>
