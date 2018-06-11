@@ -33,7 +33,10 @@ class AllProducts extends Component {
       <div className="allProducts">
         <div className="pageHeader">
           <div className="container">
-            <h2 className="title" style={{ textAlign: 'center' }}>
+            <h2
+              className="title"
+              style={{ textAlign: 'center', padding: '20px' }}
+            >
               All Products{' '}
             </h2>
           </div>
@@ -41,13 +44,16 @@ class AllProducts extends Component {
         <div className="main">
           <div className="container">
             <div className="section">
-              <div className="nav nav-bar">
-                <h2 className="navbar-header" style={{ textAlign: 'center' }}>
-                  Currently Available
-                </h2>
+              <div
+                className="nav nav-bar"
+                style={{ display: 'flex', justifyContent: 'space-between' }}
+              >
+                <h2 className="navbar-header">Currently Available</h2>
+                <CategoryDropdown categories={categories} />
+
                 <form
                   style={{ display: 'flex' }}
-                  className="form-inline"
+                  className="form-inline my-2 my-lg-0"
                   role="search"
                   onSubmit={e => e.preventDefault()}
                 >
@@ -65,7 +71,6 @@ class AllProducts extends Component {
                     <i className="material-icons">search</i>
                   </button>
                 </form>
-                <CategoryDropdown categories={categories} />
               </div>
               <ProductsCard products={products} />
             </div>
