@@ -65,11 +65,6 @@ class Cart extends Component {
               Checkout
             </button>
           </Link>
-          <button
-          type="submit"
-          onClick={this.handleSubmitOrderSubmit}>
-            Checkout(placeheld)
-          </button>
             <br />
           <button
           type="submit"
