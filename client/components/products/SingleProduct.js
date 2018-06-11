@@ -5,6 +5,7 @@ import Product from './Product';
 import DeleteProduct from './DeleteProduct';
 import { getProductThunk } from '../../store/product';
 import CategoryForm from './CategoryForm';
+<<<<<<< HEAD
 import Reviews from './Reviews';
 import axios from 'axios';
 
@@ -21,6 +22,9 @@ const existingCategories = [
 /*
   dummy data
 */
+=======
+import './SingleProduct.css';
+>>>>>>> c928b2123ab6c706622fbb6e9ca032787b3e507b
 
 class SingleProduct extends React.Component {
   constructor() {
@@ -47,22 +51,23 @@ class SingleProduct extends React.Component {
         <Product key={currentProduct.id} product={currentProduct} />
         {currentUser.isAdmin && (
           <div className="admin-product-options">
-            <Link className="btn btn-primary" to="/products/new">
+            <Link className="btn btn-primary form-links" to="/products/new">
               New Product
             </Link>
             <Link
-              className="btn btn-success"
+              className="btn btn-success form-links"
               to={`/products/${currentProduct.id}/edit`}
             >
               Edit
             </Link>
             <DeleteProduct productId={currentProduct.id} />
-            <h2>Categories</h2>
-            {currentProduct.categories.map(category => {
-              return <div key={category.id}>{category.name}</div>;
-            })}
-            <CategoryForm categories={existingCategories} />
-            <Reviews reviews={this.state.reviews} />
+            <div className="current-categories">
+              <h2>Categories</h2>
+              {currentProduct.categories.map(category => {
+                return <div key={category.id}>{category.name}</div>;
+              })}
+            </div>
+            <CategoryForm />
           </div>
         )}
       </div>

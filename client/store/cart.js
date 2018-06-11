@@ -8,6 +8,7 @@ const ADD_TO_CART = 'ADD_TO_CART';
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
 const CLEAR_CART = 'CLEAR_CART';
+const SUBMIT_ORDER_OBJ = 'SUBMIT_ORDER_OBJ';
 
 /*
   action creators
@@ -27,6 +28,13 @@ const removeFromCartAction = productId => {
     productId,
   };
 };
+
+const submitOrderObjAction = (orderObj) => {
+  return {
+    type: SUBMIT_ORDER_OBJ,
+    orderObj
+  }
+}
 
 const clearCartAction = () => {
   return {
@@ -70,8 +78,18 @@ export const clearCartThunk = () => {
   };
 };
 
+export const submitOrderThunk = (orderObj) => {
+  return async dispatch => {
+    const response = await axios.post('api/orderInfo', orderObj);
+    const newOrder = response.data;
+    const action = submitOrderObjAction(newOrder);
+    dispatch(action);
+  };
+};
+
 const initialState = {
-  cart: []
+  cart: [],
+  order: {}
 };
 
 export default function(state = initialState, action) {
@@ -101,6 +119,9 @@ export default function(state = initialState, action) {
         product => Number(product.id) !== Number(action.productId)
       );
       return { ...state, cart: updatedCart };
+    }
+    case SUBMIT_ORDER_OBJ: {
+      return { ...state, order: action.orderObj };
     }
     case CLEAR_CART:
       return { ...state, cart: [] };
