@@ -71,8 +71,7 @@ export const clearCartThunk = () => {
 };
 
 const initialState = {
-  //dummy data
-  cart: [],
+  cart: []
 };
 
 export default function(state = initialState, action) {

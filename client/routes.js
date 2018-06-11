@@ -13,7 +13,10 @@ import {
   SingleProduct,
   AddReview,
   SingleOrderPage,
-  AllOrders
+  AllOrders,
+  UserList,
+  SingleUser,
+  ProductsByCategory,
 } from './components';
 import { me } from './store';
 
@@ -42,10 +45,13 @@ class Routes extends Component {
         <Route path="/products/:id" component={SingleProduct} />
         <Route exact path="/orders/" component={AllOrders} />
         <Route exact path='/orders/:id' component={SingleOrderPage} />
+        <Route exact path="/category/:id" component={ProductsByCategory} />
         <Route path="/cart" component={Cart} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
+            <Route path="/users/:id" component={SingleUser} />
+            <Route path="/users" component={UserList} />
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
@@ -70,7 +76,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
-      dispatch(me());
+      return dispatch(me());
     },
   };
 };

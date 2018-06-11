@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Product, Review, Category } = require('../db/models');
 const productAdminRouter = require('./products.admin');
-const isAdmin = require('./auth.middleware');
+const { isAdmin } = require('./auth.middleware');
 
 router.get('/test-categories', async (req, res, next) => {
   const categories = await Category.findAll({
@@ -21,8 +21,22 @@ router.get('/', (req, res, next) => {
 
 // get all categories
 router.get('/category', (req, res, next) => {
-  return Category.findAll()
+  return Category.findAll({ include: [Product] })
     .then(categories => res.json(categories))
+    .catch(next);
+});
+
+// get specific category
+router.get('/category/:id', (req, res, next) => {
+  return Category.findOne({
+    include: [{ model: Product }],
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then(category => {
+      res.json(category);
+    })
     .catch(next);
 });
 
@@ -48,6 +62,20 @@ router.get('/:id/reviews', (req, res, next) => {
     },
   })
     .then(reviews => res.json(reviews))
+    .catch(next);
+});
+
+// post review for a product
+router.post('/:id/reviews', (req, res, next) => {
+  return Review.create(
+    { ...req.body, productId: req.params.id },
+    {
+      where: {
+        productId: req.params.productId,
+      },
+    }
+  )
+    .then(review => res.json(review))
     .catch(next);
 });
 
