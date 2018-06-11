@@ -12,11 +12,22 @@ import {
   AddProduct,
   SingleProduct,
   AddReview,
+<<<<<<< HEAD
   SingleOrderPage,
   AllOrders,
+=======
+>>>>>>> 7190236a5dc633e7811554f897256a09db5bb298
   UserList,
   SingleUser,
+
+  SingleOrderPage,
+  AllOrders,
+
   ProductsByCategory,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7190236a5dc633e7811554f897256a09db5bb298
 } from './components';
 import { me } from './store';
 
@@ -43,9 +54,18 @@ class Routes extends Component {
         <Route path="/products/:id/edit" component={EditProduct} />
         <Route path="/products/:id/review" component={AddReview} />
         <Route path="/products/:id" component={SingleProduct} />
+<<<<<<< HEAD
         <Route exact path="/orders/" component={AllOrders} />
         <Route exact path='/orders/:id' component={SingleOrderPage} />
         <Route exact path="/category/:id" component={ProductsByCategory} />
+=======
+
+        <Route exact path="/orders/" component={AllOrders} />
+        <Route exact path="/orders/:id" component={SingleOrderPage} />
+
+        <Route exact path="/category/:id" component={ProductsByCategory} />
+
+>>>>>>> 7190236a5dc633e7811554f897256a09db5bb298
         <Route path="/cart" component={Cart} />
         {isLoggedIn && (
           <Switch>

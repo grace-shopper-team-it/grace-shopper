@@ -12,8 +12,16 @@ export { default as Cart } from './cart/Cart';
 export { default as AddProduct } from './products/AddProduct';
 export { default as AllProducts } from './products/AllProducts';
 export { default as AddReview } from './products/AddReview';
+<<<<<<< HEAD
 export {default as AllOrders } from './orders/AllOrders';
 export {default as SingleOrderPage} from './orders/SingleOrderPage'
 export { default as ProductsByCategory } from './products/ProductsByCategory';
 export { default as UserList } from './users/UserList';
 export { default as SingleUser } from './users/SingleUser';
+=======
+export { default as ProductsByCategory } from './products/ProductsByCategory';
+export { default as UserList } from './users/UserList';
+export { default as SingleUser } from './users/SingleUser';
+export { default as AllOrders } from './orders/AllOrders';
+export { default as SingleOrderPage } from './orders/SingleOrderPage';
+>>>>>>> 7190236a5dc633e7811554f897256a09db5bb298
