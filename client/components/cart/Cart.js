@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CartItem from './CartItem';
-import { Link } from 'react-router-dom';
 import { removeFromCartThunk, clearCartThunk } from '../../store/cart';
 
 class Cart extends Component {
@@ -23,6 +22,20 @@ class Cart extends Component {
 
   render() {
     const items = this.props.cart.cart;
+    // Getting subtotal of all items
+    const subTotalArr = items.map((item) => {
+      return (Number(item.cartQuantity) * Number(item.price));
+    });
+    // func to find total
+    const orderTotalFunc = (arr) => {
+      let total = 0;
+      for (let i = 0; i < arr.length; i++) {
+        total += arr[i];
+      }
+      return total;
+    }; 
+    // calls func on subtotal arr
+    const orderTotal = orderTotalFunc(subTotalArr);
     return (
       <div>
       <h1> My Cart </h1>
@@ -51,6 +64,7 @@ class Cart extends Component {
             >
             Clear cart
             </button>
+            <h3>Cart Total -${orderTotal}</h3>
         </div>
         :
         <h4>Nothing in cart</h4>
