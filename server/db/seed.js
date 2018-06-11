@@ -169,27 +169,15 @@ const orders = [
   { status: 'Completed', items: [] },
 ];
 
-const categories = [{ name: 'nice' }, { name: 'creepy' }];
-
 function seed() {
-  let createdUsers,
-    createdProducts,
-    createdCategory,
-    createdReviews,
-    createdOrders;
+  let createdUsers, createdProducts, createdReviews, createdOrders;
 
   // create products
   return Promise.all(products.map(product => Product.create(product)))
     .then(result => {
       createdProducts = result;
 
-      //create category
-      return Promise.all(categories.map(category => Category.create(category)));
-    })
-    .then(result => {
-      createdCategory = result;
-
-      // create users
+      //create users
       return Promise.all(users.map(user => User.create(user)));
     })
     .then(result => {
