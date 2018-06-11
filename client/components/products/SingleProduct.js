@@ -5,26 +5,7 @@ import Product from './Product';
 import DeleteProduct from './DeleteProduct';
 import { getProductThunk } from '../../store/product';
 import CategoryForm from './CategoryForm';
-<<<<<<< HEAD
-import Reviews from './Reviews';
-import axios from 'axios';
-
-/*
-  dummy data
-*/
-const existingCategories = [
-  { id: 1, name: 'Sports' },
-  { id: 2, name: 'Music' },
-  { id: 3, name: 'Heavy Metal' },
-  { id: 4, name: 'Jazz' },
-  { id: 5, name: 'Weird Stuff' },
-];
-/*
-  dummy data
-*/
-=======
 import './SingleProduct.css';
->>>>>>> c928b2123ab6c706622fbb6e9ca032787b3e507b
 
 class SingleProduct extends React.Component {
   constructor() {
