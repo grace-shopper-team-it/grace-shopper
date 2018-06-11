@@ -10,7 +10,8 @@ const GET_ORDER = 'GET_ORDER'
 
 const defaultOrders = {
   orders: [],
-  order: {}
+  order: {},
+
 };
 
 //ACTION CREATORS

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CartItem from './CartItem';
 import { removeFromCartThunk, clearCartThunk } from '../../store/cart';
+import { Link } from 'react-router-dom'
 
 class Cart extends Component {
   constructor() {
@@ -22,11 +23,11 @@ class Cart extends Component {
 
   render() {
     const items = this.props.cart.cart;
-    // Getting subtotal of all items
+      // Getting subtotal of all items
     const subTotalArr = items.map((item) => {
       return (Number(item.cartQuantity) * Number(item.price));
     });
-    // func to find total
+      // func to find total
     const orderTotalFunc = (arr) => {
       let total = 0;
       for (let i = 0; i < arr.length; i++) {
@@ -34,7 +35,7 @@ class Cart extends Component {
       }
       return total;
     }; 
-    // calls func on subtotal arr
+      // calls func on subtotal arr
     const orderTotal = orderTotalFunc(subTotalArr);
     return (
       <div>
@@ -44,7 +45,7 @@ class Cart extends Component {
           items.length
         ?
         <div>
-        {
+          {
           items.map(product =>
           (
             <div key={product.id}>
@@ -53,22 +54,27 @@ class Cart extends Component {
                 type="submit"
                 onClick={this.handleSubmit}
                 value={product.id}>
-                Remove this item
+                  Remove this item
               </button>
             </div>
             ))
-        }
-            <button
-            type="submit"
-            onClick={this.handleClearCartSubmit}
-            >
-            Clear cart
+            }
+            <h3>Cart Total - ${orderTotal}</h3>
+          <Link to="/checkout">
+            <button type="button">
+              Checkout
             </button>
-            <h3>Cart Total -${orderTotal}</h3>
+          </Link>
+            <br />
+          <button
+          type="submit"
+          onClick={this.handleClearCartSubmit}>
+            Clear cart
+          </button>
         </div>
         :
         <h4>Nothing in cart</h4>
-      }
+          }
         </div>
       </div>
     );
@@ -84,7 +90,8 @@ const mapState = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     removeItemFromCart: (productId) => dispatch(removeFromCartThunk(productId)),
-    clearCart: () => dispatch(clearCartThunk())
+    clearCart: () => dispatch(clearCartThunk()),
+    submitOrder: () => dispatch()
   };
 };
 
