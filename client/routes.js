@@ -14,7 +14,11 @@ import {
   AddReview,
   UserList,
   SingleUser,
-  Checkout
+  Checkout,
+  SingleOrderPage,
+  AllOrders,
+  ProductsByCategory,
+
 } from './components';
 import { me } from './store';
 
@@ -41,6 +45,9 @@ class Routes extends Component {
         <Route path="/products/:id/edit" component={EditProduct} />
         <Route path="/products/:id/review" component={AddReview} />
         <Route path="/products/:id" component={SingleProduct} />
+        <Route exact path="/orders/" component={AllOrders} />
+        <Route exact path="/orders/:id" component={SingleOrderPage} />
+        <Route exact path="/category/:id" component={ProductsByCategory} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} />
         {isLoggedIn && (

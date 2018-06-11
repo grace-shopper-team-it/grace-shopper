@@ -18,13 +18,13 @@ const AuthForm = props => {
               <label htmlFor="firstName">
                 <small>First Name</small>
               </label>
-              <input name="firstName" type="text" />
+              <input name="firstName" type="text" className="form-control" />
             </div>
             <div>
               <label htmlFor="lastName">
                 <small>Last Name</small>
               </label>
-              <input name="lastName" type="text" />
+              <input name="lastName" type="text" className="form-control" />
             </div>
           </div>
         ) : (

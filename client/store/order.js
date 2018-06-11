@@ -4,10 +4,14 @@ import axios from 'axios';
 
 const GET_ORDERS = 'GET_ORDERS';
 const UPDATE_ORDER = 'UPDATE_ORDER';
+const GET_ORDER = 'GET_ORDER'
 
 //INITIAL STATE
 
-const defaultOrders = [];
+const defaultOrders = {
+  orders: [],
+  order: {}
+};
 
 //ACTION CREATORS
 const getOrders = orders => {
@@ -16,6 +20,13 @@ const getOrders = orders => {
     orders,
   };
 };
+
+const getOrder = order => {
+  return {
+    type: GET_ORDER,
+    order
+  }
+}
 
 const updateOrder = order => {
   return {
@@ -33,25 +44,35 @@ export const fetchOrders = () => {
   };
 };
 
-export const updateOrderInDB = (orderId, update) => {
+export const fetchOrder = (orderId) => {
   return async dispatch => {
-    const updatedOrder = await axios.put(`/api/orders/${orderId}`, update)
-    dispatch(updateOrder(updatedOrder.data))
+    const order = await axios.get(`/api/orders/${orderId}`)
+    dispatch(getOrder(order.data))
+  }
+}
+
+export const updateOrderInDB = (orderId, update) => {
+  const statusUpdate = {status: update}
+  return async dispatch => {
+    const updatedOrderData = await axios.put(`/api/orders/${orderId}`, statusUpdate)
+    const updatedOrder = updatedOrderData.data[0]
+    dispatch(updateOrder(updatedOrder))
   }
 }
 
 export default function(state = defaultOrders, action) {
-  console.log('state.orders', state.orders, 'state', state)
   switch (action.type) {
     case GET_ORDERS:
-      return action.orders;
+      return {...state, orders: action.orders};
+    case GET_ORDER:
+      return {...state, order: action.order}
     case UPDATE_ORDER:
-      return state.map(order => {
+      return {...state, orders: state.orders.map(order => {
         if (order.id === action.order.id) {
           return action.order;
         }
         return order;
-      });
+      })}
     default:
       return state;
   }
