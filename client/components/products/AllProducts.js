@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CategoryDropdown from './CategoryDropdown';
+import ProductsCard from './ProductsCard';
 import {
   getAllProductsThunk,
   getAllCategoriesThunk,
@@ -32,7 +33,10 @@ class AllProducts extends Component {
       <div className="allProducts">
         <div className="pageHeader">
           <div className="container">
-            <h2 className="title" style={{ textAlign: 'center' }}>
+            <h2
+              className="title"
+              style={{ textAlign: 'center', padding: '20px' }}
+            >
               All Products{' '}
             </h2>
           </div>
@@ -40,13 +44,16 @@ class AllProducts extends Component {
         <div className="main">
           <div className="container">
             <div className="section">
-              <div className="nav nav-bar">
-                <h2 className="navbar-header" style={{ textAlign: 'center' }}>
-                  Currently Available
-                </h2>
+              <div
+                className="nav nav-bar"
+                style={{ display: 'flex', justifyContent: 'space-between' }}
+              >
+                <h2 className="navbar-header">Currently Available</h2>
+                <CategoryDropdown categories={categories} />
+
                 <form
                   style={{ display: 'flex' }}
-                  className="form-inline"
+                  className="form-inline my-2 my-lg-0"
                   role="search"
                   onSubmit={e => e.preventDefault()}
                 >
@@ -64,38 +71,8 @@ class AllProducts extends Component {
                     <i className="material-icons">search</i>
                   </button>
                 </form>
-                <CategoryDropdown categories={categories} />
               </div>
-              <div className="row">
-                {products.map(product => {
-                  return (
-                    <div className="col-md-4" key={product.id}>
-                      <div>
-                        <div
-                          className="card"
-                          style={{ background: `url(${product.imageUrl})` }}
-                        >
-                          <div
-                            className="card-content"
-                            style={{ minHeight: '280px' }}
-                          >
-                            <Link to={'/products/' + product.id}>
-                              <h3 className="card-title">{product.name}</h3>
-                            </Link>
-
-                            <p className="card-description">
-                              {product.description.length < 50
-                                ? product.description
-                                : product.description.slice(0, 50) + '...'}
-                            </p>
-                            <p>{`In Stock: ${product.inventory}`}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <ProductsCard products={products} />
             </div>
           </div>
         </div>
