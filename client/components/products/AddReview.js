@@ -9,7 +9,6 @@ class AddReview extends React.Component {
       content: '',
       stars: 0,
       productId: 0,
-      review: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,7 +25,7 @@ class AddReview extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     let newReview = { content: this.state.content, stars: this.state.stars };
-    let review = await axios.post(
+    await axios.post(
       `/api/products/${this.state.productId}/reviews`,
       newReview
     );
@@ -35,7 +34,6 @@ class AddReview extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
