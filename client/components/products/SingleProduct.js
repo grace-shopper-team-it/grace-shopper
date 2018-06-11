@@ -5,6 +5,23 @@ import Product from './Product';
 import DeleteProduct from './DeleteProduct';
 import { getProductThunk } from '../../store/product';
 import CategoryForm from './CategoryForm';
+import Reviews from './Reviews';
+import axios from 'axios';
+
+/*
+  dummy data
+*/
+const existingCategories = [
+  { id: 1, name: 'Sports' },
+  { id: 2, name: 'Music' },
+  { id: 3, name: 'Heavy Metal' },
+  { id: 4, name: 'Jazz' },
+  { id: 5, name: 'Weird Stuff' },
+];
+/*
+  dummy data
+*/
+
 import './SingleProduct.css';
 
 class SingleProduct extends React.Component {
@@ -51,6 +68,7 @@ class SingleProduct extends React.Component {
             <CategoryForm />
           </div>
         )}
+        <Reviews reviews={this.state.reviews} />
       </div>
     );
   }
