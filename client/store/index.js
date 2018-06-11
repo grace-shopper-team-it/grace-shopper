@@ -9,8 +9,6 @@ import user from './user';
 import userAdmin from './user.admin';
 import product from './product';
 import cart from './cart';
-
-import category from './category';
 import order from './order';
 
 const persistConfig = {
@@ -25,7 +23,6 @@ const reducer = combineReducers({
   userAdmin,
   product,
   cart,
-  category,
   order,
 });
 
