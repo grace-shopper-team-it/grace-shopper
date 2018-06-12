@@ -28,12 +28,9 @@ export class AllOrders extends React.Component {
   }
 
   updateOrders = async () => {
-    console.log('inside updateOrders func')
     await this.props.getOrders()
     this.setState((prevState) => {
       return {filter: prevState.filter, orders: this.props.orders}
-    }, () => {
-      console.log('this.state.orders', this.state.orders)
     })
   }
 
@@ -57,6 +54,12 @@ export class AllOrders extends React.Component {
   }
 
   render() {
+    const sortedOrders = this.props.orders.sort((order1, order2) => {
+      if (order1.id > order2.id) return 1
+      if (order1.id < order2.id) return -1
+      else return 0
+    })
+
     return (
       <div className="allOrders container" >
         <h1>All Orders</h1>
@@ -67,15 +70,14 @@ export class AllOrders extends React.Component {
         >
           <label htmlFor="filter">Search by Status</label>
           <select defaultValue='Choose Status'>
-            <option>Choose Status</option>
             {statuses.map(status => {
               return <option key={status} value={status}>{status}</option>;
             })}
           </select>
           <button type='submit'>Submit</button><button onClick={() => {this.clearStatus()}} type='button'>Clear</button>
         </form>
-        {this.state.orders.length ?
-        this.state.orders.map(order => {
+        {sortedOrders.length ?
+        sortedOrders.map(order => {
           return (
             <SingleOrderItem key={order.id}
               order={order}

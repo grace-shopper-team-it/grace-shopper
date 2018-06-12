@@ -25,7 +25,6 @@ export default class StatusDropDown extends Component {
       <div>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
           <select>
-            <option>Change Status</option>
             {statuses.map(status => {
               return (
                 <option key={status} name='status' value={status}>{status}</option>
