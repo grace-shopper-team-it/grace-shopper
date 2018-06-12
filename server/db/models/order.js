@@ -47,7 +47,6 @@ const Order = db.define('order', {
 });
 
 Order.afterCreate((order) => {
-  console.log('hello Chris', order);
   const email = order.userEmail;
 
   const mailOptions = {
