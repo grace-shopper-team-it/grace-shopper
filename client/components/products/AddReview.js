@@ -9,6 +9,7 @@ class AddReview extends React.Component {
       content: '',
       stars: 0,
       productId: 0,
+      showAlert: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,6 +25,9 @@ class AddReview extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
+    if (this.state.content.length < 12) {
+      this.setState({ showAlert: !this.state.showAlert });
+    }
     let newReview = { content: this.state.content, stars: this.state.stars };
     await axios.post(
       `/api/products/${this.state.productId}/reviews`,
@@ -47,6 +51,13 @@ class AddReview extends React.Component {
             name="content"
             onChange={this.handleChange}
           />
+          {this.state.showAlert ? (
+            <div className="alert alert-danger" role="alert">
+              Sorry, your review should be longer
+            </div>
+          ) : (
+            <div />
+          )}
         </div>
         <div className="section">
           <fieldset className="rating">
