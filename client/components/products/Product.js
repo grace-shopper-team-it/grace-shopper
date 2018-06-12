@@ -10,7 +10,7 @@ class Product extends React.Component {
     this.state = {
       quantity: 1,
       formErrors: {quantity: ''},
-      inventory: props.inventory,
+      inventory: props.product.inventory,
       quantityValid: false,
       formValid: false
     };
@@ -21,15 +21,16 @@ class Product extends React.Component {
   }
 
   handleChange(event) {
+    const value = event.target.value;
     this.setState({ quantity: event.target.value },
-    () => { this.validateField(event.target.name, event.target.value); });
+    () => { this.validateField(value); });
   }
 
-  validateField(fieldName, value) {
+  validateField(value) {
     let fieldValidationErrors = this.state.formErrors;
     let quantityValid = this.state.quantityValid;
-    quantityValid = (value.match(/^[0-9]+$/) && value < this.state.inventory);
-    fieldValidationErrors.quantity = quantityValid ? '' : 'must be a number';
+    quantityValid = value <= this.state.inventory;
+    fieldValidationErrors.quantity = quantityValid ? '' : 'Not enough clowns in stock!!';
     this.setState({
       formErrors: fieldValidationErrors,
       quantityValid
@@ -44,7 +45,7 @@ class Product extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const product = this.props.product;
-    const quantity = this.state.quantity;
+    const quantity = Math.floor(this.state.quantity);
     this.props.addToCart(product, quantity);
   }
 
@@ -80,6 +81,7 @@ class Product extends React.Component {
               </label>
               <br />
               <button
+                disabled={!this.state.formValid}
                 className="btn btn-danger"
                 type="submit"
                 value="Add to cart"
