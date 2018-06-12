@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getUserInfoThunk } from '../../store/user.admin';
 import UserInfo from './UserInfo';
-import AdminActions from './AdminActions';
+import UserStatus from './UserStatus';
 import SingleOrderPage from '../orders/SingleOrderPage';
 
 class SingleUser extends React.Component {
@@ -26,7 +26,7 @@ class SingleUser extends React.Component {
             <p>
               User Type: <strong>{adminStatus}</strong>
             </p>
-            <AdminActions selectedUser={selectedUser} />
+            <UserStatus selectedUser={selectedUser} />
           </div>
         )}
       </div>
