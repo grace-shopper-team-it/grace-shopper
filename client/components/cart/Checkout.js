@@ -39,7 +39,7 @@ class Checkout extends Component {
     await axios.post('/api/orderItems', newCartArr);
     // await thunk to create order (create order responds with orderId), get orderId from thunk, assign orderId to objects to post to productOrders
     this.props.clearCart();
-    history.push('/confirmation');
+    history.push('/payment');
   }
 
   handleInputChange(event) {
