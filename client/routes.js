@@ -18,6 +18,8 @@ import {
   SingleOrderPage,
   AllOrders,
   ProductsByCategory,
+  CheckoutConfirmation,
+  PaymentForm,
 } from './components';
 import { me } from './store';
 
@@ -49,6 +51,8 @@ class Routes extends Component {
         <Route exact path="/category/:id" component={ProductsByCategory} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} />
+        <Route path="/confirmation" component={CheckoutConfirmation} />
+        <Route path="/payment" component={PaymentForm} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

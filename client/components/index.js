@@ -18,3 +18,5 @@ export { default as SingleUser } from './users/SingleUser';
 export { default as Checkout } from './cart/Checkout';
 export { default as AllOrders } from './orders/AllOrders';
 export { default as SingleOrderPage } from './orders/SingleOrderPage';
+export { default as CheckoutConfirmation } from './cart/CheckoutConfirmation';
+export { default as PaymentForm } from './cart/PaymentForm';

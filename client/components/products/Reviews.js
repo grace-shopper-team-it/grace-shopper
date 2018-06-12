@@ -19,6 +19,7 @@ class Reviews extends React.Component {
         reviews.length;
       average = Math.round(average * 10) / 10;
       average = average * 20 + 10;
+
     }
     return (
       <div>
