@@ -161,18 +161,6 @@ class AddReview extends React.Component {
               htmlFor="star1"
               title="Sucks big time - 1 star"
             />
-            <input
-              type="radio"
-              id="starhalf"
-              name="stars"
-              value="0.5"
-              onChange={this.handleChange}
-            />
-            <label
-              className="half"
-              htmlFor="starhalf"
-              title="Sucks big time - 0.5 stars"
-            />
           </fieldset>
         </div>
         <button type="submit" className="btn btn-success">
