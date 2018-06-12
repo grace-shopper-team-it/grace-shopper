@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { submitOrderThunk, clearCartThunk } from '../../store/cart';
-import axios from 'axios'
+import axios from 'axios';
+import history from '../../history';
 
 class Checkout extends Component {
   constructor() {
@@ -12,7 +13,7 @@ class Checkout extends Component {
       city: '',
       state: '',
       zipCode: 0,
-      userEmail: ''
+      userEmail: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -24,20 +25,21 @@ class Checkout extends Component {
     const orderObj = {
       userId,
       ...this.state,
-      zipCode: Number(this.state.zipCode)
+      zipCode: Number(this.state.zipCode),
     };
     await this.props.submitOrderObj(orderObj);
     const newOrderId = this.props.cart.order.id;
-    const newCartArr = this.props.cart.cart.map((item) => {
+    const newCartArr = this.props.cart.cart.map(item => {
       item.productId = item.id;
       item.orderId = newOrderId;
       item.price = Number(item.price);
       item.cartQuantity = Number(item.cartQuantity);
       return item;
-    })
-    await axios.post('/api/orderItems', newCartArr)
+    });
+    await axios.post('/api/orderItems', newCartArr);
     // await thunk to create order (create order responds with orderId), get orderId from thunk, assign orderId to objects to post to productOrders
     this.props.clearCart();
+    history.push('/confirmation');
   }
 
   handleInputChange(event) {
@@ -45,7 +47,7 @@ class Checkout extends Component {
     const value = target.value;
     const name = target.name;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
@@ -61,59 +63,65 @@ class Checkout extends Component {
               name="street1"
               type="text"
               value={this.state.street1}
-              onChange={this.handleInputChange} />
-              (required)
+              onChange={this.handleInputChange}
+            />
+            (required)
           </label>
-            <br />
+          <br />
           <label>
             Street 2
             <input
               name="street2"
               type="text"
               value={this.state.street2}
-              onChange={this.handleInputChange} />
+              onChange={this.handleInputChange}
+            />
           </label>
-            <br />
+          <br />
           <label>
             City
             <input
               name="city"
               type="text"
               value={this.state.city}
-              onChange={this.handleInputChange} />
-              (required)
+              onChange={this.handleInputChange}
+            />
+            (required)
           </label>
-            <br />
+          <br />
           <label>
             State
             <input
               name="state"
               type="text"
               value={this.state.state}
-              onChange={this.handleInputChange} />
-              (required)
+              onChange={this.handleInputChange}
+            />
+            (required)
           </label>
-            <br />
+          <br />
           <label>
             Zip Code
             <input
               name="zipCode"
               type="text"
               value={this.state.zipCode}
-              onChange={this.handleInputChange} />
-              (required)
+              onChange={this.handleInputChange}
+            />
+            (required)
           </label>
-            <h4>Confirm your email</h4>
+          <h4>Confirm your email</h4>
           <label>
             email
             <input
               name="userEmail"
               type="text"
               value={this.state.userEmail}
-              onChange={this.handleInputChange} />
-              (required)
+              onChange={this.handleInputChange}
+            />
+            (required)
           </label>
-            <br />
+          <br />
           <input type="submit" value="submit" />
         </form>
       </div>
@@ -121,17 +129,17 @@ class Checkout extends Component {
   }
 }
 
-const mapState = (state) => {
+const mapState = state => {
   return {
     user: state.user,
-    cart: state.cart
+    cart: state.cart,
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = dispatch => {
   return {
-    submitOrderObj: (orderObj) => dispatch(submitOrderThunk(orderObj)),
-    clearCart: () => dispatch(clearCartThunk())
+    submitOrderObj: orderObj => dispatch(submitOrderThunk(orderObj)),
+    clearCart: () => dispatch(clearCartThunk()),
   };
 };
 
