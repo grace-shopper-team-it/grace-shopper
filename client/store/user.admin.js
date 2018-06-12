@@ -3,6 +3,7 @@ import axios from 'axios';
 const GET_ALL_USERS = 'GET_ALL_USERS';
 const GET_USER_INFO = 'GET_USER_INFO';
 const CHANGE_USER_STATUS = 'CHANGE_USER_STATUS';
+const DELETE_USER = 'DELETE_USER';
 
 const getAllUsersAction = users => {
   return {
@@ -20,6 +21,12 @@ const changeUserStatusAction = user => {
   return {
     type: CHANGE_USER_STATUS,
     user,
+  };
+};
+const deleteUserAction = userId => {
+  return {
+    type: DELETE_USER,
+    userId,
   };
 };
 
@@ -41,6 +48,12 @@ export const changeUserStatusThunk = (userId, formData) => {
     dispatch(changeUserStatusAction(data));
   };
 };
+export const deleteUserThunk = userId => {
+  return async dispatch => {
+    await axios.delete(`/api/users/${userId}`);
+    dispatch(deleteUserAction(userId));
+  };
+};
 
 const initialState = {
   users: [],
@@ -55,6 +68,11 @@ export default (state = initialState, action) => {
       return { ...state, selectedUser: action.user };
     case CHANGE_USER_STATUS:
       return { ...state, selectedUser: action.user };
+    case DELETE_USER:
+      const updatedUserList = state.users.filter(
+        user => user.id !== action.userId
+      );
+      return { ...state, users: updatedUserList };
     default:
       return state;
   }

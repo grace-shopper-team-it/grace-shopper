@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changeUserStatusThunk } from '../../store/user.admin';
 
-class AdminActions extends React.Component {
+class UserStatus extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -46,4 +46,4 @@ const mapDispatch = dispatch => {
 export default connect(
   null,
   mapDispatch
-)(AdminActions);
+)(UserStatus);
