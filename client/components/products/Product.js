@@ -41,24 +41,36 @@ class Product extends React.Component {
               <label>
                 Quantity:{' '}
                 <input
+                  className="form-control my-2 my-sm-0"
+                  style={{ maxWidth: '25%' }}
                   type="number"
                   min="1"
                   value={this.state.quantity}
                   onChange={this.handleChange}
                 />
               </label>
-              <input
+              <br />
+              <button
+                className="btn btn-danger"
                 type="submit"
                 value="Add to cart"
                 onClick={this.handleSubmit}
-              />
+              >
+                {' '}
+                Add to cart
+              </button>
             </form>
           </div>
         ) : (
-          <div>
-            <p style={{ color: 'red' }}>Added to cart!</p>
+          <div
+            className="alert alert-danger"
+            role="alert"
+            style={{ maxWidth: '25%' }}
+          >
+            Added to cart!
           </div>
         )}
+        <br />
         <p>{product.description}</p>
         <Link
           className="btn btn-secondary"
