@@ -48,7 +48,23 @@ const Order = db.define('order', {
 
 Order.afterCreate((order) => {
   console.log('hello Chris', order);
-})
+  const email = order.userEmail;
+
+  const mailOptions = {
+    from: 'funclowntown666@gmail.com',
+    to: email,
+    subject: orderConfSubj,
+    html: orderConf
+  };
+
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(info);
+    }
+  });
+});
 
 Order.afterBulkUpdate( async (order) => {
   const thisOrder = await Order.findById(order.where.id);
@@ -78,8 +94,6 @@ Order.afterBulkUpdate( async (order) => {
       default:
       return;
     }
-
-    console.log(mailOptions);
 
     transporter.sendMail(mailOptions, (err, info) => {
         if (err) {

@@ -8,13 +8,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// const mailOptions = {
-//   from: 'funclowntown@gmail.com',
-//   to: 'tophersjones@gmail.com',
-//   subject: 'Thanks for your order!',
-//   html: "<p>thanks for your order from ClownTown! Expect your clown to arrive in 2 - 5 business weeks! Be nice to your clown! Unless your clown doesn't want you to be! He he he!</p> <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Clown_chili_peppers.jpg/220px-Clown_chili_peppers.jpg' />"
-// }
-
 const orderConfSubj = 'Your new friend is getting ready for a big trip!';
 const shippingConfSubj = 'Your new friend is in a box!';
 const deliveredConfSubj = 'Your new friend has been delivered!';
@@ -26,12 +19,3 @@ const deliveredConf = "<p>Thanks for shopping at ClownTown! Your clown was deliv
 const cancelledConf = "<p>We know life can be tough, we're very sorry you don't have enough money to buy your item! Hopefully you become more successful someday!</p> <img src='https://thumbs.dreamstime.com/b/funny-clown-holding-money-13116443.jpg' />";
 
 module.exports = { transporter, orderConf, shippingConf, cancelledConf, deliveredConf, orderConfSubj, shippingConfSubj, deliveredConfSubj, cancelledConfSubj };
-
-// transporter.sendMail(mailOptions, (err, info) => {
-//   if (err) {
-//     console.log(err);
-//   }
-//   else {
-//     console.log(info);
-//   }
-// });
