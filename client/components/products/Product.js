@@ -2,20 +2,44 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { addToCartThunk } from '../../store/cart';
+import { FormErrors } from './FormErrors';
 
 class Product extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       quantity: 1,
+      formErrors: {quantity: ''},
+      inventory: props.inventory,
+      quantityValid: false,
+      formValid: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.validateField = this.validateField.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ quantity: event.target.value });
+    this.setState({ quantity: event.target.value },
+    () => { this.validateField(event.target.name, event.target.value); });
   }
+
+  validateField(fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors;
+    let quantityValid = this.state.quantityValid;
+    quantityValid = (value.match(/^[0-9]+$/) && value < this.state.inventory);
+    fieldValidationErrors.quantity = quantityValid ? '' : 'must be a number';
+    this.setState({
+      formErrors: fieldValidationErrors,
+      quantityValid
+    }, this.validateForm);
+  }
+
+  validateForm() {
+    this.setState({formValid: this.state.quantityValid})
+  }
+
 
   handleSubmit(event) {
     event.preventDefault();
@@ -27,7 +51,6 @@ class Product extends React.Component {
   render() {
     const { product } = this.props;
     const maxQuant = product.inventory;
-    console.log(maxQuant)
     const cartIdArr = this.props.cart.cart.map(
       singleProduct => singleProduct.id
     );
@@ -39,6 +62,9 @@ class Product extends React.Component {
         <p>{`Price: ${product.price}`}</p>
         {!isInCart ? (
           <div>
+            <div>
+              <FormErrors formErrors={this.state.formErrors} />
+            </div>
             <form>
               <label>
                 Quantity:{' '}
@@ -47,6 +73,7 @@ class Product extends React.Component {
                   style={{ maxWidth: '25%' }}
                   type="number"
                   min="1"
+                  max={maxQuant}
                   value={this.state.quantity}
                   onChange={this.handleChange}
                 />
