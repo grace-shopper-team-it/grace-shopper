@@ -24,6 +24,7 @@ class AdminActions extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="isAdmin">Change User Status</label>
         <select name="isAdmin" id="isAdmin" onChange={this.handleChange}>
+          <option value={false}>------------</option>
           <option value={true}>Administrator</option>
           <option value={false}>Regular User</option>
         </select>

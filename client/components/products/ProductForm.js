@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changeInputAction, getProductAction } from '../../store/product';
 import history from '../../history';
+import { isArray } from 'util';
 
 export class ProductForm extends React.Component {
   componentDidMount() {
@@ -24,10 +25,16 @@ export class ProductForm extends React.Component {
   handleChange = event => {
     this.props.handleInput(event.target.name, event.target.value);
   };
+  turnArrayToString = array => {
+    return array.map(element => element.name).join(' ');
+  };
 
   render() {
     const { currentProduct } = this.props;
     const { handleChange } = this;
+    const categoryNames = isArray(currentProduct.categories)
+      ? this.turnArrayToString(currentProduct.categories)
+      : currentProduct.categories;
     return (
       <div className="container">
         <form onSubmit={event => this.handleSubmit(event, currentProduct)}>
@@ -73,10 +80,10 @@ export class ProductForm extends React.Component {
               type="text"
               name="categories"
               id="categories"
-              placeholder="Separate with a comma"
+              placeholder="Separate with a space"
               className="form-control"
               onChange={handleChange}
-              value={currentProduct.categories}
+              value={categoryNames}
             />
           </div>
 
