@@ -16,7 +16,6 @@ productAdminRouter.post('/', async (req, res, next) => {
       formData.categories,
       Category
     );
-    console.log('CATEGORIES ARRAY:', categories);
     product.setCategories(categories);
     res.status(201).json(product);
   } catch (err) {
@@ -32,9 +31,17 @@ productAdminRouter.put('/:id', async (req, res, next) => {
       price: req.body.price,
       inventory: req.body.inventory,
       imageUrl: req.body.imageUrl,
+      categories: req.body.categories.split(' '),
     };
     await Product.update(formData, { where: { id: req.params.id } });
-    const updatedProduct = await Product.findById(req.params.id);
+    const updatedProduct = await Product.findById(req.params.id, {
+      include: [Category],
+    });
+    const categories = await Product.createCategories(
+      formData.categories,
+      Category
+    );
+    await updatedProduct.setCategories(categories);
     res.json(updatedProduct);
   } catch (err) {
     next(err);

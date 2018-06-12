@@ -23,6 +23,7 @@ const existingCategories = [
 */
 
 import './SingleProduct.css';
+import { isArray } from 'util';
 
 class SingleProduct extends React.Component {
   constructor() {
@@ -41,7 +42,11 @@ class SingleProduct extends React.Component {
   render() {
     const { currentUser, currentProduct } = this.props;
     if (!currentProduct) return <Redirect to="/allProducts" />;
-    if (!currentProduct.id || !currentProduct.categories) {
+    if (
+      !currentProduct.id ||
+      !currentProduct.categories ||
+      !isArray(currentProduct.categories)
+    ) {
       return <div>LOADING...</div>;
     }
     return (
