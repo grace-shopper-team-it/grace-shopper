@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
+import './navbar.css';
 
 const Header = ({ handleClick, isLoggedIn, isAdmin }) => (
   <nav className="navbar navbar-light" style={{ backgroundColor: '#e3f2fd' }}>
@@ -11,21 +12,32 @@ const Header = ({ handleClick, isLoggedIn, isAdmin }) => (
     </a>
     {isLoggedIn ? (
       <div>
-      {isAdmin ? (
-        <span>
-      <Link
-        to='/orders'
-        style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
-      >
-        Orders
-      </Link>
-      <Link
-        to='/users'
-        style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
-      >
-        Users
-      </Link>
-     </span> ) : <span></span>}
+        {isAdmin ? (
+          <span>
+            <Link
+              to="/orders"
+              style={{
+                textDecoration: 'none',
+                color: 'gray',
+                fontWeight: 'bold',
+              }}
+            >
+              Orders
+            </Link>
+            <Link
+              to="/users"
+              style={{
+                textDecoration: 'none',
+                color: 'gray',
+                fontWeight: 'bold',
+              }}
+            >
+              Users
+            </Link>
+          </span>
+        ) : (
+          <span />
+        )}
         {/* The navbar will show these links after you log in */}
         <Link
           to="/home"
@@ -70,6 +82,10 @@ const Header = ({ handleClick, isLoggedIn, isAdmin }) => (
         style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
       >
         View My Cart
+        <i
+          className="fas fa-shopping-cart"
+          style={{ color: 'red', marginLeft: '2px' }}
+        />
       </Link>
     </div>
   </nav>
@@ -81,7 +97,7 @@ const Header = ({ handleClick, isLoggedIn, isAdmin }) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    isAdmin: state.user.isAdmin
+    isAdmin: state.user.isAdmin,
   };
 };
 
@@ -104,5 +120,5 @@ export default connect(
 Header.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-  isAdmin: PropTypes.bool.isRequired
+  isAdmin: PropTypes.bool.isRequired,
 };
