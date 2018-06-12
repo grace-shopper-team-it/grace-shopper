@@ -32,44 +32,45 @@ export class SingleOrderPage extends Component {
       : [undefined, undefined];
     return (
       <div className="container">
-        <h1>View Order Details</h1>
-        <span>Id: {order.id} </span>
-        <span>Status: {order.status} </span>
-        {order.guestId && <span>GuestId: {order.guestId} </span>}
-        {order.userId && <span>UserId: {order.userId} </span>}
-        <span>Date: {date} </span>
-        <span>Time: {time ? time.slice(0, 8) : undefined} </span>
-        <span>Total cost: ${totalCost} </span>
-        <p>Products</p>
-        <ul>
-          {products.map(product => {
-            return (
-              <li key={product.id}>
-                <span>Product id: {product.id} </span>
-                <Link to={`/products/${product.id}`}>
-                  <span>(view product) </span>
-                </Link>
-                <span>Product name: {product.name} </span>
-                <span>
-                  {' '}
-                  Product quantity: {product.productOrder.cartQuantity}{' '}
-                </span>
-                <span>Product price: {product.productOrder.price} </span>
-              </li>
-            );
-          })}
-        </ul>
+        <h1>Order Id #{order.id}</h1>
         {currentUser.isAdmin && (
           <div className='container'>
-            <h1>Update Order Status</h1>
-            <StatusDropDown
+            <span>Update Order Status</span>
+            <span><StatusDropDown
               order={this.props.order}
               updateOrder={this.props.updateOrder}
-            />
+            /></span>
           </div>
         )}
+        <ul>
+        <li>Status: {order.status} </li>
+        {order.guestId && <li>GuestId: {order.guestId}</li>}
+        {order.userId && <li>UserId: {order.userId} </li>}
+        <li>Date: {date} </li>
+        <li>Time: {time ? time.slice(0, 8) : undefined} </li>
+        <li>Total cost: ${totalCost} </li>
+        </ul>
+        <div className='orderProducts container'>
+        <p><strong>Products</strong></p>
+          {products.length ? products.map(product => {
+            return (
+              <ul key={product.id}>
+                <li>Name: {product.name} </li>
+                <li>Id: {product.id}
+                <Link to={`/products/${product.id}`}>
+                  <span> (view product) </span>
+                </Link></li>
+                <li>
+                  {' '}
+                  Quantity: {product.productOrder.cartQuantity}{' '}
+                </li>
+                <li>Price: {product.productOrder.price} </li>
+              </ul>
+            );
+          }): <span>Weird. No products associated with this order</span>}
+        </div>
         {currentUser.isAdmin && (
-          <div>
+          <div class='container'>
             <Link to="/orders">Back to All Orders</Link>
           </div>
         )}
