@@ -26,6 +26,8 @@ class Product extends React.Component {
 
   render() {
     const { product } = this.props;
+    const maxQuant = product.inventory;
+    console.log(maxQuant)
     const cartIdArr = this.props.cart.cart.map(
       singleProduct => singleProduct.id
     );
