@@ -13,7 +13,7 @@ const Review = db.define('review', {
   stars: {
     type: Sequelize.DECIMAL(2, 1),
     validate: {
-      min: 0,
+      min: 1,
       max: 5,
     },
   },
