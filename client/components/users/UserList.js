@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import UserInfo from './UserInfo';
 import { getAllUsersThunk } from '../../store/user.admin';
 import history from './../../history';
+import DeleteUser from './DeleteUser';
 
 class UserList extends React.Component {
   componentDidMount() {
@@ -20,6 +21,7 @@ class UserList extends React.Component {
         {users.map(user => (
           <div key={user.id}>
             <UserInfo user={user} />
+            <DeleteUser userId={user.id} />
           </div>
         ))}
       </div>
