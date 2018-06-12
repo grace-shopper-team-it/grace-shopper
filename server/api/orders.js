@@ -6,8 +6,13 @@ const { Order } = require('../db/models');
 // api/orderInfo
 
 router.post('/', async(req, res) => {
+  const order = req.body
+  if (!order.userId){
+    order.guestId = req.sessionID
+    console.log('order', order)
+  }
   try {
-    const response = await Order.create(req.body);
+    const response = await Order.create(order);
     res.status(201)
     res.send(response);
   } catch (error) {

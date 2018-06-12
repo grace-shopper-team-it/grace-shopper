@@ -1,0 +1,30 @@
+.admin-product-options {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.form-links {
+  max-height: 38px;
+  margin-right: 10px;
+}
+
+.current-categories {
+  width: 100%;
+  margin-top: 15px;
+}
+
+#category-form {
+  margin: 30px 0;
+  width: 80%;
+}
+
+#category-dropdown {
+  display: flex;
+  justify-content: space-around;
+}
+
+.category-btn {
+  margin-left: 10px;
+}
