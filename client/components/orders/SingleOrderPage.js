@@ -10,16 +10,19 @@ export class SingleOrderPage extends Component {
   }
 
   async componentDidMount() {
-    const orderId = this.props.match
-      ? this.props.match.params.id
-      : this.props.orderId;
-    await this.props.getOrder(orderId);
+    if (!this.props.orderFromUser) {
+      await this.props.getOrder(this.props.match.params.id);
+    }
   }
 
   render() {
-    const order = this.props.order.products
-      ? this.props.order
-      : { products: [] };
+    // const order = this.props.order.products
+    //   ? this.props.order
+    //   : { products: [] };
+    const order = this.props.orderFromUser
+      ? this.props.orderFromUser
+      : this.props.order;
+    if (!order.products) return <div>LOADING...</div>;
     const totalCost = order.products.reduce((acc, curr) => {
       return (acc +=
         Number(curr.productOrder.price) * Number(curr.productOrder.quantity));

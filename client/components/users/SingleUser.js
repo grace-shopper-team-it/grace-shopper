@@ -12,8 +12,6 @@ class SingleUser extends React.Component {
   }
   render() {
     const { currentUser, selectedUser } = this.props;
-    console.log('selectedUser:', selectedUser);
-
     const adminStatus = selectedUser.isAdmin ? 'Admin User' : 'Regular User';
     if (!selectedUser.id) return <div>LOADING...</div>;
     return (
@@ -21,7 +19,7 @@ class SingleUser extends React.Component {
         <UserInfo user={selectedUser} />
         <h3>Order History</h3>
         {selectedUser.orders.map(order => {
-          return <SingleOrderPage key={order.id} orderId={order.id} />;
+          return <SingleOrderPage key={order.id} orderFromUser={order} />;
         })}
         {currentUser.isAdmin && (
           <div>

@@ -20,7 +20,7 @@ userAdminRouter.put('/:id', async (req, res, next) => {
   );
   const updatedUser = await User.findById(req.params.id, {
     attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
-    include: [{ model: Order, inlude: [Product] }],
+    include: [{ model: Order, include: [Product] }],
   });
   res.json(updatedUser);
 });
