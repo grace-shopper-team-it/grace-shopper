@@ -11,8 +11,8 @@ class Product extends React.Component {
       quantity: 1,
       formErrors: {quantity: ''},
       inventory: props.product.inventory,
-      quantityValid: false,
-      formValid: false
+      quantityValid: true,
+      formValid: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

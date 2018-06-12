@@ -15,13 +15,13 @@ class CartItem extends Component {
   }
 
   handleChange(event) {
-    this.setState({ quantity: event.target.value });
+    this.setState({ quantity: Math.floor(event.target.value) });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const product = this.props.item;
-    const quantity = this.state.quantity;
+    const quantity = Math.floor(this.state.quantity);
     this.setState({ subTotal: product.price * quantity });
     this.props.adjustQuantity(product, quantity);
   }
