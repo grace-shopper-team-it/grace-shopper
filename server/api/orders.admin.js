@@ -41,9 +41,12 @@ orderAdminRouter.put('/:id', async (req, res, next) => {
   };
   const [rowUpdated, updatedOrder] = await Order.update(status, {
     returning: true,
-    where: { id: req.params.id },
+    where: { id: req.params.id }
   });
-  res.json(updatedOrder);
+  const updatedOrderWithProducts = await Order.findById(updatedOrder[0].id, {
+    include: [Product],
+  })
+  res.json(updatedOrderWithProducts);
 });
 
 module.exports = orderAdminRouter;

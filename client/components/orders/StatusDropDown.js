@@ -14,9 +14,10 @@ export default class StatusDropDown extends Component {
     this.setState({status: event.target.value});
   }
 
-  handleSubmit= (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    this.props.updateOrder(this.props.order.id, this.state.status);
+    await this.props.updateOrder(this.props.order.id, this.state.status);
+    await this.props.updateOrders()
   }
 
   render(){

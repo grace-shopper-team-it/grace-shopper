@@ -27,6 +27,16 @@ export class AllOrders extends React.Component {
     }
   }
 
+  updateOrders = async () => {
+    console.log('inside updateOrders func')
+    await this.props.getOrders()
+    this.setState((prevState) => {
+      return {filter: prevState.filter, orders: this.props.orders}
+    }, () => {
+      console.log('this.state.orders', this.state.orders)
+    })
+  }
+
   handleChange = event => {
     this.setState({filter: event.target.value})
   };
@@ -48,7 +58,7 @@ export class AllOrders extends React.Component {
 
   render() {
     return (
-      <div className="allOrders">
+      <div className="allOrders container" >
         <h1>All Orders</h1>
         <form
           className="form-group"
@@ -70,6 +80,7 @@ export class AllOrders extends React.Component {
             <SingleOrderItem key={order.id}
               order={order}
               updateOrder={this.props.updateOrder}
+              updateOrders={this.updateOrders}
             />
           );
         }) : <span>No matching orders</span>}

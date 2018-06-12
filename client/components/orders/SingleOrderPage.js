@@ -22,39 +22,51 @@ export class SingleOrderPage extends Component {
       : { products: [] };
     const totalCost = order.products.reduce((acc, curr) => {
       return (acc +=
-        Number(curr.productOrder.price) * Number(curr.productOrder.quantity));
+        Number(curr.productOrder.price) *
+        Number(curr.productOrder.cartQuantity));
     }, 0);
     let products = order.products;
     const { currentUser } = this.props;
+    const [date, time] = order.createdAt
+      ? order.createdAt.split('T')
+      : [undefined, undefined];
     return (
-      <div>
+      <div className="container">
         <h1>View Order Details</h1>
         <span>Id: {order.id} </span>
         <span>Status: {order.status} </span>
         {order.guestId && <span>GuestId: {order.guestId} </span>}
         {order.userId && <span>UserId: {order.userId} </span>}
-        <span>Date: {order.createdAt} </span>
-        <span>Total cost: {totalCost} </span>
+        <span>Date: {date} </span>
+        <span>Time: {time ? time.slice(0, 8) : undefined} </span>
+        <span>Total cost: ${totalCost} </span>
         <p>Products</p>
         <ul>
           {products.map(product => {
             return (
               <li key={product.id}>
+                <span>Product id: {product.id} </span>
                 <Link to={`/products/${product.id}`}>
-                  <span>Product id: {product.id} </span>
+                  <span>(view product) </span>
                 </Link>
                 <span>Product name: {product.name} </span>
-                <span> Product quantity: {product.productOrder.quantity} </span>
+                <span>
+                  {' '}
+                  Product quantity: {product.productOrder.cartQuantity}{' '}
+                </span>
                 <span>Product price: {product.productOrder.price} </span>
               </li>
             );
           })}
         </ul>
         {currentUser.isAdmin && (
-          <StatusDropDown
-            order={this.props.order}
-            updateOrder={this.props.updateOrder}
-          />
+          <div className='container'>
+            <h1>Update Order Status</h1>
+            <StatusDropDown
+              order={this.props.order}
+              updateOrder={this.props.updateOrder}
+            />
+          </div>
         )}
         {currentUser.isAdmin && (
           <div>

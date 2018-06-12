@@ -18,7 +18,7 @@ export class SingleOrderItem extends React.Component {
           <Link to={`/orders/${order.id}`}>
             <button>View Details</button>
           </Link>
-          <StatusDropDown updateOrder={this.props.updateOrder} order={order} />
+          <StatusDropDown updateOrders={this.props.updateOrders} updateOrder={this.props.updateOrder} order={order} />
         </li>
       </div>
     );
