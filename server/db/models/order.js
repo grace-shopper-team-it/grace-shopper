@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const send = require('../../../email');
 
 const Order = db.define('order', {
   status: {
@@ -44,5 +45,14 @@ const Order = db.define('order', {
   }
 });
 
+Order.afterBulkUpdate( async (order) => {
+  const thisOrder = await Order.findById(order.where.id);
+  const email = thisOrder.userEmail;
+  const status = thisOrder.status;
+  const address = thisOrder.shippingAddress;
+  console.log('hello chris, yes the order updated', email, status, address, order);
+  // send();
+  console.log('THISOPRDER', thisOrder);
+})
 
-module.exports = Order
+module.exports = Order;
