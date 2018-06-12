@@ -26,36 +26,51 @@ class Product extends React.Component {
 
   render() {
     const { product } = this.props;
-    const cartIdArr = this.props.cart.cart.map(singleProduct =>  singleProduct.id);
+    const cartIdArr = this.props.cart.cart.map(
+      singleProduct => singleProduct.id
+    );
     const isInCart = cartIdArr.includes(product.id);
     return (
       <div>
         <h3>{product.name}</h3>
         <img src={product.imageUrl} />
+        <p>{`Price: ${product.price}`}</p>
         {!isInCart ? (
           <div>
             <form>
               <label>
                 Quantity:{' '}
                 <input
+                  className="form-control my-2 my-sm-0"
+                  style={{ maxWidth: '25%' }}
                   type="number"
                   min="1"
                   value={this.state.quantity}
                   onChange={this.handleChange}
                 />
               </label>
-              <input
+              <br />
+              <button
+                className="btn btn-danger"
                 type="submit"
                 value="Add to cart"
                 onClick={this.handleSubmit}
-              />
+              >
+                {' '}
+                Add to cart
+              </button>
             </form>
           </div>
         ) : (
-          <div>
-            <p style={{ color: 'red' }}>Added to cart!</p>
+          <div
+            className="alert alert-danger"
+            role="alert"
+            style={{ maxWidth: '25%' }}
+          >
+            Added to cart!
           </div>
         )}
+        <br />
         <p>{product.description}</p>
         <Link
           className="btn btn-secondary"

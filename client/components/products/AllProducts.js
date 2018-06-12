@@ -72,7 +72,13 @@ class AllProducts extends Component {
                   </button>
                 </form>
               </div>
-              <ProductsCard products={products} />
+              {!products.length ? (
+                <div className="alert alert-info" role="alert">
+                  Sorry, No matches found
+                </div>
+              ) : (
+                <ProductsCard products={products} />
+              )}
             </div>
           </div>
         </div>

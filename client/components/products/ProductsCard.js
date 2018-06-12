@@ -32,6 +32,7 @@ const ProductsCard = props => (
                   ? product.description
                   : product.description.slice(0, 50) + '...'}{' '}
               </p>
+              <p>{`Price: ${product.price}`} </p>
               <p>{`In Stock: ${product.inventory}`}</p>
               <Link to={'/products/' + product.id} className="btn btn-primary">
                 Details
