@@ -13,12 +13,11 @@ export class SingleOrderItem extends React.Component {
       <div className="orderItem">
         <ul className="orderListItem" />
         <li>
-          Order Id: {order.id} Order Status: {order.status} Order userId:{' '}
-          {order.userId} Order GuestId: {order.guestId}{' '}
+          Order Id: {order.id} Status: {order.status} {order.userId ? <span>User: {order.userId} </span> : <span>Guest User: {order.guestId} </span>}
           <Link to={`/orders/${order.id}`}>
-            <button>View Details</button>
+            <button>View Order Details</button>
           </Link>
-          <StatusDropDown updateOrder={this.props.updateOrder} order={order} />
+          <StatusDropDown updateOrders={this.props.updateOrders} updateOrder={this.props.updateOrder} order={order} />
         </li>
       </div>
     );

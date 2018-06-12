@@ -11,7 +11,6 @@ const GET_ORDER = 'GET_ORDER'
 const defaultOrders = {
   orders: [],
   order: {},
-
 };
 
 //ACTION CREATORS
@@ -56,7 +55,7 @@ export const updateOrderInDB = (orderId, update) => {
   const statusUpdate = {status: update}
   return async dispatch => {
     const updatedOrderData = await axios.put(`/api/orders/${orderId}`, statusUpdate)
-    const updatedOrder = updatedOrderData.data[0]
+    const updatedOrder = updatedOrderData.data
     dispatch(updateOrder(updatedOrder))
   }
 }
@@ -68,7 +67,7 @@ export default function(state = defaultOrders, action) {
     case GET_ORDER:
       return {...state, order: action.order}
     case UPDATE_ORDER:
-      return {...state, orders: state.orders.map(order => {
+      return {...state, order: action.order, orders: state.orders.map(order => {
         if (order.id === action.order.id) {
           return action.order;
         }
