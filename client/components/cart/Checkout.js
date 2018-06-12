@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { submitOrderThunk, clearCartThunk } from '../../store/cart';
 import axios from 'axios';
 import history from '../../history';
+import './checkout.css';
 
 class Checkout extends Component {
   constructor() {
@@ -53,7 +54,7 @@ class Checkout extends Component {
 
   render() {
     return (
-      <div>
+      <div className="div-center">
         <h2>Checkout Page</h2>
         <form onSubmit={this.handleSubmit}>
           <h4>Enter your shipping address</h4>
