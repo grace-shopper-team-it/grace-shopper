@@ -27,6 +27,13 @@ export class AllOrders extends React.Component {
     }
   }
 
+  updateOrders = async () => {
+    await this.props.getOrders()
+    this.setState((prevState) => {
+      return {filter: prevState.filter, orders: this.props.orders}
+    })
+  }
+
   handleChange = event => {
     this.setState({filter: event.target.value})
   };
@@ -47,8 +54,14 @@ export class AllOrders extends React.Component {
   }
 
   render() {
+    const sortedOrders = this.props.orders.sort((order1, order2) => {
+      if (order1.id > order2.id) return 1
+      if (order1.id < order2.id) return -1
+      else return 0
+    })
+
     return (
-      <div className="allOrders">
+      <div className="allOrders container" >
         <h1>All Orders</h1>
         <form
           className="form-group"
@@ -57,19 +70,19 @@ export class AllOrders extends React.Component {
         >
           <label htmlFor="filter">Search by Status</label>
           <select defaultValue='Choose Status'>
-            <option>Choose Status</option>
             {statuses.map(status => {
               return <option key={status} value={status}>{status}</option>;
             })}
           </select>
           <button type='submit'>Submit</button><button onClick={() => {this.clearStatus()}} type='button'>Clear</button>
         </form>
-        {this.state.orders.length ?
-        this.state.orders.map(order => {
+        {sortedOrders.length ?
+        sortedOrders.map(order => {
           return (
             <SingleOrderItem key={order.id}
               order={order}
               updateOrder={this.props.updateOrder}
+              updateOrders={this.updateOrders}
             />
           );
         }) : <span>No matching orders</span>}
