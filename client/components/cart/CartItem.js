@@ -8,7 +8,7 @@ class CartItem extends Component {
     super(props);
     this.state = {
       quantity: props.item.cartQuantity,
-      subTotal: ( props.item.cartQuantity * props.item.price )
+      subTotal: props.item.cartQuantity * props.item.price,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,27 +22,39 @@ class CartItem extends Component {
     event.preventDefault();
     const product = this.props.item;
     const quantity = this.state.quantity;
-    this.setState({subTotal: (product.price * quantity) });
+    this.setState({ subTotal: product.price * quantity });
     this.props.adjustQuantity(product, quantity);
   }
 
   render() {
     const item = this.props.item;
     return (
-      <div>
-      <Link to={`/products/${item.id}`}>
-        <h4>{item.name}</h4>
-      </Link>
-      <h6>Subtotal - ${this.state.subTotal}</h6>
-        <form>
-          <label>
+      <div
+        className="row"
+        style={{ display: 'flex', justifyContent: 'space-evenly' }}
+      >
+        <Link className="col-8 col-md-4" to={`/products/${item.id}`}>
+          <h4>{item.name}</h4>
+        </Link>
+        <h6 className="col-8 col-md-4">${this.state.subTotal}</h6>
+        <form className="col-8 col-md-4">
+          <label style={{ display: 'flex' }}>
             <input
+              className="form-control my-2 my-sm-0"
+              style={{ maxWidth: '15%' }}
               type="number"
               min="1"
               value={this.state.quantity}
               onChange={this.handleChange}
             />
-            <input type="submit" value="Adjust Quantity" onClick={this.handleSubmit} />
+            <button
+              className="btn btn-primary"
+              type="submit"
+              value="Adjust Quantity"
+              onClick={this.handleSubmit}
+            >
+              Adjust Quantity
+            </button>
           </label>
         </form>
       </div>
@@ -50,9 +62,10 @@ class CartItem extends Component {
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = dispatch => {
   return {
-    adjustQuantity: (product, quantity) => dispatch(updateQuantityThunk(product, quantity))
+    adjustQuantity: (product, quantity) =>
+      dispatch(updateQuantityThunk(product, quantity)),
   };
 };
 
