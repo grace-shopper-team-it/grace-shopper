@@ -31,7 +31,7 @@ describe('user reducer', () => {
   it('propertly deletes a user give an id', () => {
     const reducerValue = userReducer(
       { users: userList },
-      { type: 'REMOVE_USER', userId: 2 }
+      { type: 'DELETE_USER', userId: 2 }
     );
     expect(reducerValue).to.be.an('object');
     expect(reducerValue.users.length).to.equal(2);
