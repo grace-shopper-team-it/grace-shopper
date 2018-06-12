@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const send = require('../../../email');
+const { transporter, orderConf, shippingConf, deliveredConf, cancelledConf, orderConfSubj, shippingConfSubj, deliveredConfSubj, cancelledConfSubj } = require('../../../email');
+
 
 const Order = db.define('order', {
   status: {
@@ -45,14 +46,49 @@ const Order = db.define('order', {
   }
 });
 
+Order.afterCreate((order) => {
+  console.log('hello Chris', order);
+})
+
 Order.afterBulkUpdate( async (order) => {
   const thisOrder = await Order.findById(order.where.id);
   const email = thisOrder.userEmail;
   const status = thisOrder.status;
-  const address = thisOrder.shippingAddress;
-  console.log('hello chris, yes the order updated', email, status, address, order);
-  // send();
-  console.log('THISOPRDER', thisOrder);
-})
+
+  const mailOptions = {
+   from: 'funclowntown666@gmail.com',
+   to: email,
+   subject: '',
+   html: ''
+ };
+
+ switch (status) {
+    case 'Processing':
+      mailOptions.subject = shippingConfSubj;
+      mailOptions.html = shippingConf;
+      break;
+    case 'Completed':
+      mailOptions.subject = deliveredConfSubj;
+      mailOptions.html = deliveredConf;
+      break;
+    case 'Cancelled':
+      mailOptions.subject = cancelledConfSubj;
+      mailOptions.html = cancelledConf;
+    break;
+      default:
+      return;
+    }
+
+    console.log(mailOptions);
+
+    transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(info);
+        }
+
+    });
+  });
 
 module.exports = Order;
