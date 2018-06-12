@@ -26,12 +26,15 @@ class Product extends React.Component {
 
   render() {
     const { product } = this.props;
-    const cartIdArr = this.props.cart.cart.map(singleProduct =>  singleProduct.id);
+    const cartIdArr = this.props.cart.cart.map(
+      singleProduct => singleProduct.id
+    );
     const isInCart = cartIdArr.includes(product.id);
     return (
       <div>
         <h3>{product.name}</h3>
         <img src={product.imageUrl} />
+        <p>{`Price: ${product.price}`}</p>
         {!isInCart ? (
           <div>
             <form>

@@ -10,11 +10,6 @@ class CategoryDropdow extends Component {
   render() {
     let category = this.props.categories;
 
-    // category = category.map(categ => Object.values(categ.name).join(''));
-    // category = category.filter((categ, pos) => {
-    //   return category.indexOf(categ) === pos;
-    // });
-
     return (
       <div className="dropdown">
         <button
@@ -28,6 +23,8 @@ class CategoryDropdow extends Component {
           Categories
         </button>
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <option key="nothing">-----</option>
+
           {category.map(categ => {
             return (
               <Link
