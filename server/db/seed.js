@@ -227,43 +227,6 @@ const orders = [
   { status: 'Completed', userEmail: 'tatters@clowntown.com', street1: '444 tub Street', street2: null, city: 'Chicago', state: 'IL', zipCode: 60606 },
 ];
 
-  // let createdUsers, createdProducts, createdCategories, createdOrders;
-
-  // //create products
-  // return Promise.all(products.map(product => Product.create(product)))
-  // })
-  //   .then(result => {
-  //     createdProducts = result;
-
-  //   return Promise.all(users.map(user => User.create(user)))
-  //   })
-  //     .then(result => {
-  //       createdUsers = result
-
-  //   //create categories and associate products with them
-  //   return Promise.all(categories.map(category => Category.create(category)))
-  //     .then(result => {
-  //       createdCategories = result;
-  //       createdCategories.forEach(category => {
-  //         category.setProducts(createdProducts)
-  //       })
-  //     //create reviews
-  //       return Promise.all(reviews.map(review => Review.create(review)))
-  //     })
-  //     .then(result => {
-  //       createdReviews = result;
-
-  //     //create orders
-  //       return Promise.all(orders.map(order => Order.create(order)))
-  //     })
-  //     .then(result => {
-  //       createdOrders = result
-
-  //     //create productOrders
-  //       return Promise.all(productOrders.map(productOrder => ProductOrder.create(productOrder)))
-  //     })
-
-
   function seed() {
     let createdUsers, createdProducts, createdReviews, createdOrders;
 
@@ -286,6 +249,12 @@ const orders = [
       })
       .then(result => {
         createdReviews = result;
+
+        createdReviews.map((review, index) => {
+          review.productId = createdProducts[index].id;
+          review.save()
+        })
+
         // create orders
         for (var i = 0; i < orders.length; i++) {
           orders[i].userId = createdUsers[i].id;
@@ -302,30 +271,20 @@ const orders = [
       .then(result => {
         createdOrders = result
 
+        //create Categories
+        return Promise.all(categories.map(category => Category.create(category)))
+      })
+      .then(result => {
+        createdCategories = result
+        createdCategories.map(category => {
+          category.addProducts(createdProducts)
+          category.save()
+        })
+
+        //create Product Orders
+        return Promise.all(productOrders.map(productOrder => ProductOrder.create(productOrder)))
       })
   }
-
-// async function seed() {
-//   await products.map(product => Product.create(product));
-//   await users.map(user => User.create(user));
-//   categories.map(category => Category.create(category))
-//   reviews.map(review => Review.create(review))
-//   await orders.map(order => Order.create(order));
-//   await productOrders.map(productOrder => ProductOrder.create(productOrder))
-// }
-
-// const main = async () => {
-//   try {
-//   console.log('Syncing db...');
-//    await db.sync({force: true})
-//    console.log('Seeding db')
-//    await seed()
-//    console.log('success!')
-//   } catch (err) {
-//     console.log('Error while seeding')
-//     console.log(err.stack)
-//   }
-// }
 
 const main = () => {
   console.log('Syncing db...');
