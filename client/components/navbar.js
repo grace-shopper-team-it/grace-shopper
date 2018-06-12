@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
+import './navbar.css';
 
 const Header = ({ handleClick, isLoggedIn, isAdmin }) => (
   <nav className="navbar navbar-light" style={{ backgroundColor: '#e3f2fd' }}>
