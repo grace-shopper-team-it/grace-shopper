@@ -40,7 +40,17 @@ const Product = db.define('product', {
 
 Product.createCategories = function(categories, categoryModel) {
   return Promise.all(
-    categories.map(category => categoryModel.create({ name: category }))
+    categories.map(async category => {
+      const array = await categoryModel.findOrCreate({
+        where: {
+          name: category,
+        },
+        defaults: {
+          name: category,
+        },
+      });
+      return array[0];
+    })
   );
 };
 

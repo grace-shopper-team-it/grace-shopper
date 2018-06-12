@@ -16,6 +16,7 @@ productAdminRouter.post('/', async (req, res, next) => {
       formData.categories,
       Category
     );
+    console.log('CATEGORIES ARRAY:', categories);
     product.setCategories(categories);
     res.status(201).json(product);
   } catch (err) {
