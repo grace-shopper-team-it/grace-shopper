@@ -6,8 +6,8 @@ import { FormErrors } from './FormErrors';
 
 const imgStyle = {
   maxWidth: 500,
-  maxHeight: 300
-}
+  maxHeight: 300,
+};
 
 class Product extends React.Component {
   constructor(props) {
