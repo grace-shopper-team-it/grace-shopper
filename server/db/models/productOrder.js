@@ -20,7 +20,6 @@ ProductOrder.afterBulkCreate((productOrder) => {
   const prodId = item.productId;
   const product = await Product.findById(prodId);
   product.inventory = product.inventory - quant;
-  console.log('PRODIUCTET', product);
   product.save();
 });
 
