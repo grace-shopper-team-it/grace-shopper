@@ -4,6 +4,7 @@ import UserInfo from './UserInfo';
 import { getAllUsersThunk } from '../../store/user.admin';
 import history from './../../history';
 import DeleteUser from './DeleteUser';
+import ResetPassword from './ResetPassword';
 
 class UserList extends React.Component {
   componentDidMount() {
@@ -22,6 +23,7 @@ class UserList extends React.Component {
           <div key={user.id}>
             <UserInfo user={user} />
             <DeleteUser userId={user.id} />
+            <ResetPassword userId={user.id} />
           </div>
         ))}
       </div>
