@@ -8,11 +8,16 @@ class ResetPassword extends React.Component {
     super();
     this.state = {
       password: '',
+      confirmation: false,
     };
   }
   handleSubmit = event => {
     event.preventDefault();
-    this.props.resetPassword(this.props.userId, this.state);
+    this.handleData();
+  };
+  handleData = async () => {
+    await this.props.resetPassword(this.props.userId, this.state);
+    this.setState({ confirmation: true });
   };
   handleChange = event => {
     this.setState({
@@ -21,6 +26,9 @@ class ResetPassword extends React.Component {
   };
   render() {
     const { password } = this.state;
+    if (this.state.confirmation) {
+      return <div className="alert alert-warning">Password Reset</div>;
+    }
     return (
       <form onSubmit={this.handleSubmit} className="reset-form">
         <label className="reset-label">
@@ -44,7 +52,7 @@ class ResetPassword extends React.Component {
 const mapDispatch = dispatch => {
   return {
     resetPassword: (userId, formData) => {
-      dispatch(updateUserThunk(userId, formData));
+      return dispatch(updateUserThunk(userId, formData));
     },
   };
 };
