@@ -18,9 +18,13 @@ class SingleUser extends React.Component {
       <div className="container">
         <UserInfo user={selectedUser} />
         <h3>Order History</h3>
-        {selectedUser.orders.length ? selectedUser.orders.map(order => {
-          return <SingleOrderPage key={order.id} orderFromUser={order} />;
-        }): <div>You haven't ordered anything yet!</div>}
+        {selectedUser.orders.length ? (
+          selectedUser.orders.map(order => {
+            return <SingleOrderPage key={order.id} orderFromUser={order} />;
+          })
+        ) : (
+          <div>You haven't ordered anything yet!</div>
+        )}
         {currentUser.isAdmin && (
           <div>
             <p>
