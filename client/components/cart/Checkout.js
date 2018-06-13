@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { submitOrderThunk, clearCartThunk } from '../../store/cart';
 import axios from 'axios';
 import history from '../../history';
+import './checkout.css';
 
 class Checkout extends Component {
   constructor() {
@@ -53,7 +54,7 @@ class Checkout extends Component {
 
   render() {
     return (
-      <div>
+      <div className="div-center">
         <h2>Checkout Page</h2>
         <form onSubmit={this.handleSubmit}>
           <h4>Enter your shipping address</h4>
@@ -61,6 +62,7 @@ class Checkout extends Component {
             Street 1
             <input
               name="street1"
+              className="form-control"
               type="text"
               value={this.state.street1}
               onChange={this.handleInputChange}
@@ -73,6 +75,7 @@ class Checkout extends Component {
             <input
               name="street2"
               type="text"
+              className="form-control"
               value={this.state.street2}
               onChange={this.handleInputChange}
             />
@@ -83,6 +86,7 @@ class Checkout extends Component {
             <input
               name="city"
               type="text"
+              className="form-control"
               value={this.state.city}
               onChange={this.handleInputChange}
             />
@@ -94,6 +98,7 @@ class Checkout extends Component {
             <input
               name="state"
               type="text"
+              className="form-control"
               value={this.state.state}
               onChange={this.handleInputChange}
             />
@@ -105,6 +110,7 @@ class Checkout extends Component {
             <input
               name="zipCode"
               type="text"
+              className="form-control"
               value={this.state.zipCode}
               onChange={this.handleInputChange}
             />
@@ -116,13 +122,16 @@ class Checkout extends Component {
             <input
               name="userEmail"
               type="text"
+              className="form-control"
               value={this.state.userEmail}
               onChange={this.handleInputChange}
             />
             (required)
           </label>
           <br />
-          <input type="submit" value="submit" />
+          <button type="submit" value="submit" className="btn btn-success">
+            Submit
+          </button>
         </form>
       </div>
     );
