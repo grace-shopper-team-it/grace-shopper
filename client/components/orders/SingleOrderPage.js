@@ -73,7 +73,7 @@ export class SingleOrderPage extends Component {
           }): <span>Weird. No products associated with this order</span>}
         </div>
         {currentUser.isAdmin && (
-          <div class='container'>
+          <div className='container'>
             <Link to="/orders">Back to All Orders</Link>
           </div>
         )}

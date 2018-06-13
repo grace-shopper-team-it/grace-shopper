@@ -6,9 +6,6 @@ import {store} from '../../store'
 
 const statuses = ['Completed', 'Cancelled', 'Created', 'Processing'];
 
-const state = store.getState()
-console.log('state', state)
-
 export class AllOrders extends React.Component {
   constructor(props) {
     super(props);
@@ -21,16 +18,25 @@ export class AllOrders extends React.Component {
   async componentDidMount() {
     if (this.props.currentUser.isAdmin) {
       await this.props.getOrders();
-      this.setState({orders: this.props.orders ? this.props.orders : []})
+      this.setState({orders: this.props.orders ? this.props.orders.sort((order1, order2) => {
+        if (order1.id > order2.id) return 1
+        if (order1.id < order2.id) return -1
+        else return 0
+      }) : []})
     } else {
       this.props.history.push('/allProducts')
     }
   }
 
   updateOrders = async () => {
+    const sortedOrders = this.props.orders.sort((order1, order2) => {
+      if (order1.id > order2.id) return 1
+      if (order1.id < order2.id) return -1
+      else return 0
+    })
     await this.props.getOrders()
     this.setState((prevState) => {
-      return {filter: prevState.filter, orders: this.props.orders}
+      return {filter: prevState.filter, orders: sortedOrders}
     })
   }
 
@@ -54,11 +60,6 @@ export class AllOrders extends React.Component {
   }
 
   render() {
-    const sortedOrders = this.props.orders.sort((order1, order2) => {
-      if (order1.id > order2.id) return 1
-      if (order1.id < order2.id) return -1
-      else return 0
-    })
 
     return (
       <div className="allOrders container" >
@@ -69,15 +70,15 @@ export class AllOrders extends React.Component {
           onSubmit={this.handleSubmit}
         >
           <label htmlFor="filter">Search by Status</label>
-          <select defaultValue='Choose Status'>
+          <select defaultValue='Completed'>
             {statuses.map(status => {
               return <option key={status} value={status}>{status}</option>;
             })}
           </select>
           <button type='submit'>Submit</button><button onClick={() => {this.clearStatus()}} type='button'>Clear</button>
         </form>
-        {sortedOrders.length ?
-        sortedOrders.map(order => {
+        {this.state.orders.length ?
+        this.state.orders.map(order => {
           return (
             <SingleOrderItem key={order.id}
               order={order}
