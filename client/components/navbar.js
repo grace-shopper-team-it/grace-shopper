@@ -6,89 +6,125 @@ import { logout } from '../store';
 import './navbar.css';
 
 const Header = ({ handleClick, isLoggedIn, isAdmin }) => (
-  <nav className="navbar navbar-light" style={{ backgroundColor: '#e3f2fd' }}>
-    <a className="navbar-brand" href="#">
-      ClownTown
-    </a>
-    {isLoggedIn ? (
-      <div>
-        {isAdmin ? (
-          <span>
-            <Link
-              to="/orders"
-              style={{
-                textDecoration: 'none',
-                color: 'gray',
-                fontWeight: 'bold',
-              }}
-            >
-              Orders
-            </Link>
-            <Link
-              to="/users"
-              style={{
-                textDecoration: 'none',
-                color: 'gray',
-                fontWeight: 'bold',
-              }}
-            >
-              Users
-            </Link>
-          </span>
-        ) : (
-          <span />
-        )}
-        {/* The navbar will show these links after you log in */}
-        <Link
-          to="/home"
-          style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
-        >
-          Home
-        </Link>
-        <a
-          href="#"
-          style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
-          onClick={handleClick}
-        >
-          Logout
-        </a>
-      </div>
-    ) : (
-      <div>
-        {/* The navbar will show these links before you log in */}
-        <Link
-          to="/login"
-          style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
-        >
-          Login
-        </Link>
-        <Link
-          to="/signup"
-          style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
-        >
-          Sign Up
-        </Link>
-      </div>
-    )}
-    <div>
-      <Link
-        to="/allProducts"
-        style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
-      >
-        View All Products
-      </Link>
-      <Link
-        to="/cart"
-        style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
-      >
-        View My Cart
-        <i
-          className="fas fa-shopping-cart"
-          style={{ color: 'red', marginLeft: '2px' }}
-        />
-      </Link>
+  <div className="nav">
+    <div className="nav-header">
+      <div className="nav-title">ClownTown</div>
     </div>
-  </nav>
+    <div className="nav-btn">
+      <label htmlFor="nav-check">
+        <span />
+        <span />
+        <span />
+      </label>
+    </div>
+    <input type="checkbox" id="nav-check" />
+    <div className="navbar-link">
+      {isLoggedIn ? (
+        <div className="inner-links">
+          {isAdmin ? (
+            <div style={{ marginRight: '10px' }}>
+              <Link
+                to="/orders"
+                style={{
+                  fontSize: '18px',
+                  marginRight: '5px',
+                  textDecoration: 'none',
+                  color: 'gray',
+                  fontWeight: 'bold',
+                }}
+              >
+                Orders
+              </Link>
+              <Link
+                to="/users"
+                style={{
+                  fontSize: '18px',
+                  textDecoration: 'none',
+                  color: 'gray',
+                  fontWeight: 'bold',
+                }}
+              >
+                Users
+              </Link>
+            </div>
+          ) : (
+            <div />
+          )}
+          {/* The navbar will show these links after you log in */}
+          <div>
+            <Link
+              to="/home"
+              style={{
+                fontSize: '18px',
+                marginRight: '5px',
+                textDecoration: 'none',
+                color: 'gray',
+                fontWeight: 'bold',
+              }}
+            >
+              Home
+            </Link>
+            <a
+              href="#"
+              style={{
+                fontSize: '18px',
+                textDecoration: 'none',
+                color: 'gray',
+                fontWeight: 'bold',
+              }}
+              onClick={handleClick}
+            >
+              Logout
+            </a>
+          </div>
+        </div>
+      ) : (
+        <div>
+          {/* The navbar will show these links before you log in */}
+          <Link
+            to="/login"
+            style={{
+              fontSize: '18px',
+              textDecoration: 'none',
+              color: 'gray',
+              fontWeight: 'bold',
+            }}
+          >
+            Login
+          </Link>
+          <Link
+            to="/signup"
+            style={{
+              fontSize: '18px',
+              textDecoration: 'none',
+              color: 'gray',
+              fontWeight: 'bold',
+            }}
+          >
+            Sign Up
+          </Link>
+        </div>
+      )}
+      <div>
+        <Link
+          to="/allProducts"
+          style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
+        >
+          View All Products
+        </Link>
+        <Link
+          to="/cart"
+          style={{ textDecoration: 'none', color: 'gray', fontWeight: 'bold' }}
+        >
+          View My Cart
+          <i
+            className="fas fa-shopping-cart"
+            style={{ color: 'red', marginLeft: '2px' }}
+          />
+        </Link>
+      </div>
+    </div>
+  </div>
 );
 
 /**

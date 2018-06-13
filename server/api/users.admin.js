@@ -25,4 +25,9 @@ userAdminRouter.put('/:id', async (req, res, next) => {
   res.json(updatedUser);
 });
 
+userAdminRouter.delete('/:id', async (req, res, next) => {
+  await User.destroy({ where: { id: req.params.id } });
+  res.status(204).end();
+});
+
 module.exports = userAdminRouter;
