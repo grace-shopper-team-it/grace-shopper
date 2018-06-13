@@ -1,0 +1,8 @@
+.info-delete {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-wrapper {
+  margin: 30px 0 50px 0;
+}

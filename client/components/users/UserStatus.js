@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeUserStatusThunk } from '../../store/user.admin';
+import { updateUserThunk } from '../../store/user.admin';
 
 class UserStatus extends React.Component {
   constructor() {
@@ -39,7 +39,7 @@ class UserStatus extends React.Component {
 const mapDispatch = dispatch => {
   return {
     updateStatus: (userId, formData) =>
-      dispatch(changeUserStatusThunk(userId, formData)),
+      dispatch(updateUserThunk(userId, formData)),
   };
 };
 

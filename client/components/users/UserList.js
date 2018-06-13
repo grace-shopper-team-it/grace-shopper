@@ -4,6 +4,8 @@ import UserInfo from './UserInfo';
 import { getAllUsersThunk } from '../../store/user.admin';
 import history from './../../history';
 import DeleteUser from './DeleteUser';
+import ResetPassword from './ResetPassword';
+import './UserList.css';
 
 class UserList extends React.Component {
   componentDidMount() {
@@ -19,9 +21,12 @@ class UserList extends React.Component {
     return (
       <div className="container">
         {users.map(user => (
-          <div key={user.id}>
-            <UserInfo user={user} />
-            <DeleteUser userId={user.id} />
+          <div key={user.id} className="user-wrapper">
+            <div className="info-delete">
+              <UserInfo user={user} />
+              <DeleteUser userId={user.id} />
+            </div>
+            <ResetPassword userId={user.id} />
           </div>
         ))}
       </div>
