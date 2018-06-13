@@ -15,6 +15,7 @@ class CategoryDropdow extends Component {
         <button
           className="btn btn-secondary dropdown-toggle"
           type="button"
+          style={{ marginTop: '5px' }}
           id="dropdownMenuButton"
           data-toggle="dropdown"
           aria-haspopup="true"

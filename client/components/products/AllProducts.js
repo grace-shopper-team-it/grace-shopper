@@ -48,7 +48,9 @@ class AllProducts extends Component {
                 className="nav nav-bar"
                 style={{ display: 'flex', justifyContent: 'space-between' }}
               >
-                <h2 className="navbar-header">Currently Available</h2>
+                <h2 className="navbar-header" style={{ color: 'white' }}>
+                  Currently Available
+                </h2>
                 <CategoryDropdown categories={categories} />
 
                 <form
