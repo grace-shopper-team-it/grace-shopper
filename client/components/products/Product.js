@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { addToCartThunk } from '../../store/cart';
 
+const imgStyle = {
+  maxWidth: 500,
+  maxHeight: 300
+}
+
 class Product extends React.Component {
   constructor() {
     super();
@@ -33,7 +38,11 @@ class Product extends React.Component {
     return (
       <div>
         <h3>{product.name}</h3>
+
+        <img style={imgStyle} src={product.imageUrl} />
+
         <img style={{ maxWidth: '50%' }} src={product.imageUrl} />
+
         <p>{`Price: ${product.price}`}</p>
         {!isInCart ? (
           <div>
