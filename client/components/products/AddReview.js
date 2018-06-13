@@ -39,9 +39,12 @@ class AddReview extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} style={{ margin: '5%' }}>
         <div className="form-group">
-          <label htmlFor="exampleFormControlTextarea1">
+          <label
+            htmlFor="exampleFormControlTextarea1"
+            style={{ fontSize: '18px' }}
+          >
             Write your Review Here
           </label>
           <textarea
