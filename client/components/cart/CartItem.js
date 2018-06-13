@@ -2,32 +2,56 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateQuantityThunk } from '../../store/cart';
+import { FormErrors } from '../products/FormErrors';
 
 class CartItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: props.item.cartQuantity,
       subTotal: props.item.cartQuantity * props.item.price,
+      quantity: props.item.cartQuantity,
+      formErrors: {quantity: ''},
+      inventory: props.item.inventory,
+      quantityValid: true,
+      formValid: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ quantity: event.target.value });
+    const value = event.target.value;
+    this.setState({ quantity: Math.floor(event.target.value) },
+  () => { this.validateField(value); });
   }
+
+  validateField(value) {
+    let fieldValidationErrors = this.state.formErrors;
+    let quantityValid = this.state.quantityValid;
+    quantityValid = value <= this.state.inventory;
+    fieldValidationErrors.quantity = quantityValid ? '' : 'Not enough clowns in stock!!';
+    this.setState({
+      formErrors: fieldValidationErrors,
+      quantityValid
+    }, this.validateForm);
+  }
+
+  validateForm() {
+    this.setState({formValid: this.state.quantityValid})
+  }
+
 
   handleSubmit(event) {
     event.preventDefault();
     const product = this.props.item;
-    const quantity = this.state.quantity;
+    const quantity = Math.floor(this.state.quantity);
     this.setState({ subTotal: product.price * quantity });
     this.props.adjustQuantity(product, quantity);
   }
 
   render() {
     const item = this.props.item;
+    const maxQuant = item.inventory;
     return (
       <div
         className="row"
@@ -44,10 +68,12 @@ class CartItem extends Component {
               style={{ maxWidth: '15%' }}
               type="number"
               min="1"
+              max={maxQuant}
               value={this.state.quantity}
               onChange={this.handleChange}
             />
             <button
+              disabled={!this.state.formValid}
               className="btn btn-primary"
               type="submit"
               value="Adjust Quantity"
@@ -55,6 +81,7 @@ class CartItem extends Component {
             >
               Adjust Quantity
             </button>
+            <FormErrors formErrors={this.state.formErrors} />
           </label>
         </form>
       </div>
