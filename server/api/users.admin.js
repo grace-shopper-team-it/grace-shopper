@@ -9,15 +9,15 @@ userAdminRouter.get('/', async (req, res, next) => {
 });
 
 userAdminRouter.put('/:id', async (req, res, next) => {
-  const adminStatus = req.body.isAdmin;
-  await User.update(
-    { isAdmin: adminStatus },
-    {
-      where: {
-        id: req.params.id,
-      },
-    }
-  );
+  const updateObj = {};
+  if (req.body.password) updateObj.password = req.body.password;
+  if (req.body.isAdmin) updateObj.isAdmin = req.body.isAdmin;
+  await User.update(updateObj, {
+    individualHooks: true,
+    where: {
+      id: req.params.id,
+    },
+  });
   const updatedUser = await User.findById(req.params.id, {
     attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
     include: [{ model: Order, include: [Product] }],
