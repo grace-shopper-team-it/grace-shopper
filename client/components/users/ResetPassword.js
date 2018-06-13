@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateUserThunk } from '../../store/user.admin';
+import './ResetPassword.css';
 
 class ResetPassword extends React.Component {
   constructor() {
@@ -21,17 +22,18 @@ class ResetPassword extends React.Component {
   render() {
     const { password } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="password">New Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          className="form-control"
-          value={password}
-          onChange={this.handleChange}
-        />
-        <button type="submit" className="btn btn-danger">
+      <form onSubmit={this.handleSubmit} className="reset-form">
+        <label className="reset-label">
+          New Password
+          <input
+            type="password"
+            name="password"
+            className="form-control"
+            value={password}
+            onChange={this.handleChange}
+          />
+        </label>
+        <button type="submit" className="btn btn-warning">
           Reset
         </button>
       </form>
