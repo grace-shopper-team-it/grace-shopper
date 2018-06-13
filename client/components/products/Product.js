@@ -64,11 +64,8 @@ class Product extends React.Component {
     return (
       <div>
         <h3>{product.name}</h3>
-
         <img style={imgStyle} src={product.imageUrl} />
-
         <img style={{ maxWidth: '50%' }} src={product.imageUrl} />
-
         <p>{`Price: ${product.price}`}</p>
         {!isInCart ? (
           <div>
@@ -90,7 +87,7 @@ class Product extends React.Component {
               </label>
               <br />
               <button
-                disabled={!this.state.formValid}
+                disabled={(!this.state.formValid || this.state.quantity < 1)}
                 className="btn btn-danger"
                 type="submit"
                 value="Add to cart"

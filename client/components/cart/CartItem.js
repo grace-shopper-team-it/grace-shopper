@@ -73,7 +73,7 @@ class CartItem extends Component {
               onChange={this.handleChange}
             />
             <button
-              disabled={!this.state.formValid}
+              disabled={(!this.state.formValid || this.state.quantity < 1)}
               className="btn btn-primary"
               type="submit"
               value="Adjust Quantity"
